@@ -1,0 +1,27 @@
+<resources>
+    <string-array name="mes_villes">
+        <item>Bayonne 64100</item>
+        <item>Paris 75000</item>
+        <item>Biarritz 64200</item>
+        <item>Anglet 64600</item>
+        <item>Lyon 69000</item>
+        <item>Marseille 13000</item>
+        <item>Clermont-Ferrand 63000</item>
+        <item>Dax 40100</item>
+        <item>Laluque 40465</item>
+    </string-array>
+
+    <string name="app_name">ScanEco</string>
+    <string name="col1">Types de déchets</string>
+    <string name="col2">Jours</string>
+    <string name="col3">Heures</string>
+    <string name="row1Type">Ménagers</string>
+    <string name="row1Jours">Mardi/Vendredi</string>
+    <string name="row1Heures">5h-11h</string>
+    <string name="row2Type">Sélectif</string>
+    <string name="row2Jours">Mercredi</string>
+    <string name="row2Heures">4h-11h</string>
+    <string name="row3Type">Verre</string>
+    <string name="row3Jours">Jeudi</string>
+    <string name="row3Heures">6h-11h</string>
+</resources>

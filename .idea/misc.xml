@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/bordure_arrondie.xml" value="0.1" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/btn_rond_vert.xml" value="0.1" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/ic_animations.xml" value="0.2265625" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/ic_camion_poubelle.xml" value="0.2265625" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/ic_loupe_blanche.xml" value="0.2265625" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/drawable/ic_triman.xml" value="0.2265625" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/layout/activity_acceuil_recherche_sans_scan.xml" value="0.10778985507246377" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/layout/activity_accueil_hor_ram_poubelles.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/layout/activity_accueil_recherche_sans_scan.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/layout/activity_accueil_recherche_sans_scan2.xml" value="0.213768115942029" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/layout/activity_hor_ram_poubelles_details_ville.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/menu/barre_de_menu.xml" value="0.264" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/menu/menu_hor_ram_poubelles.xml" value="0.25" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_logo_scanEco.xml" value="0.115625" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_logo_scaneco.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_logo_scaneco_round.xml" value="0.14322916666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
