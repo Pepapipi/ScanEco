@@ -26,6 +26,7 @@
         <GridLayout
             android:columnCount="2"
             android:rowCount="3"
+
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false"
             android:layout_width="match_parent"
@@ -33,7 +34,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
