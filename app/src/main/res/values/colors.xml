@@ -13,4 +13,10 @@
 
     <color name="vert_Original">#185918</color>
     <color name="vert_Clair">#AB348C2E</color>
+
+    //Couleurs Recherche_Sans_Codes_Barres
+
+    <color name="rech_sans_codes_barre_gris">#808080</color>
+    <color name="rech_sans_codes_barre_bleu_fonce">#212b30</color>
+    <color name="rech_sans_codes_barre_bleu_clair">#03DAC5</color>
 </resources>
