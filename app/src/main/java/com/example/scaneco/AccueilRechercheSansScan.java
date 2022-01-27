@@ -41,12 +41,12 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         });
     }
 
-    public void ouvrirLeScan()
+    protected void ouvrirLeScan()
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    public void ouvrirHorRamPoubelles()
+    protected void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
