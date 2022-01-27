@@ -19,4 +19,8 @@
     <color name="rech_sans_codes_barre_gris">#808080</color>
     <color name="rech_sans_codes_barre_bleu_fonce">#212b30</color>
     <color name="rech_sans_codes_barre_bleu_clair">#03DAC5</color>
+
+    //Couleur Recherche_Sans_Scan_Categ_Details
+    <color name="rech_sans_scan_categ_det_gris_clair">#EDEDED</color>
+
 </resources>
