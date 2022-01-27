@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".AccueilRechercheSansScan">
 
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
@@ -20,12 +22,13 @@
         app:itemTextColor="#ffffff"
         app:menu="@menu/barre_de_menu" />
 
+    //Scroll catégorie
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
-
+        //Grille des catégories
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +38,7 @@
             android:columnOrderPreserved="true"
             android:rowCount="3">
 
-
+            //Catégorie Papiers
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -46,13 +49,16 @@
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
+
                 <LinearLayout
+                    android:id="@+id/linearLayoutPapier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:padding="16dp">
+
 
                     <ImageView
                         android:layout_width="80dp"
@@ -63,13 +69,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Papier"
+                        android:text="Papiers"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Verres
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Verre"
+                        android:text="Verres"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 
@@ -105,6 +112,7 @@
 
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Plastiques
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Plastique"
+                        android:text="Plastiques"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 
@@ -140,6 +148,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Piles
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,6 +184,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Fruits et légumes
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="25dp"
@@ -202,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Fruits"
+                        android:text="Fruits,Légumes"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 
@@ -210,6 +220,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Verdures
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -237,7 +248,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Verdure"
+                        android:text="Verdures"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 
@@ -245,6 +256,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Vaisselles
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -272,7 +284,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Vaisselle"
+                        android:text="Vaisselles"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 
@@ -280,6 +292,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Médicament
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -315,6 +328,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Cartons
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -342,7 +356,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Carton"
+                        android:text="Cartons"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 
@@ -350,6 +364,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Vêtements
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -385,6 +400,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Meubles
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -420,6 +436,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            //Catégorie Electroménagers
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -447,7 +464,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Electroménager"
+                        android:text="Electroménagers"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
 

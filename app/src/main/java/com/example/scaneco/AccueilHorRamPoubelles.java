@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
     ListView recherche_ville;
     ArrayAdapter<String> adapter;
     private ImageButton _boutonRetourScan;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,5 +115,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
 
 }

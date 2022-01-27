@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +16,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     private ImageButton _boutonRetourScan;
     private ScrollView _scrollView;
+    private LinearLayout _linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +25,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setOnItemSelectedListener(item ->{
-            switch (item.getItemId()){
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
                 case R.id.accueilHorRamPoubelles:
                     ouvrirHorRamPoubelles();
                     break;
@@ -33,10 +36,19 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         });
 
         _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
+        _boutonRetourScan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 ouvrirLeScan();
+            }
+        });
+
+        //Création du bouton qui ouvre la page recherche sans scan
+        _linearLayout = findViewById(R.id.linearLayoutPapier);
+        //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
+        _linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ouvrirDetailsCategoriePapier();
             }
         });
     }
@@ -49,6 +61,14 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     protected void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
+        startActivity(intent);
+    }
+
+    /*Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page du détails de la catégorie Papier
+     * */
+    public void ouvrirDetailsCategoriePapier(){
+        Intent intent = new Intent(this, RechercheSansScanCategDetails.class);
         startActivity(intent);
     }
 }
