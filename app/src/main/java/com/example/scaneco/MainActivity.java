@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
+    private ImageButton _boutonReglages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Création du bouton qui ouvre les réglages de l'application
+        _boutonReglages = findViewById(R.id.boutonReglages);
+        //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
+        _boutonReglages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ouvrirReglages();
+            }
+        });
 
         //Pour se servir du scan, l'utilisateur doit autoriser l'accès à la caméra
         //On vérifie s'il a autorisé ou non l'accès à la caméra
@@ -142,6 +152,12 @@ public class MainActivity extends AppCompatActivity {
     public void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
+        startActivity(intent);
+    }
+
+    public void ouvrirReglages()
+    {
+        Intent intent = new Intent(this, Reglages.class);
         startActivity(intent);
     }
 }

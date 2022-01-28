@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Reglages">
+
+    <ImageButton
+        android:id="@+id/boutonFlecheRetourScan"
+        android:layout_width="30dp"
+
+        android:layout_height="30dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_fleche_retour" />
+
+    <TextView
+        android:id="@+id/TitrePageRéglages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="50dp"
+        android:text="Paramètres"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+        android:id="@+id/TitreTheme"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="50dp"
+        android:text="Thème" />
+
+    <Switch
+        android:id="@+id/switchSombreClair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="80dp"
+        android:text="Mode Sombre"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+</RelativeLayout>
