@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
+    private Produit _produitRetourne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +100,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //On récupère les chiffres scannés
-                        _textView.setText(result.getText());
+                        String _nomProduit;
+                        try {
+
+                            _nomProduit = Produit.getProductFromBarCode(result.getText()).getNom();
+                        }
+                        catch (Exception e){
+                            _nomProduit = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
+                        }
+                        _textView.setText(_nomProduit);
                         //On les affiche en rendant le texte visible
                         _textView.setVisibility(View.VISIBLE);
-                        //
+
                         _mCodeScanner.startPreview();
                     }
                 });
@@ -111,10 +120,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*Fonction qui vérifie si on a la permission d'acceder à la caméra
-    * La fonction s'active au premier lancement de l'application
-    * Elle s'active ensuite à chaque fois qu'on arrive sur le scan et qu'on n'a toujours pas la permission
-    * */
+    /**
+     * Fonction qui vérifie si on a la permission d'acceder à la caméra
+     * La fonction s'active au premier lancement de l'application
+     * Elle s'active ensuite à chaque fois qu'on arrive sur le scan et qu'on n'a toujours pas la permission
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
