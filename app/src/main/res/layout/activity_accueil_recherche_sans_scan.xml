@@ -22,25 +22,26 @@
         app:itemTextColor="#ffffff"
         app:menu="@menu/barre_de_menu" />
 
-    //Scroll catégorie
+    <!--Scroll catégorie -->
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
-        //Grille des catégories
+        <!--Grille des catégories -->
         <GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:columnOrderPreserved="true"
+            android:paddingBottom="50dp"
             android:rowCount="3">
 
             //Catégorie Papiers
+
             <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -54,8 +55,8 @@
                     android:id="@+id/linearLayoutPapier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:background="@color/white"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -77,6 +78,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Verres
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,9 +90,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -113,6 +115,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Plastiques
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,9 +127,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -149,6 +152,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Piles
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,9 +164,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -185,6 +189,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Fruits et légumes
+
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="25dp"
@@ -196,9 +201,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -221,6 +226,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Verdures
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -232,9 +238,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -257,6 +263,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Vaisselles
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -268,9 +275,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -293,6 +300,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Médicament
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -304,9 +312,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -329,6 +337,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Cartons
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -340,9 +349,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -365,6 +374,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Vêtements
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -376,9 +386,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -401,6 +411,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Meubles
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -412,9 +423,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
@@ -437,6 +448,7 @@
             </androidx.cardview.widget.CardView>
 
             //Catégorie Electroménagers
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -448,9 +460,9 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
