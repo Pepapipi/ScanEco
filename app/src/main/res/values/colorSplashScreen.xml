@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //Couleur logo splash Screen
+    <color name="vert">#48B878</color>
+    <color name="noir">#373636</color>
+    <color name="violet">#5D404B</color>
+
+
+</resources>

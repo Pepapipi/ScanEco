@@ -22,15 +22,17 @@
         app:itemTextColor="#ffffff"
         app:menu="@menu/barre_de_menu" />
 
-    <!--Scroll catégorie -->
+   <!--ScrollView pour les items -->
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
-        <!--Grille des catégories -->
+        <!--Grille des catégorie -->
+
         <GridLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/gridViewRechercheSansScan"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
@@ -41,7 +43,7 @@
             //Catégorie Papiers
 
             <androidx.cardview.widget.CardView
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"

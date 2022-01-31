@@ -45,11 +45,13 @@
 
 
             <ImageView
+                android:id="@+id/imageView_imageEmballage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/papier" />
 
             <TextView
+                android:id="@+id/textView_nomEmballage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -85,7 +87,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="400dp"
         android:layout_marginEnd="150dp"
-        android:src="@drawable/bleu" />
+        android:src="@drawable/poubelle_bleue" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="250dp"

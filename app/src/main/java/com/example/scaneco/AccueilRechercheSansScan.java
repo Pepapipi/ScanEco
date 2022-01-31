@@ -1,30 +1,40 @@
 package com.example.scaneco;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintSet;
 
+import java.util.*;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.text.Layout;
 import android.view.View;
-import android.widget.Button;
+
+import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccueilRechercheSansScan extends AppCompatActivity {
 
     private ImageButton _boutonRetourScan;
-    private ScrollView _scrollView;
-    private LinearLayout _linearLayout;
+    private GridLayout _gridLayout;
+    ArrayList<String> arrayEmballage = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_recherche_sans_scan);
 
+        _gridLayout = (GridLayout)findViewById(R.id.gridViewRechercheSansScan);
+        setSingleEvent(_gridLayout);
+        //Barre de navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.accueilHorRamPoubelles:
@@ -34,7 +44,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             }
             return true;
         });
-
+        //Bouton de retour
         _boutonRetourScan = findViewById(R.id.boutonRetourScan);
         _boutonRetourScan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -42,15 +52,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             }
         });
 
-        //Création du bouton qui ouvre la page recherche sans scan
-        _linearLayout = findViewById(R.id.linearLayoutPapier);
-        //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
-        _linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ouvrirDetailsCategoriePapier();
-            }
-        });
+
+
     }
 
     protected void ouvrirLeScan()
@@ -64,11 +67,20 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*Fonction permettant d'aller sur une autre page(vue)
-     * Ici cette fonction permettra d'accéder à la page du détails de la catégorie Papier
-     * */
-    public void ouvrirDetailsCategoriePapier(){
-        Intent intent = new Intent(this, RechercheSansScanCategDetails.class);
-        startActivity(intent);
+    protected void setSingleEvent (GridLayout mainGrid){
+        arrayEmballage.addAll(Arrays.asList(getResources().getStringArray(R.array.mes_dechets)));
+
+        for (int i = 0; i< mainGrid.getChildCount(); i++){
+            CardView _cardView = (CardView) mainGrid.getChildAt(i);
+            final int _finalI = i;
+            _cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                Intent intent = new Intent(AccueilRechercheSansScan.this, RechercheSansScanCategDetails.class);
+                intent.putExtra("info", arrayEmballage.get(_finalI));
+                startActivity(intent);
+                }
+            });
+        }
     }
 }

@@ -11,6 +11,21 @@
         <item>Laluque 40465</item>
     </string-array>
 
+    <string-array name="mes_dechets">
+        <item>Papiers</item>
+        <item>Verres</item>
+        <item>Plastiques</item>
+        <item>Piles</item>
+        <item>Fruits et Légumes</item>
+        <item>Verdures</item>
+        <item>Vaisselles</item>
+        <item>Médicament</item>
+        <item>Cartons</item>
+        <item>Vêtements</item>
+        <item>Meubles</item>
+        <item>Electroménager</item>
+    </string-array>
+
     <string name="app_name">ScanEco</string>
     <string name="col1">Types de déchets</string>
     <string name="col2">Jours</string>

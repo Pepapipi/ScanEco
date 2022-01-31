@@ -46,21 +46,6 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
             }
         });
 
-
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        /*bottomNavigationView.setOnItemSelectedListener(item ->{
-
-            switch (item.getItemId()){
-                case R.id.accueilHorRamPoubelles:
-                    ouvrirHorRamPoubelles();
-                    break;
-
-            }
-            return true;
-        });*/
-
         adapter = new ArrayAdapter<String>(
                 AccueilHorRamPoubelles.this,
                 android.R.layout.simple_list_item_1,

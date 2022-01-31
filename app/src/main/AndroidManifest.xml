@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.scaneco" >
+    package="com.example.scaneco">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_scaneco_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ScanEco" >
+        android:theme="@style/Theme.ScanEco">
+
         <activity
             android:name=".RechercheSansScanCategDetails"
             android:exported="false" />
@@ -26,6 +27,10 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="true"/>
+        <activity
+            android:theme="@style/Theme.SplashScreen"
+            android:name=".SplashScreen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
