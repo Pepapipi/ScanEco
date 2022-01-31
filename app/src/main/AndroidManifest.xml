@@ -14,16 +14,13 @@
         android:theme="@style/Theme.ScanEco">
 
         <activity
-            android:name=".RechercheSansScanCategDetails"
+            android:name=".recherchesansscan.RechercheSansScanCategDetails"
             android:exported="false" />
         <activity
-            android:name=".HorRamPoubellesDetailsVille"
+            android:name=".horRamPoubelles.AccueilHorRamPoubelles"
             android:exported="false" />
         <activity
-            android:name=".AccueilHorRamPoubelles"
-            android:exported="false" />
-        <activity
-            android:name=".AccueilRechercheSansScan"
+            android:name=".recherchesansscan.AccueilRechercheSansScan"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

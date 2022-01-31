@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 

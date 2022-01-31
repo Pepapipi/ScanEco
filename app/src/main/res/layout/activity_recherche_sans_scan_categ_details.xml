@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RechercheSansScanCategDetails">
+    tools:context=".recherchesansscan.RechercheSansScanCategDetails">
 
     //Barre de navigation
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -78,7 +78,9 @@
         android:src="@drawable/ic_fleche" />
 
     //Image de la poubelle
+
     <ImageView
+        android:id="@+id/imageView_imagePoubelle"
         android:layout_width="wrap_content"
         android:layout_height="122dp"
         android:layout_alignParentStart="true"
