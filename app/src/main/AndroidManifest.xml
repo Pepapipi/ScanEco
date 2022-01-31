@@ -20,11 +20,14 @@
             android:name=".horRamPoubelles.AccueilHorRamPoubelles"
             android:exported="false" />
         <activity
+            android:name=".horRamPoubelles.HorRamPoubellesDetailsVille"
+            android:exported="false" />
+        <activity
             android:name=".recherchesansscan.AccueilRechercheSansScan"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="false"/>
         <activity
             android:theme="@style/Theme.SplashScreen"
             android:name=".SplashScreen"

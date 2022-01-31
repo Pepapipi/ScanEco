@@ -59,7 +59,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
 
                 Toast.makeText(AccueilHorRamPoubelles.this,"Selectionné "+recherche_ville.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(AccueilHorRamPoubelles.this,HorRamPoubellesDetailsVille.class);
+                Intent intent = new Intent(AccueilHorRamPoubelles.this, HorRamPoubellesDetailsVille.class);
 
                 String nomVille= recherche_ville.getItemAtPosition(position).toString();
                 intent.putExtra("valRecup",nomVille);
