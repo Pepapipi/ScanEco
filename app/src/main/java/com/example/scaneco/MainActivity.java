@@ -5,11 +5,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.scaneco.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 
@@ -29,11 +34,17 @@ public class MainActivity extends AppCompatActivity {
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
+    private BottomNavigationView _bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Sélection d'un Item sur la barre de navigation
+        _bottomNav = findViewById(R.id.bottom_navigation);
+        _bottomNav.setOnNavigationItemSelectedListener(navListener);
+
 
         //Création et initialisation du scanner
         _mCodeScannerView = findViewById(R.id.scanner_view);
@@ -45,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setOnItemSelectedListener(item ->{
+        /*bottomNavigationView.setOnItemSelectedListener(item ->{
             switch (item.getItemId()){
                 case R.id.accueilHorRamPoubelles:
                     ouvrirHorRamPoubelles();
@@ -53,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             return true;
-        });
+        });*/
 
 
         //Création du bouton qui ouvre la page recherche sans scan
@@ -78,6 +89,32 @@ public class MainActivity extends AppCompatActivity {
             startScanning();
         }
     }
+
+    //Navigation entre les pages
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
+
+            switch (item.getItemId())
+            {
+                case R.id.accueilHorRamPoubelles:
+                    selectedFragment = new HorRamPoubFragment();
+                    break;
+                case R.id.pointDeCollecte:
+                    selectedFragment = new PointCollecteFragment();
+                    break;
+                case R.id.animations:
+                    selectedFragment = new AnimationsFragment();
+                    break;
+            }
+
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+            return true;
+        }
+    };
 
 
     /*Fonction qui permet de scanner des codes-barres

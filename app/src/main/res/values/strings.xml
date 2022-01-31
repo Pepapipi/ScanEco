@@ -24,4 +24,6 @@
     <string name="row3Type">Verre</string>
     <string name="row3Jours">Jeudi</string>
     <string name="row3Heures">6h-11h</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

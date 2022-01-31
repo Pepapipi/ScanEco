@@ -10,14 +10,14 @@
         />
 
     <item
-        android:id="@+id/logo_triman"
+        android:id="@+id/pointDeCollecte"
         android:title="Points de collecte"
         android:icon="@drawable/ic_triman"
 
         />
 
     <item
-        android:id="@+id/logo_animation"
+        android:id="@+id/animations"
         android:title="Animations"
 
         android:icon="@drawable/ic_animations"

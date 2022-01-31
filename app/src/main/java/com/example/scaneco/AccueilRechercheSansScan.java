@@ -43,7 +43,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         });
 
         //Création du bouton qui ouvre la page recherche sans scan
-        _linearLayout = findViewById(R.id.linearLayoutPapier);
+        _linearLayout = findViewById(R.id.linearLayout);
         //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
         _linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

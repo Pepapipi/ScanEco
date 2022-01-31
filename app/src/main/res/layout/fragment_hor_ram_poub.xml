@@ -6,9 +6,24 @@
     tools:context=".HorRamPoubFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ListView
+        android:id="@+id/recherche_ville"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+
+    </ListView>
+
+    <ImageButton
+        android:id="@+id/boutonRetourScan"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/btn_rond_vert"
+
+        android:src="@drawable/ic_code_scanner_auto_focus_on" />
 
 </FrameLayout>
