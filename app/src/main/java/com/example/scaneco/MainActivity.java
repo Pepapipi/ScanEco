@@ -29,12 +29,12 @@ import com.google.zxing.Result;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView _textView;
+    private TextView _nomProduit;
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
     private ImageView _imageEmballage;
-    private Produit _produitRetourne;
+    private TextView _marqueProduit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
         _mCodeScanner = new CodeScanner(this, _mCodeScannerView);
 
         //Texte qui nous sert à afficher ce que le scanner a récupérée
-        _textView = findViewById(R.id.textView);
+        _nomProduit = findViewById(R.id.textView);
         _imageEmballage = findViewById(R.id.imageView_EmballageScan);
+        _marqueProduit = findViewById(R.id.textView_marqueProduit);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
     private void startScanning() {
         //Au départ quand aucun article n'est scanné le texte n'apparait pas
         //Donc on lui demande d'être invisible
-        _textView.setVisibility(View.INVISIBLE);
+        _nomProduit.setVisibility(View.INVISIBLE);
+        _marqueProduit.setVisibility(View.INVISIBLE);
         _mCodeScanner.startPreview();
 
         //Le scan décode un code-barres
@@ -111,20 +113,25 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         //On récupère les chiffres scannés
                         String _nomProduit;
+                        String _marqueProduit;
                         try {
                             Produit _produitObtenu = Produit.getProductFromBarCode(result.getText());
                             _nomProduit = _produitObtenu.getNom();
+                            _marqueProduit = _produitObtenu.getMarque();
+
                             _produitObtenu.loadImage();
                             _imageEmballage.setImageDrawable(_produitObtenu.getImage());
 
                         }
                         catch (Exception e){
+                            _marqueProduit = null;
                             _nomProduit = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
                         }
-                        _textView.setText(_nomProduit);
+                        MainActivity.this._nomProduit.setText(_nomProduit);
+                        MainActivity.this._marqueProduit.setText(_marqueProduit);
                         //On les affiche en rendant le texte visible
-                        _textView.setVisibility(View.VISIBLE);
-
+                        MainActivity.this._nomProduit.setVisibility(View.VISIBLE);
+                        MainActivity.this._marqueProduit.setVisibility(View.VISIBLE);
                         _mCodeScanner.startPreview();
                     }
                 });

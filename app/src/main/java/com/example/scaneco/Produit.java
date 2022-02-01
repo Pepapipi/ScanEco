@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 public class Produit {
     private String code;
     private String nom;
-    private List<String> marques;
+    private String marques;
     private String texteEmbalage;
     private String urlImage;
     private Drawable image;
@@ -68,8 +68,7 @@ public class Produit {
                             name = reader.nextName();
                             switch (name) {
                                 case "brands":
-                                    String brands = reader.nextString();
-                                    this.marques = Arrays.asList(brands.split("\\s*,\\s*"));
+                                    this.marques = reader.nextString();
                                     break;
                                 case "product_name":
                                     this.nom = reader.nextString();
@@ -123,7 +122,7 @@ public class Produit {
      *
      * @return La liste des marques du produit.
      */
-    public List<String> getMarques() {
+    public String getMarque() {
         return marques;
     }
 
@@ -131,7 +130,7 @@ public class Produit {
      *
      * @return Les instructions vis-à-vis des embalages.
      */
-    public String getTexteEmbalage() {
+    public String getTexteEmballage() {
         return texteEmbalage;
     }
 
@@ -149,6 +148,8 @@ public class Produit {
     public void loadImage() throws  Exception{
         image = new ImageProduit().execute(urlImage).get();
     }
+
+
     /**
      * Créé et renvoit un Produit à partir d'un code barres. Seulement si les permissions internet
      * ont été accordées.
@@ -164,4 +165,6 @@ public class Produit {
     public static Produit getProductFromBarCode(String barCode) throws IOException, Resources.NotFoundException, CancellationException, ExecutionException, InterruptedException {
         return new Produit(new OpenFoodFactsAPI().execute("https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json").get());
     }
+
+
 }

@@ -42,7 +42,6 @@
         android:textSize="20dp"
         android:visibility="visible"></TextView>
 
-
     <ImageButton
         android:id="@+id/bouton1"
         android:layout_width="60dp"
@@ -81,4 +80,14 @@
         android:minHeight="140dp"
         android:minWidth="140dp"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView_marqueProduit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="560dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:text="TextView" />
+
 </RelativeLayout>
