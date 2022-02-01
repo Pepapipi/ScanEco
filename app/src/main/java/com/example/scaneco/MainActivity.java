@@ -10,6 +10,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,7 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
     private TextView _nomProduit;
     private CodeScanner _mCodeScanner;
@@ -35,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton _boutonRechercheSansScan;
     private ImageView _imageEmballage;
     private TextView _marqueProduit;
+    private GestureDetector _gestureUtilisateur;
+    private float y1,y2;
+    private static int MIN_DISTANCE = 150;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +51,17 @@ public class MainActivity extends AppCompatActivity {
         _mCodeScannerView = findViewById(R.id.scanner_view);
         _mCodeScanner = new CodeScanner(this, _mCodeScannerView);
 
-        //Texte qui nous sert à afficher ce que le scanner a récupérée
+        //Initialisation des variables qui nous permettront d'affocher les
+        //caracteristiques du produit
         _nomProduit = findViewById(R.id.textView);
         _imageEmballage = findViewById(R.id.imageView_EmballageScan);
         _marqueProduit = findViewById(R.id.textView_marqueProduit);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        //Initialisation du swipe de l'utilisateur
+        this._gestureUtilisateur = new GestureDetector(MainActivity.this,this);
 
+        //Initialisation de la barre de menu
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item ->{
             switch (item.getItemId()){
                 case R.id.accueilHorRamPoubelles:
@@ -66,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-        //Création du bouton qui ouvre la page recherche sans scan
+        //Initialisation du bouton qui ouvre la page recherche sans scan
         _boutonRechercheSansScan = findViewById(R.id.bouton1);
         //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
         _boutonRechercheSansScan.setOnClickListener(new View.OnClickListener() {
@@ -92,9 +100,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*Fonction qui permet de scanner des codes-barres
-      Le carré blanc apparait au premier scan
-      Attention ! Il le carré blanc restera tant que l'utilisateur n'a pas changé de page(appelé vue)
+    /**
+     * Fonction qui permet de scanner des codes-barres
+     * Le carré blanc apparait au premier scan
+     * Attention ! Il le carré blanc restera tant que l'utilisateur n'a pas changé de page(appelé vue)
      */
 
     private void startScanning() {
@@ -112,23 +121,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //On récupère les chiffres scannés
-                        String _nomProduit;
-                        String _marqueProduit;
+                        String _nomProduitRecupere;
+                        String _marqueProduitRecupere;
                         try {
                             Produit _produitObtenu = Produit.getProductFromBarCode(result.getText());
-                            _nomProduit = _produitObtenu.getNom();
-                            _marqueProduit = _produitObtenu.getMarque();
+                            _nomProduitRecupere = _produitObtenu.getNom();
+                            _marqueProduitRecupere = _produitObtenu.getMarque();
 
                             _produitObtenu.loadImage();
                             _imageEmballage.setImageDrawable(_produitObtenu.getImage());
 
                         }
                         catch (Exception e){
-                            _marqueProduit = null;
-                            _nomProduit = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
+                            _marqueProduitRecupere = null;
+                            _nomProduitRecupere = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
                         }
-                        MainActivity.this._nomProduit.setText(_nomProduit);
-                        MainActivity.this._marqueProduit.setText(_marqueProduit);
+                        MainActivity.this._nomProduit.setText(_nomProduitRecupere);
+                        MainActivity.this._marqueProduit.setText(_marqueProduitRecupere);
                         //On les affiche en rendant le texte visible
                         MainActivity.this._nomProduit.setVisibility(View.VISIBLE);
                         MainActivity.this._marqueProduit.setVisibility(View.VISIBLE);
@@ -161,9 +170,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*Fonction permettant d'aller sur une autre page(vue)
+    /**
+    * Fonction permettant d'aller sur une autre page(vue)
     * Ici cette fonction permettra d'accéder à la page recherche sans scan
-    * */
+    **/
     public void ouvrirRechercheSansScan(){
         Intent intent = new Intent(this, AccueilRechercheSansScan.class);
         startActivity(intent);
@@ -180,9 +190,63 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
     }
+    public void ouvrirProduitDetail()
+    {
+        Intent intent = new Intent(this, ProduitDetails.class);
+        startActivity(intent);
+    }
+
+    //Gesture detector
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        _gestureUtilisateur.onTouchEvent(event);
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                y1 = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                y2 = event.getY();
+                float valueY = y2-y1;
+                if(Math.abs(valueY) > MIN_DISTANCE){
+                    if(y2<y1) {
+                        ouvrirProduitDetail();
+                        Toast.makeText(this, "Top Swipe", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        }
+        return super.onTouchEvent(event);
+    }
 
 
 
 
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
 
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        return false;
+    }
 }
