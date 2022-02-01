@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
 import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -54,9 +55,14 @@ public class MainActivity extends AppCompatActivity {
                     ouvrirHorRamPoubelles();
                     break;
 
+                case R.id.accueilAnimations:
+                    ouvrirAnimations();
+                    break;
             }
             return true;
         });
+
+
 
 
         //Création du bouton qui ouvre la page recherche sans scan
@@ -133,12 +139,12 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 123){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 //Un petit message lui indique que c'est bon, et on lance le scan
-                Toast.makeText(this,"Permission Granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Permission accordée", Toast.LENGTH_SHORT).show();
                 startScanning();
             }
             else{
                 //Un message lui indique qu'il ne peut toujours pas se servir du scan
-                Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Permission refusée", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -151,9 +157,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void ouvrirAnimations()
+    {
+        Intent intent = new Intent(this, AccueilAnimations.class);
+        startActivity(intent);
+    }
+
     public void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
     }
+
+
+
+
+
 }

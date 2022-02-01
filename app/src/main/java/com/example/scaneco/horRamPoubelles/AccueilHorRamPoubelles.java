@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.animations.AccueilAnimations;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +46,18 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
             {
                 ouvrirLeScan();
             }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnItemSelectedListener(item ->{
+            switch (item.getItemId()){
+
+                case R.id.accueilAnimations:
+                    ouvrirAnimations();
+                    break;
+            }
+            return true;
         });
 
         adapter = new ArrayAdapter<String>(
@@ -98,6 +112,12 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
     public void ouvrirLeScan()
     {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void ouvrirAnimations()
+    {
+        Intent intent = new Intent(this, AccueilAnimations.class);
         startActivity(intent);
     }
 
