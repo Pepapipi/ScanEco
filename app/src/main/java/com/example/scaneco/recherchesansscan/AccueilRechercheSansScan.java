@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,6 +40,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     ouvrirHorRamPoubelles();
                     break;
 
+                case R.id.accueilAnimations:
+                    ouvrirAnimations();
+                    break;
+
             }
             return true;
         });
@@ -52,6 +57,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
 
 
+
+
     }
 
     protected void ouvrirLeScan()
@@ -62,6 +69,11 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     protected void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
+        startActivity(intent);
+    }
+    public void ouvrirAnimations()
+    {
+        Intent intent = new Intent(this, AccueilAnimations.class);
         startActivity(intent);
     }
 

@@ -14,6 +14,10 @@
         android:theme="@style/Theme.ScanEco">
 
         <activity
+            android:name=".animations.AccueilAnimations"
+            android:exported="false" />
+
+        <activity
             android:name=".recherchesansscan.RechercheSansScanCategDetails"
             android:exported="false" />
         <activity
@@ -28,10 +32,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
+
         <activity
-            android:theme="@style/Theme.SplashScreen"
             android:name=".SplashScreen"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
