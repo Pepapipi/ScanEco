@@ -32,7 +32,7 @@
 
         <GridLayout
             android:id="@+id/gridViewRechercheSansScan"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
@@ -42,7 +42,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -56,6 +56,7 @@
                     android:id="@+id/linearLayoutPapier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -80,7 +81,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
@@ -126,7 +127,7 @@
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="162dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -211,16 +212,15 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="3dp"
                         android:text="Fruits/Légumes"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="17dp" />
 
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
 
 
             <androidx.cardview.widget.CardView
@@ -296,7 +296,6 @@
             </androidx.cardview.widget.CardView>
 
 
-
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -333,7 +332,6 @@
             </androidx.cardview.widget.CardView>
 
 
-
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -368,7 +366,6 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
 
 
             <androidx.cardview.widget.CardView
@@ -440,7 +437,6 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
 
 
             <androidx.cardview.widget.CardView
