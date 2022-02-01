@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
+    private ImageView _imageEmballage;
     private Produit _produitRetourne;
 
     @Override
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Texte qui nous sert à afficher ce que le scanner a récupérée
         _textView = findViewById(R.id.textView);
-
+        _imageEmballage = findViewById(R.id.imageView_EmballageScan);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -110,8 +112,11 @@ public class MainActivity extends AppCompatActivity {
                         //On récupère les chiffres scannés
                         String _nomProduit;
                         try {
+                            Produit _produitObtenu = Produit.getProductFromBarCode(result.getText());
+                            _nomProduit = _produitObtenu.getNom();
+                            _produitObtenu.loadImage();
+                            _imageEmballage.setImageDrawable(_produitObtenu.getImage());
 
-                            _nomProduit = Produit.getProductFromBarCode(result.getText()).getNom();
                         }
                         catch (Exception e){
                             _nomProduit = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";

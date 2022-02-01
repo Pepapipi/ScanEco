@@ -1,8 +1,8 @@
 package com.example.scaneco;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
-import android.util.JsonToken;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -43,7 +43,8 @@ public class Produit {
     private String nom;
     private List<String> marques;
     private String texteEmbalage;
-    private String image;
+    private String urlImage;
+    private Drawable image;
 
 
     /**
@@ -77,7 +78,7 @@ public class Produit {
                                     this.texteEmbalage = reader.nextString();
                                     break;
                                 case "image_url":
-                                    this.image = reader.nextString();
+                                    this.urlImage = reader.nextString();
                                     break;
                                 default:
                                     reader.skipValue();
@@ -139,10 +140,15 @@ public class Produit {
      *
      * @return L'image du produit.
      */
-    public String getImage() {
-        return image;
+    public String getUrlImage() {
+        return urlImage;
     }
 
+    public Drawable getImage(){return  image;}
+
+    public void loadImage() throws  Exception{
+        image = new ImageProduit().execute(urlImage).get();
+    }
     /**
      * Créé et renvoit un Produit à partir d'un code barres. Seulement si les permissions internet
      * ont été accordées.

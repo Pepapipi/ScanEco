@@ -28,6 +28,7 @@
         app:maskColor="#6C000000">
 
 
+
     </com.budiyev.android.codescanner.CodeScannerView>
 
     <TextView
@@ -66,7 +67,18 @@
         android:elevation="7dp"
         app:itemIconTint="@color/white"
         app:itemTextColor="#ffffff"
-        app:menu="@menu/barre_de_menu"
-        />
+        app:menu="@menu/barre_de_menu" />
 
+    <ImageView
+        android:id="@+id/imageView_EmballageScan"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_alignBottom="@id/bottom_navigation"
+        android:layout_marginLeft="270dp"
+        android:layout_marginBottom="40dp"
+        android:maxHeight="140dp"
+        android:maxWidth="140dp"
+        android:minHeight="140dp"
+        android:minWidth="140dp"
+        tools:srcCompat="@tools:sample/avatars" />
 </RelativeLayout>

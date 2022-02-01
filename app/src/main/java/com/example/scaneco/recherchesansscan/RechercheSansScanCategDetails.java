@@ -2,6 +2,7 @@ package com.example.scaneco.recherchesansscan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ public class RechercheSansScanCategDetails extends AppCompatActivity {
     private ImageView _imageEmballage;
     private ImageView _imagePoubelle;
     private TextView _texteExplicatif;
+    private Drawable _test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +87,7 @@ public class RechercheSansScanCategDetails extends AppCompatActivity {
                 case "Electroménager" :
                     _imageEmballage.setImageResource(R.drawable.electromenager);
                     _imagePoubelle.setImageResource(R.drawable.dechetterie);
+
                     _texteExplicatif.setText("S'ils sont en bon état veuillez les donner à une association");
                     break;
             }
