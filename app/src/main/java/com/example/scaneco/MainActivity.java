@@ -33,17 +33,20 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     private TextView _nomProduit;
     private TextView _ecranBlanc;
+    private TextView _marqueProduit;
+
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
+
     private ImageView _imageEmballage;
-    private TextView _marqueProduit;
+
     private GestureDetector _gestureUtilisateur;
     private float y1,y2;
     private static int MIN_DISTANCE = 150;
 
-    private String _codeBarre;
     private Produit _produitObtenu;
+    private String _codeBarre;
     private String _nomProduitRecupere;
     private String _marqueProduitRecupere;
 
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _ecranBlanc.setVisibility(View.INVISIBLE);
         _nomProduit.setVisibility(View.INVISIBLE);
         _marqueProduit.setVisibility(View.INVISIBLE);
+        _imageEmballage.setVisibility(View.INVISIBLE);
         _mCodeScanner.startPreview();
 
         //Le scan décode un code-barres
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                         _ecranBlanc.setVisibility(View.VISIBLE);
                         _nomProduit.setVisibility(View.VISIBLE);
                         _marqueProduit.setVisibility(View.VISIBLE);
+                        _imageEmballage.setVisibility(View.VISIBLE);
                         _mCodeScanner.startPreview();
                     }
                 });
@@ -204,7 +209,12 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
-    //Gesture detector
+    /**
+     * Les fonctions ci-dessous sont nécessaires pour le swipe !!!
+     * @param event c'est un MotionEvent, c'est un evenement qui est déclenché après
+     *              une action qui bouge
+     * @return event ça retourne l'event qui permet de savoir ce qu'a fait l'utilisateur
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event){
         _gestureUtilisateur.onTouchEvent(event);
@@ -218,15 +228,11 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 if(Math.abs(valueY) > MIN_DISTANCE){
                     if(y2<y1) {
                         ouvrirProduitDetail();
-                        Toast.makeText(this, "Top Swipe", Toast.LENGTH_SHORT).show();
                     }
                 }
         }
         return super.onTouchEvent(event);
     }
-
-
-
 
     @Override
     public boolean onDown(MotionEvent e) {
