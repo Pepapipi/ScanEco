@@ -8,12 +8,14 @@
 
     <ImageView
         android:id="@+id/imageView_EmballageScan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="263dp"
-        android:layout_marginBottom="556dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="504dp"
+        android:maxWidth="220dp"
+        android:maxHeight="220dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="33dp"
         tools:srcCompat="@tools:sample/avatars" />
@@ -44,22 +46,26 @@
 
     <TextView
         android:id="@+id/textView_nomProduit"
-        android:layout_width="122dp"
-        android:layout_height="31dp"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="85dp"
-        android:layout_marginBottom="676dp"
-        android:text="TextView" />
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="643dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView_marqueProduit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="177dp"
+        android:layout_height="36dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="170dp"
-        android:layout_marginBottom="636dp"
-        android:text="TextView" />
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="569dp"
+        android:text="TextView"
+        android:textSize="17dp"
+        android:textStyle="italic" />
 
 </RelativeLayout>

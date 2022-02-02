@@ -28,16 +28,20 @@
         app:maskColor="#6C000000">
 
 
-
+        <View
+            android:id="@+id/view"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginBottom="300dp"/>
     </com.budiyev.android.codescanner.CodeScannerView>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_ecranBlanc"
         android:layout_width="match_parent"
         android:layout_height="205dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorOnPrimary"
-        android:text="Scannez un code-barres"
+
         android:textAlignment="center"
         android:textSize="20dp"
         android:visibility="visible"></TextView>
@@ -73,21 +77,35 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_alignBottom="@id/bottom_navigation"
-        android:layout_marginLeft="270dp"
         android:layout_marginBottom="40dp"
-        android:maxHeight="140dp"
         android:maxWidth="140dp"
-        android:minHeight="140dp"
+        android:maxHeight="140dp"
         android:minWidth="140dp"
+        android:minHeight="140dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
+        android:id="@+id/textView_nomProduit"
+        android:layout_width="229dp"
+        android:layout_height="39dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="540dp"
+        android:layout_marginEnd="20dp"
+        android:text="Nom du produit"
+        android:textAlignment="textEnd"
+        android:textSize="20dp" />
+
+    <TextView
         android:id="@+id/textView_marqueProduit"
-        android:layout_width="wrap_content"
+        android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="560dp"
+        android:layout_below="@+id/textView_nomProduit"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="10dp"
-        android:textSize="15dp"
-        android:text="TextView" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:textAlignment="textEnd"
+        android:text="TextView"
+        android:textSize="15dp" />
 
 </RelativeLayout>

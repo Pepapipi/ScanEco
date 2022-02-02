@@ -32,6 +32,7 @@ import com.google.zxing.Result;
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
     private TextView _nomProduit;
+    private TextView _ecranBlanc;
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private float y1,y2;
     private static int MIN_DISTANCE = 150;
 
+    private String _codeBarre;
+    private Produit _produitObtenu;
+    private String _nomProduitRecupere;
+    private String _marqueProduitRecupere;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         //Initialisation des variables qui nous permettront d'affocher les
         //caracteristiques du produit
-        _nomProduit = findViewById(R.id.textView);
+        _ecranBlanc = findViewById(R.id.textView_ecranBlanc);
+        _nomProduit = findViewById(R.id.textView_nomProduit);
         _imageEmballage = findViewById(R.id.imageView_EmballageScan);
         _marqueProduit = findViewById(R.id.textView_marqueProduit);
 
@@ -109,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private void startScanning() {
         //Au départ quand aucun article n'est scanné le texte n'apparait pas
         //Donc on lui demande d'être invisible
+        _ecranBlanc.setVisibility(View.INVISIBLE);
         _nomProduit.setVisibility(View.INVISIBLE);
         _marqueProduit.setVisibility(View.INVISIBLE);
         _mCodeScanner.startPreview();
@@ -120,11 +127,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //On récupère les chiffres scannés
-                        String _nomProduitRecupere;
-                        String _marqueProduitRecupere;
+
                         try {
-                            Produit _produitObtenu = Produit.getProductFromBarCode(result.getText());
+                            _codeBarre = result.getText();
+                            _produitObtenu= Produit.getProductFromBarCode(result.getText());
                             _nomProduitRecupere = _produitObtenu.getNom();
                             _marqueProduitRecupere = _produitObtenu.getMarque();
 
@@ -139,8 +145,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                         MainActivity.this._nomProduit.setText(_nomProduitRecupere);
                         MainActivity.this._marqueProduit.setText(_marqueProduitRecupere);
                         //On les affiche en rendant le texte visible
-                        MainActivity.this._nomProduit.setVisibility(View.VISIBLE);
-                        MainActivity.this._marqueProduit.setVisibility(View.VISIBLE);
+                        _ecranBlanc.setVisibility(View.VISIBLE);
+                        _nomProduit.setVisibility(View.VISIBLE);
+                        _marqueProduit.setVisibility(View.VISIBLE);
                         _mCodeScanner.startPreview();
                     }
                 });
@@ -193,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public void ouvrirProduitDetail()
     {
         Intent intent = new Intent(this, ProduitDetails.class);
+        intent.putExtra("codebarre", _codeBarre);
         startActivity(intent);
     }
 
