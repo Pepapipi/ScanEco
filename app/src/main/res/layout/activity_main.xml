@@ -27,12 +27,6 @@
         app:frameThickness="8dp"
         app:maskColor="#6C000000">
 
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginBottom="300dp"/>
     </com.budiyev.android.codescanner.CodeScannerView>
 
     <TextView
@@ -43,7 +37,7 @@
         android:background="?attr/colorOnPrimary"
 
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="17dp"
         android:visibility="visible"></TextView>
 
     <ImageButton
@@ -76,8 +70,8 @@
         android:id="@+id/imageView_EmballageScan"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_alignBottom="@id/bottom_navigation"
-        android:layout_marginBottom="40dp"
+        android:layout_above="@+id/bottom_navigation"
+
         android:maxWidth="140dp"
         android:maxHeight="140dp"
         android:minWidth="140dp"
@@ -86,26 +80,67 @@
 
     <TextView
         android:id="@+id/textView_nomProduit"
-        android:layout_width="226dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="540dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="272dp"
+        android:layout_height="28dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignTop="@+id/textView_ecranBlanc"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginBottom="112dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Nom du produit"
-        android:textAlignment="textEnd"
-        android:textSize="20dp" />
+        android:textAlignment="center"
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/textView_marqueProduit"
         android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_nomProduit"
+
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignTop="@id/textView_nomProduit"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:textAlignment="textEnd"
-        android:text="TextView"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="561dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="85dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Marque"
+        android:textAlignment="center"
         android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView_poubelle1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="5dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView_poubelle2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="5dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageView_poubelle3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="5dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
 
 </RelativeLayout>

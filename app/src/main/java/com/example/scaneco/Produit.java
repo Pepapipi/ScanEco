@@ -45,7 +45,7 @@ public class Produit {
     private String texteEmbalage;
     private String urlImage;
     private Drawable image;
-
+    public String[] emball;
 
     /**
      * Construit un produit à partir de données json.
@@ -78,6 +78,9 @@ public class Produit {
                                     break;
                                 case "image_url":
                                     this.urlImage = reader.nextString();
+                                    break;
+                                case "packaging":
+                                    emball = reader.nextString().split(",");
                                     break;
                                 default:
                                     reader.skipValue();

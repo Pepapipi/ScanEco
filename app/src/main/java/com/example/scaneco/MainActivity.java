@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -27,6 +28,9 @@ import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
 import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
@@ -50,6 +54,26 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private String _nomProduitRecupere;
     private String _marqueProduitRecupere;
 
+    private String text1;
+    private String text2;
+    private String text3;
+    private ImageView _imageViewPoubelle1;
+    private ImageView _imageViewPoubelle2;
+    private ImageView _imageViewPoubelle3;
+
+
+    private List<String> listeRecyclable= new ArrayList<String>();
+    private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
+            "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable"
+            ,"Etui carton","Bouchon en plastique","Couvercle en métal", "Carton"};
+
+    private List<String> listeVerre = new ArrayList<String>();
+    private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
+
+    private List<String> listeNonRecyclable = new ArrayList<String>();
+    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique"," Film en plastique", "Sachet plastique", "Plastique"};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +89,20 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _nomProduit = findViewById(R.id.textView_nomProduit);
         _imageEmballage = findViewById(R.id.imageView_EmballageScan);
         _marqueProduit = findViewById(R.id.textView_marqueProduit);
+
+        _imageViewPoubelle1 = findViewById(R.id.imageView_poubelle1);
+        _imageViewPoubelle2 = findViewById(R.id.imageView_poubelle2);
+        _imageViewPoubelle3 = findViewById(R.id.imageView_poubelle3);
+        //Initialisation des listes
+        for (int i =0; i< tabRecyclable.length;i++){
+            listeRecyclable.add(tabRecyclable[i]);
+        }
+        for (int i =0; i< tabNonRecyclabe.length;i++){
+            listeNonRecyclable.add(tabNonRecyclabe[i]);
+        }
+        for (int i =0; i< tabVerre.length;i++){
+            listeVerre.add(tabVerre[i]);
+        }
 
         //Initialisation du swipe de l'utilisateur
         this._gestureUtilisateur = new GestureDetector(MainActivity.this,this);
@@ -121,7 +159,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _ecranBlanc.setVisibility(View.INVISIBLE);
         _nomProduit.setVisibility(View.INVISIBLE);
         _marqueProduit.setVisibility(View.INVISIBLE);
-        _imageEmballage.setVisibility(View.INVISIBLE);
+
+
         _mCodeScanner.startPreview();
 
         //Le scan décode un code-barres
@@ -133,18 +172,46 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     public void run() {
 
                         try {
+                            //Code-barres scanné
                             _codeBarre = result.getText();
+                            //Le produit rendu par OFF
                             _produitObtenu= Produit.getProductFromBarCode(result.getText());
+
+                            //Nom produit
                             _nomProduitRecupere = _produitObtenu.getNom();
                             _marqueProduitRecupere = _produitObtenu.getMarque();
 
+                            //Image emballage
                             _produitObtenu.loadImage();
                             _imageEmballage.setImageDrawable(_produitObtenu.getImage());
 
+                            text1="";
+                            text2="";
+                            text3="";
+
+                            int i=0;
+                            while(i<_produitObtenu.emball.length && text1.isEmpty())
+                            {
+                                text1 = affichageCorrect(i,text1,_imageViewPoubelle1);
+                                i++;
+                            }
+                            while(i<_produitObtenu.emball.length && text2.isEmpty())
+                            {
+                                text2 = affichageCorrect(i,text2,_imageViewPoubelle2);
+                                i++;
+                            }
+                            while(i<_produitObtenu.emball.length && text3.isEmpty())
+                            {
+                                text3 = affichageCorrect(i,text3,_imageViewPoubelle3);
+                                i++;
+                            }
+
+
                         }
                         catch (Exception e){
-                            _marqueProduitRecupere = null;
-                            _nomProduitRecupere = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
+
+                            _nomProduitRecupere =e.toString();
+                            //_nomProduitRecupere = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
                         }
                         MainActivity.this._nomProduit.setText(_nomProduitRecupere);
                         MainActivity.this._marqueProduit.setText(_marqueProduitRecupere);
@@ -152,7 +219,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                         _ecranBlanc.setVisibility(View.VISIBLE);
                         _nomProduit.setVisibility(View.VISIBLE);
                         _marqueProduit.setVisibility(View.VISIBLE);
-                        _imageEmballage.setVisibility(View.VISIBLE);
                         _mCodeScanner.startPreview();
                     }
                 });
@@ -209,6 +275,37 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
+
+    public String affichageCorrect(int i,String text, ImageView image)
+    {
+        String _emballage = upperCaseFirst(_produitObtenu.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
+        if (listeRecyclable.contains(_emballage))
+        {
+            text=_emballage;
+            image.setImageResource(R.drawable.poubelle_jaune);
+
+        }
+        else if (listeNonRecyclable.contains(_emballage))
+        {
+            text=_emballage;
+            image.setImageResource(R.drawable.poubelle_noire);
+
+        }
+        else if(listeVerre.contains(_emballage))
+        {
+            text=_emballage;
+            image.setImageResource(R.drawable.poubelle_verte);
+
+        }
+        return text;
+    }
+
+    public static String upperCaseFirst(String val) {
+        char[] arr = val.toCharArray();
+        arr[0] = Character.toUpperCase(arr[0]);
+        return new String(arr);
+    }
+
     /**
      * Les fonctions ci-dessous sont nécessaires pour le swipe !!!
      * @param event c'est un MotionEvent, c'est un evenement qui est déclenché après
@@ -263,4 +360,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
+
+
 }
+
