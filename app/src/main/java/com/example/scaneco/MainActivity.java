@@ -188,7 +188,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                             text1="";
                             text2="";
                             text3="";
-
+                            _imageViewPoubelle1.setImageResource(0);
+                            _imageViewPoubelle2.setImageResource(0);
+                            _imageViewPoubelle3.setImageResource(0);
                             int i=0;
                             while(i<_produitObtenu.emball.length && text1.isEmpty())
                             {
