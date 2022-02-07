@@ -80,33 +80,26 @@
 
     <TextView
         android:id="@+id/textView_nomProduit"
-        android:layout_width="281dp"
-        android:layout_height="34dp"
-        android:layout_above="@+id/bottom_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView_ecranBlanc"
-
-        android:layout_marginLeft="140dp"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="106dp"
+        android:layout_toEndOf="@+id/imageView_EmballageScan"
         android:fontFamily="sans-serif-medium"
         android:text="Nom du produit"
         android:textAlignment="center"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView_marqueProduit"
-        android:layout_width="117dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignTop="@id/textView_nomProduit"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-
-
-        android:layout_marginTop="580dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="80dp"
+        android:layout_below="@+id/textView_nomProduit"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/imageView_EmballageScan"
         android:fontFamily="sans-serif-medium"
         android:text="Marque"
         android:textAlignment="center"
@@ -117,9 +110,9 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="200dp"
+        android:layout_marginStart="1dp"
         android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/imageView_EmballageScan"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -127,9 +120,9 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="125dp"
+        android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/imageView_poubelle1"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
@@ -137,9 +130,9 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/imageView_poubelle2"
         tools:srcCompat="@tools:sample/avatars" />
 
 
