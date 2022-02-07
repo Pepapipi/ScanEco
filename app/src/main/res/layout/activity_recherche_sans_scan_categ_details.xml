@@ -112,17 +112,14 @@
             android:padding="1dp">
 
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-3dp"
+                android:layout_marginTop="-10dp"
                 android:text="Information"
                 android:textColor="#6f6f6f"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-
 
             <TextView
                 android:id="@+id/textExplicatif"

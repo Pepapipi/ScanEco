@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/drawable/ic_fleche.xml" value="0.32760416666666664" />
+        <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_accueil_animations.xml" value="0.31444759206798867" />
         <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_accueil_hor_ram_poubelles.xml" value="0.3177083333333333" />
-        <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_accueil_recherche_sans_scan.xml" value="0.1" />
+        <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_accueil_recherche_sans_scan.xml" value="0.3333333333333333" />
         <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_hor_ram_poubelles_details_ville.xml" value="0.30572916666666666" />
         <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_main.xml" value="0.3177083333333333" />
         <entry key="..\:/Android_Studio/ScanEco/app/src/main/res/layout/activity_recherche_sans_scan_categ_details.xml" value="0.33" />
