@@ -80,14 +80,14 @@
 
     <TextView
         android:id="@+id/textView_nomProduit"
-        android:layout_width="272dp"
-        android:layout_height="28dp"
+        android:layout_width="281dp"
+        android:layout_height="34dp"
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignTop="@+id/textView_ecranBlanc"
 
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="140dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="106dp"
         android:fontFamily="sans-serif-medium"
         android:text="Nom du produit"
         android:textAlignment="center"
@@ -95,18 +95,18 @@
 
     <TextView
         android:id="@+id/textView_marqueProduit"
-        android:layout_width="118dp"
+        android:layout_width="117dp"
         android:layout_height="wrap_content"
 
         android:layout_above="@+id/bottom_navigation"
         android:layout_alignTop="@id/textView_nomProduit"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
 
-        android:layout_marginTop="561dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginBottom="85dp"
+
+        android:layout_marginTop="580dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp"
         android:fontFamily="sans-serif-medium"
         android:text="Marque"
         android:textAlignment="center"

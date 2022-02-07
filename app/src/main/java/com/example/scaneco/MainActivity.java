@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -64,14 +65,14 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     private List<String> listeRecyclable= new ArrayList<String>();
     private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
-            "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable"
-            ,"Etui carton","Bouchon en plastique","Couvercle en métal", "Carton"};
+            "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable", "Boite en métal"
+            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule papier", "Pot en plastique", "Couvercle en plastique"};
 
     private List<String> listeVerre = new ArrayList<String>();
     private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
 
     private List<String> listeNonRecyclable = new ArrayList<String>();
-    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique"," Film en plastique", "Sachet plastique", "Plastique"};
+    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Plastique", "Barquette en plastique"};
 
 
     @Override
@@ -159,8 +160,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _ecranBlanc.setVisibility(View.INVISIBLE);
         _nomProduit.setVisibility(View.INVISIBLE);
         _marqueProduit.setVisibility(View.INVISIBLE);
-
-
         _mCodeScanner.startPreview();
 
         //Le scan décode un code-barres
@@ -175,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                             //Code-barres scanné
                             _codeBarre = result.getText();
                             //Le produit rendu par OFF
-                            _produitObtenu= Produit.getProductFromBarCode(result.getText());
+                            _produitObtenu= Produit.getProductFromBarCode(_codeBarre);
 
                             //Nom produit
                             _nomProduitRecupere = _produitObtenu.getNom();
@@ -185,12 +184,16 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                             _produitObtenu.loadImage();
                             _imageEmballage.setImageDrawable(_produitObtenu.getImage());
 
+                            //Reinitialise les paramètres
                             text1="";
                             text2="";
                             text3="";
                             _imageViewPoubelle1.setImageResource(0);
                             _imageViewPoubelle2.setImageResource(0);
                             _imageViewPoubelle3.setImageResource(0);
+
+                            //Affiche les poubelles correspondantes, tant que il n'y a pas de text
+                            //Ce qui veut dire qu'aucun emballage a était trouvé..
                             int i=0;
                             while(i<_produitObtenu.emball.length && text1.isEmpty())
                             {
@@ -215,8 +218,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                             _nomProduitRecupere =e.toString();
                             //_nomProduitRecupere = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
                         }
-                        MainActivity.this._nomProduit.setText(_nomProduitRecupere);
-                        MainActivity.this._marqueProduit.setText(_marqueProduitRecupere);
+                        _nomProduit.setText(_nomProduitRecupere);
+                        _marqueProduit.setText(_marqueProduitRecupere);
                         //On les affiche en rendant le texte visible
                         _ecranBlanc.setVisibility(View.VISIBLE);
                         _nomProduit.setVisibility(View.VISIBLE);
@@ -273,11 +276,23 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public void ouvrirProduitDetail()
     {
         Intent intent = new Intent(this, ProduitDetails.class);
-        intent.putExtra("codebarre", _codeBarre);
+        intent.putExtra("nomPdt", _nomProduitRecupere);
+        intent.putExtra("marquePdt", _marqueProduitRecupere);
+        intent.putExtra("codeBarre", _codeBarre);
+        intent.putExtra("text1",text1);
+        intent.putExtra("text2",text2);
+        intent.putExtra("text3", text3);
         startActivity(intent);
     }
 
-
+    /**
+     * Fonction qui permet regarde dans les 3 listes si l'emballage qu'on a dans le tableau
+     * _produitObtenu.emball
+     * @param i
+     * @param text
+     * @param image
+     * @return
+     */
     public String affichageCorrect(int i,String text, ImageView image)
     {
         String _emballage = upperCaseFirst(_produitObtenu.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
