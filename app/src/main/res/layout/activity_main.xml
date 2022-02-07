@@ -32,7 +32,7 @@
     <TextView
         android:id="@+id/textView_ecranBlanc"
         android:layout_width="match_parent"
-        android:layout_height="205dp"
+        android:layout_height="211dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorOnPrimary"
 
@@ -65,6 +65,16 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="#ffffff"
         app:menu="@menu/barre_de_menu" />
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_alignTop="@+id/textView_ecranBlanc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/gris_clair"
+
+        />
 
     <ImageView
         android:id="@+id/imageView_EmballageScan"

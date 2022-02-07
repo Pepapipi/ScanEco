@@ -1,13 +1,16 @@
 package com.example.scaneco;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProduitDetails extends AppCompatActivity{
@@ -21,6 +24,9 @@ private ImageView imageView2D;
 private ImageView imageView3D;
 private ImageView imageView_Emballage;
 private Produit _produitObtenu;
+private CardView _cardView1;
+private CardView _cardView2;
+private CardView _cardView3;
 
 
 
@@ -47,21 +53,18 @@ private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plasti
             text3D = findViewById(R.id.textView3);
             _nomProduit = findViewById(R.id.textView_nomProduit);
             _marqueProduit = findViewById(R.id.textView_marqueProduit);
+            _cardView1 = findViewById(R.id.firstDescription);
+            _cardView2 = findViewById(R.id.secondDescription);
+            _cardView3 = findViewById(R.id.thirdDescription);
 
             imageView1D = findViewById(R.id.imageView_poubelle1);
             imageView2D = findViewById(R.id.imageView_poubelle2);
             imageView3D = findViewById(R.id.imageView_poubelle3);
             imageView_Emballage = findViewById(R.id.imageView_EmballageScan);
 
-            for (int i = 0; i < tabRecyclable.length; i++) {
-                listeRecyclable.add(tabRecyclable[i]);
-            }
-            for (int i = 0; i < tabNonRecyclabe.length; i++) {
-                listeNonRecyclable.add(tabNonRecyclabe[i]);
-            }
-            for (int i = 0; i < tabVerre.length; i++) {
-                listeVerre.add(tabVerre[i]);
-            }
+            Collections.addAll(listeRecyclable, tabRecyclable);
+            Collections.addAll(listeNonRecyclable, tabNonRecyclabe);
+            Collections.addAll(listeVerre, tabVerre);
 
             text1D.setText(getIntent().getStringExtra("text1"));
             text2D.setText(getIntent().getStringExtra("text2"));
@@ -69,9 +72,9 @@ private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plasti
 
             _nomProduit.setText(getIntent().getStringExtra("nomPdt"));
             _marqueProduit.setText(getIntent().getStringExtra("marquePdt"));
-            imagePoubelle(getIntent().getStringExtra("text1"), imageView1D);
-            imagePoubelle(getIntent().getStringExtra("text2"), imageView2D);
-            imagePoubelle(getIntent().getStringExtra("text3"), imageView3D);
+            imagePoubelle(getIntent().getStringExtra("text1"), imageView1D, _cardView1);
+            imagePoubelle(getIntent().getStringExtra("text2"), imageView2D, _cardView2);
+            imagePoubelle(getIntent().getStringExtra("text3"), imageView3D, _cardView3);
             try{
                 String _codeBarre = getIntent().getStringExtra("codeBarre");
                 _produitObtenu = Produit.getProductFromBarCode(_codeBarre);
@@ -86,20 +89,24 @@ private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plasti
     }
 
 
-    private void imagePoubelle (String text, ImageView imgView)
+    private void imagePoubelle (String text, ImageView imgView, CardView cardView)
     {
 
         if (listeRecyclable.contains(text))
         {
             imgView.setImageResource(R.drawable.poubelle_jaune);
+            cardView.setVisibility(View.VISIBLE);
         }
         else if(listeNonRecyclable.contains(text))
         {
             imgView.setImageResource(R.drawable.poubelle_noire);
+            cardView.setVisibility(View.VISIBLE);
         }
         else if (listeVerre.contains(text))
         {
             imgView.setImageResource(R.drawable.poubelle_verte);
+            cardView.setVisibility(View.VISIBLE);
         }
     }
+
 }
