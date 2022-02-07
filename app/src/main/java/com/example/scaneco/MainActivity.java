@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private TextView _ecranBlanc;
     private TextView _marqueProduit;
 
+    private View _traitView;
+
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
@@ -94,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _imageViewPoubelle1 = findViewById(R.id.imageView_poubelle1);
         _imageViewPoubelle2 = findViewById(R.id.imageView_poubelle2);
         _imageViewPoubelle3 = findViewById(R.id.imageView_poubelle3);
+
+        _traitView = findViewById(R.id.traitView);
         //Initialisation des listes
         for (int i =0; i< tabRecyclable.length;i++){
             listeRecyclable.add(tabRecyclable[i]);
@@ -160,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _ecranBlanc.setVisibility(View.INVISIBLE);
         _nomProduit.setVisibility(View.INVISIBLE);
         _marqueProduit.setVisibility(View.INVISIBLE);
+        _traitView.setVisibility(View.INVISIBLE);
         _mCodeScanner.startPreview();
 
         //Le scan décode un code-barres
@@ -224,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                         _ecranBlanc.setVisibility(View.VISIBLE);
                         _nomProduit.setVisibility(View.VISIBLE);
                         _marqueProduit.setVisibility(View.VISIBLE);
+                        _traitView.setVisibility(View.VISIBLE);
                         _mCodeScanner.startPreview();
                     }
                 });

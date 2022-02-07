@@ -81,7 +81,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="TextView"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                 />
 
             <ImageView
                 android:id="@+id/imageView_poubelle1"
@@ -127,7 +127,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="TextView"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                />
 
             <ImageView
                 android:id="@+id/imageView_poubelle2"
@@ -172,7 +172,7 @@
             android:textSize="20dp"
             android:text="TextView"
             android:layout_weight="2"
-            android:textStyle="bold" />
+            />
 
         <ImageView
             android:id="@+id/imageView_poubelle3"
