@@ -37,7 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
     private TextView _nomProduit;
-    private TextView _ecranBlanc;
+    private View _ecranBlanc;
     private TextView _marqueProduit;
 
     private View _traitView;
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         //Initialisation des variables qui nous permettront d'affocher les
         //caracteristiques du produit
-        _ecranBlanc = findViewById(R.id.textView_ecranBlanc);
+        _ecranBlanc = findViewById(R.id.view_ecranBlanc);
         _nomProduit = findViewById(R.id.textView_nomProduit);
         _imageEmballage = findViewById(R.id.imageView_EmballageScan);
         _marqueProduit = findViewById(R.id.textView_marqueProduit);

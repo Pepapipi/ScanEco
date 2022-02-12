@@ -22,23 +22,14 @@
         app:frameAspectRatioWidth="1"
         app:frameColor="@android:color/black"
         app:frameCornersRadius="0.75dp"
-        app:frameCornersSize="50dp"
+        app:frameCornersSize="155dp"
         app:frameSize="0.75"
-        app:frameThickness="8dp"
-        app:maskColor="#6C000000">
+        app:frameThickness="5dp"
+        app:maskColor="#4D000000">
 
     </com.budiyev.android.codescanner.CodeScannerView>
 
-    <TextView
-        android:id="@+id/textView_ecranBlanc"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/colorOnPrimary"
 
-        android:textAlignment="center"
-        android:textSize="17dp"
-        android:visibility="visible"></TextView>
 
     <ImageButton
         android:id="@+id/bouton1"
@@ -66,15 +57,23 @@
         app:itemTextColor="#ffffff"
         app:menu="@menu/barre_de_menu" />
 
+
+    <View
+        android:id="@+id/view_ecranBlanc"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorOnPrimary"
+        android:visibility="visible"/>
+
     <View
         android:id="@+id/traitView"
         android:layout_width="40dp"
         android:layout_height="3dp"
-        android:layout_alignTop="@+id/textView_ecranBlanc"
+        android:layout_alignTop="@+id/view_ecranBlanc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@color/gris_clair"
-
         />
 
     <ImageView
@@ -95,7 +94,7 @@
         android:id="@+id/textView_nomProduit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView_ecranBlanc"
+        android:layout_alignTop="@+id/view_ecranBlanc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/imageView_EmballageScan"
