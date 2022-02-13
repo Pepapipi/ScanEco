@@ -32,7 +32,8 @@
         android:text="Nom du produit"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/textView_marqueProduit"
@@ -59,7 +60,8 @@
         android:layout_marginTop="200dp"
         android:elevation="6dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,7 +101,8 @@
         android:layout_marginTop="20dp"
         android:elevation="6dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -138,7 +141,8 @@
         android:layout_marginTop="20dp"
         android:elevation="6dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"

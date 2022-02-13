@@ -4,9 +4,12 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
 
+
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -14,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Récupère à partir de données json où un code barres avec l'API d'OpenFoodFacts un objet Produit
  * avec son code barres, son nom, ses marques ainsi que ses instructions pour le tri de ses
- * embalages.
+ * emballages.
  *
  * Pour créer un objet produit il faut soit utiliser le constructeur avec des données json ayant au
  * minimum comme forme :
@@ -82,6 +85,7 @@ public class Produit {
                                 case "packaging":
                                     emball = reader.nextString().split(",");
                                     break;
+
                                 default:
                                     reader.skipValue();
                                     break;
@@ -104,6 +108,8 @@ public class Produit {
             }
         }
     }
+
+    public Produit(){}
 
     /**
      *
@@ -152,6 +158,25 @@ public class Produit {
         image = new ImageProduit().execute(urlImage).get();
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setMarques(String marques) {
+        this.marques = marques;
+    }
+
+    public void setTexteEmbalage(String texteEmbalage) {
+        this.texteEmbalage = texteEmbalage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
 
     /**
      * Créé et renvoit un Produit à partir d'un code barres. Seulement si les permissions internet
@@ -169,5 +194,67 @@ public class Produit {
         return new Produit(new OpenFoodFactsAPI().execute("https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json").get());
     }
 
+
+    /**
+     * Créé et renvoit une liste de Produits à partir d'un String contenant des données Json.
+     * @param json String contenant des données Json.
+     * @return List de Produits.
+     * @throws IOException Si les données json fournies ne sont pas valides.
+     */
+    @NonNull
+    public static List<Produit> getProductsListFromJson(String json) throws IOException{
+
+        List<Produit> produits = new ArrayList<>();
+
+        try(JsonReader reader = new JsonReader(new StringReader(json))){
+            reader.beginObject();
+            String name;
+            while (reader.hasNext()){
+                name = reader.nextName();
+                if (name.equals("products")){
+                    reader.beginArray();
+                    while (reader.hasNext()){
+                        reader.beginObject();
+                        Produit produit = new Produit();
+                        while (reader.hasNext()){
+                            name = reader.nextName();
+                            switch (name){
+                                case "code":
+                                    produit.setCode(reader.nextString());
+                                    break;
+                                case "product_name":
+                                    produit.setNom(reader.nextString());
+                                    break;
+                                case "brands":
+                                    produit.setMarques(reader.nextString());
+                                    break;
+                                case "packaging_text_fr":
+                                    produit.setTexteEmbalage(reader.nextString());
+                                    break;
+                                case "image_url":
+                                    produit.setUrlImage(reader.nextString());
+                                    break;
+                                case "packaging":
+                                    produit.emball = reader.nextString().split(",");
+                                    break;
+                                default:
+                                    reader.skipValue();
+                                    break;
+                            }
+                        }
+                        produits.add(produit);
+                        reader.endObject();
+                    }
+                    reader.endArray();
+                }
+                else {
+                    reader.skipValue();
+                }
+            }
+            reader.endObject();
+        }
+
+        return produits;
+    }
 
 }

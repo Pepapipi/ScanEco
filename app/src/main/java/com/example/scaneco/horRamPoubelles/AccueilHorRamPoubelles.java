@@ -60,11 +60,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
             return true;
         });
 
-        adapter = new ArrayAdapter<String>(
-                AccueilHorRamPoubelles.this,
-                android.R.layout.simple_list_item_1,
-                arrayVille
-        );
+        adapter = new ArrayAdapter<String>(AccueilHorRamPoubelles.this, android.R.layout.simple_list_item_1, arrayVille);
         recherche_ville.setAdapter(adapter);
 
         recherche_ville.setOnItemClickListener(new AdapterView.OnItemClickListener(){
