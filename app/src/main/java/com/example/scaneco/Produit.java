@@ -8,6 +8,7 @@ import android.util.JsonReader;
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ import java.util.concurrent.ExecutionException;
  * la ligne :
  * {@code <uses-permission android:name="android.permission.INTERNET"/>}.
  */
-public class Produit {
+public class Produit implements Serializable {
     private String code;
     private String nom;
     private String marques;
@@ -205,7 +206,6 @@ public class Produit {
     public static List<Produit> getProductsListFromJson(String json) throws IOException{
 
         List<Produit> produits = new ArrayList<>();
-
         try(JsonReader reader = new JsonReader(new StringReader(json))){
             reader.beginObject();
             String name;

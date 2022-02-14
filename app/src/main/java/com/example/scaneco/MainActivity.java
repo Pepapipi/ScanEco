@@ -31,6 +31,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -95,15 +96,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _imageViewPoubelle2 = findViewById(R.id.imageView_poubelle2);
         _imageViewPoubelle3 = findViewById(R.id.imageView_poubelle3);
         //Initialisation des listes
-        for (int i =0; i< tabRecyclable.length;i++){
-            listeRecyclable.add(tabRecyclable[i]);
-        }
-        for (int i =0; i< tabNonRecyclabe.length;i++){
-            listeNonRecyclable.add(tabNonRecyclabe[i]);
-        }
-        for (int i =0; i< tabVerre.length;i++){
-            listeVerre.add(tabVerre[i]);
-        }
+        listeRecyclable.addAll(Arrays.asList(tabRecyclable));
+        listeNonRecyclable.addAll(Arrays.asList(tabNonRecyclabe));
+        listeVerre.addAll(Arrays.asList(tabVerre));
 
         //Initialisation du swipe de l'utilisateur
         this._gestureUtilisateur = new GestureDetector(MainActivity.this,this);
