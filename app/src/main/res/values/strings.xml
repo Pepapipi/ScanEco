@@ -30,6 +30,7 @@
     <string name="col1">Types de déchets</string>
     <string name="col2">Jours</string>
     <string name="col3">Heures</string>
+    <string name="col4">Poubelles</string>
     <string name="row1Type">Ménagers</string>
     <string name="row1Jours">Mardi/Vendredi</string>
     <string name="row1Heures">5h-11h</string>
