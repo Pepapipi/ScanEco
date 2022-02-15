@@ -37,6 +37,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
+    private DoneesProduit m_donneesDuProduit;
     private TextView _nomProduit;
     private TextView _ecranBlanc;
     private TextView _marqueProduit;
@@ -56,24 +57,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private String _nomProduitRecupere;
     private String _marqueProduitRecupere;
 
-    private String text1;
-    private String text2;
-    private String text3;
     private ImageView _imageViewPoubelle1;
     private ImageView _imageViewPoubelle2;
     private ImageView _imageViewPoubelle3;
-
-
-    private List<String> listeRecyclable= new ArrayList<String>();
-    private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
-            "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable", "Boite en métal"
-            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule papier", "Pot en plastique", "Couvercle en plastique"};
-
-    private List<String> listeVerre = new ArrayList<String>();
-    private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
-
-    private List<String> listeNonRecyclable = new ArrayList<String>();
-    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Plastique", "Barquette en plastique"};
 
 
     @Override
@@ -96,9 +82,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         _imageViewPoubelle2 = findViewById(R.id.imageView_poubelle2);
         _imageViewPoubelle3 = findViewById(R.id.imageView_poubelle3);
         //Initialisation des listes
-        listeRecyclable.addAll(Arrays.asList(tabRecyclable));
-        listeNonRecyclable.addAll(Arrays.asList(tabNonRecyclabe));
-        listeVerre.addAll(Arrays.asList(tabVerre));
+        m_donneesDuProduit = new DoneesProduit();
+        m_donneesDuProduit.initialisationDesListes();
 
         //Initialisation du swipe de l'utilisateur
         this._gestureUtilisateur = new GestureDetector(MainActivity.this,this);
@@ -179,34 +164,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                             _produitObtenu.loadImage();
                             _imageEmballage.setImageDrawable(_produitObtenu.getImage());
 
-                            //Reinitialise les paramètres
-                            text1="";
-                            text2="";
-                            text3="";
-                            _imageViewPoubelle1.setImageResource(0);
-                            _imageViewPoubelle2.setImageResource(0);
-                            _imageViewPoubelle3.setImageResource(0);
-
-                            //Affiche les poubelles correspondantes, tant que il n'y a pas de text
-                            //Ce qui veut dire qu'aucun emballage a était trouvé..
-                            int i=0;
-                            while(i<_produitObtenu.emball.length && text1.isEmpty())
-                            {
-                                text1 = affichageCorrect(i,text1,_imageViewPoubelle1);
-                                i++;
-                            }
-                            while(i<_produitObtenu.emball.length && text2.isEmpty())
-                            {
-                                text2 = affichageCorrect(i,text2,_imageViewPoubelle2);
-                                i++;
-                            }
-                            while(i<_produitObtenu.emball.length && text3.isEmpty())
-                            {
-                                text3 = affichageCorrect(i,text3,_imageViewPoubelle3);
-                                i++;
-                            }
-
-
+                            m_donneesDuProduit.afficherPoubelleSansTexte(_produitObtenu,_imageViewPoubelle1,_imageViewPoubelle2,_imageViewPoubelle3);
                         }
                         catch (Exception e){
 
@@ -274,49 +232,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         intent.putExtra("nomPdt", _nomProduitRecupere);
         intent.putExtra("marquePdt", _marqueProduitRecupere);
         intent.putExtra("codeBarre", _codeBarre);
-        intent.putExtra("text1",text1);
-        intent.putExtra("text2",text2);
-        intent.putExtra("text3", text3);
         startActivity(intent);
     }
 
-    /**
-     * Fonction qui permet regarde dans les 3 listes si l'emballage qu'on a dans le tableau
-     * _produitObtenu.emball
-     * @param i
-     * @param text
-     * @param image
-     * @return
-     */
-    public String affichageCorrect(int i,String text, ImageView image)
-    {
-        String _emballage = upperCaseFirst(_produitObtenu.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
-        if (listeRecyclable.contains(_emballage))
-        {
-            text=_emballage;
-            image.setImageResource(R.drawable.poubelle_jaune);
-
-        }
-        else if (listeNonRecyclable.contains(_emballage))
-        {
-            text=_emballage;
-            image.setImageResource(R.drawable.poubelle_noire);
-
-        }
-        else if(listeVerre.contains(_emballage))
-        {
-            text=_emballage;
-            image.setImageResource(R.drawable.poubelle_verte);
-
-        }
-        return text;
-    }
-
-    public static String upperCaseFirst(String val) {
-        char[] arr = val.toCharArray();
-        arr[0] = Character.toUpperCase(arr[0]);
-        return new String(arr);
-    }
 
     /**
      * Les fonctions ci-dessous sont nécessaires pour le swipe !!!

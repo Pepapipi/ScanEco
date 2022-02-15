@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.scaneco.DoneesProduit;
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.Produit;
 import com.example.scaneco.ProduitDetails;
@@ -45,18 +46,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     List<Produit> produits;
     RecyclerViewClickListner recyclerViewClickListner;
     ScrollView scrlView;
-
-    private List<String> listeRecyclable= new ArrayList<String>();
-    private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
-            "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable", "Boite en métal"
-            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule papier", "Pot en plastique", "Couvercle en plastique"};
-
-    private List<String> listeVerre = new ArrayList<String>();
-    private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
-
-    private List<String> listeNonRecyclable = new ArrayList<String>();
-    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Plastique", "Barquette en plastique"};
-
+    DoneesProduit m_produitDonnees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +77,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 ouvrirLeScan();
             }
         });
-        listeRecyclable.addAll(Arrays.asList(tabRecyclable));
-        listeNonRecyclable.addAll(Arrays.asList(tabNonRecyclabe));
-        listeVerre.addAll(Arrays.asList(tabVerre));
+        m_produitDonnees = new DoneesProduit();
+        m_produitDonnees.initialisationDesListes();
         setOnClickListner();
 
     }
@@ -188,31 +177,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     {
                         //Il faut maintenant envoyé les données à la page produit.
                         Produit _produitAEnvoyer = Produit.getProductFromBarCode(s);
-
-                        int i = 0;
-                        String text1 = "";
-                        String text2 = "";
-                        String text3 = "";
-                        while (i < _produitAEnvoyer.emball.length && text1.isEmpty()) {
-                            text1 = affichageCorrect(_produitAEnvoyer,i,text1);
-                            i++;
-                        }
-                        while (i < _produitAEnvoyer.emball.length && text2.isEmpty()) {
-                            text2 = affichageCorrect(_produitAEnvoyer,i,text2);
-                            i++;
-                        }
-                        while (i < _produitAEnvoyer.emball.length && text3.isEmpty()) {
-                            text3 = affichageCorrect(_produitAEnvoyer,i,text3);
-                            i++;
-                        }
                         Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
-                        intent.putExtra("nomPdt", _produitAEnvoyer.getNom());
-                        intent.putExtra("marquePdt", _produitAEnvoyer.getMarque());
-                        intent.putExtra("codeBarre", s);
-                        intent.putExtra("text1", text1);
-                        intent.putExtra("text2", text2);
-                        intent.putExtra("text3", text3);
-
+                        intent.putExtra("codeBarre", _produitAEnvoyer.getCode());
                         startActivity(intent);
                         Toast.makeText(AccueilRechercheSansScan.this,"Yes codeBrre Ok", Toast.LENGTH_SHORT).show();
                     }
@@ -251,33 +217,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 try {
-
-                    int i = 0;
-                    String text1 = "";
-                    String text2 = "";
-                    String text3 = "";
-                    while (i < produits.get(position).emball.length && text1.isEmpty()) {
-                        text1 = adapter.verificationNomDeEmballage(position, i, text1);
-                        i++;
-                    }
-                    while (i < produits.get(position).emball.length && text2.isEmpty()) {
-                        text2 = adapter.verificationNomDeEmballage(position, i, text2);
-                        i++;
-                    }
-                    while (i < produits.get(position).emball.length && text3.isEmpty()) {
-                        text3 = adapter.verificationNomDeEmballage(position, i, text3);
-                        i++;
-                    }
-
-
                     Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
-                    intent.putExtra("nomPdt", produits.get(position).getNom());
-                    intent.putExtra("marquePdt", produits.get(position).getMarque());
                     intent.putExtra("codeBarre", produits.get(position).getCode());
-
-                    intent.putExtra("text1", text1);
-                    intent.putExtra("text2", text2);
-                    intent.putExtra("text3", text3);
                     startActivity(intent);
                 }
                 catch (Exception e) {
@@ -286,31 +227,5 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             }
 
         };
-    }
-
-    public String affichageCorrect(Produit _produitObtenu, int i,String text)
-    {
-        String _emballage = upperCaseFirst(_produitObtenu.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
-        if (listeRecyclable.contains(_emballage))
-        {
-            text=_emballage;
-
-        }
-        else if (listeNonRecyclable.contains(_emballage))
-        {
-            text=_emballage;
-
-        }
-        else if(listeVerre.contains(_emballage))
-        {
-            text=_emballage;
-        }
-        return text;
-    }
-
-    public static String upperCaseFirst(String val) {
-        char[] arr = val.toCharArray();
-        arr[0] = Character.toUpperCase(arr[0]);
-        return new String(arr);
     }
 }

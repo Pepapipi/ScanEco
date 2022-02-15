@@ -25,27 +25,13 @@ public class ProduitDetails extends AppCompatActivity{
     private ImageView m_imagePoubelle3;
     private ImageView m_imageProduit;
 
-
     private Produit m_produitObtenu;
 
     private CardView m_cardViewPoubelle1;
     private CardView m_cardViewPoubelle2;
     private CardView m_cardViewPoubelle3;
 
-
-
-    private List<String> listeRecyclable= new ArrayList<String>();
-    private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
-            "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable", "Boite en métal"
-            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule papier", "Pot en plastique", "Couvercle en plastique"};
-
-    private List<String> listeVerre = new ArrayList<String>();
-    private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
-
-    private List<String> listeNonRecyclable = new ArrayList<String>();
-    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Plastique", "Barquette en plastique"};
-
-
+    private  DoneesProduit m_produitDonnee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,88 +51,20 @@ public class ProduitDetails extends AppCompatActivity{
         m_imagePoubelle3 = findViewById(R.id.imageView_poubelle3);
         m_imageProduit = findViewById(R.id.imageView_EmballageScan);
 
-        listeRecyclable.addAll(Arrays.asList(tabRecyclable));
-        listeNonRecyclable.addAll(Arrays.asList(tabNonRecyclabe));
-        listeVerre.addAll(Arrays.asList(tabVerre));
+        m_produitDonnee = new DoneesProduit();
+        m_produitDonnee.initialisationDesListes();
 
-        m_nomEmballage1.setText(getIntent().getStringExtra("text1"));
-        m_nomEmballage2.setText(getIntent().getStringExtra("text2"));
-        m_nomEmballage3.setText(getIntent().getStringExtra("text3"));
-        m_nomProduit.setText(getIntent().getStringExtra("nomPdt"));
-        m_marqueProduit.setText(getIntent().getStringExtra("marquePdt"));
-
-        imagePoubelle(getIntent().getStringExtra("text1"), m_imagePoubelle1, m_cardViewPoubelle1);
-        imagePoubelle(getIntent().getStringExtra("text2"), m_imagePoubelle2, m_cardViewPoubelle2);
-        imagePoubelle(getIntent().getStringExtra("text3"), m_imagePoubelle3, m_cardViewPoubelle3);
 
         try {
             String _codeBarre = getIntent().getStringExtra("codeBarre");
             m_produitObtenu = Produit.getProductFromBarCode(_codeBarre);
+            m_nomProduit.setText(m_produitObtenu.getNom());
+            m_marqueProduit.setText(m_produitObtenu.getMarque());
             m_produitObtenu.loadImage();
             m_imageProduit.setImageDrawable(m_produitObtenu.getImage());
+            m_produitDonnee.affichageCardViewAvecTexte(m_produitObtenu,m_nomEmballage1,m_nomEmballage2,m_nomEmballage3,m_imagePoubelle1,m_imagePoubelle2,m_imagePoubelle3,m_cardViewPoubelle1,m_cardViewPoubelle2,m_cardViewPoubelle3);
         }
-        catch (Exception ignored)
-        {
+        catch (Exception ignored) {}
 
-        }
-
-    }
-
-    private void imagePoubelle (String text, ImageView imgView, CardView cardView)
-    {
-
-        if (listeRecyclable.contains(text))
-        {
-            imgView.setImageResource(R.drawable.poubelle_jaune);
-            cardView.setVisibility(View.VISIBLE);
-        }
-        else if(listeNonRecyclable.contains(text))
-        {
-            imgView.setImageResource(R.drawable.poubelle_noire);
-            cardView.setVisibility(View.VISIBLE);
-        }
-        else if (listeVerre.contains(text))
-        {
-            imgView.setImageResource(R.drawable.poubelle_verte);
-            cardView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * Fonction qui permet regarde dans les 3 listes si l'emballage qu'on a dans le tableau
-     * _produitObtenu.emball
-     * @param i
-     * @param text
-     * @param image
-     * @return
-     */
-    public String affichageCorrect(int i,String text, ImageView image)
-    {
-        String _emballage = upperCaseFirst(m_produitObtenu.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
-        if (listeRecyclable.contains(_emballage))
-        {
-            text=_emballage;
-            image.setImageResource(R.drawable.poubelle_jaune);
-
-        }
-        else if (listeNonRecyclable.contains(_emballage))
-        {
-            text=_emballage;
-            image.setImageResource(R.drawable.poubelle_noire);
-
-        }
-        else if(listeVerre.contains(_emballage))
-        {
-            text=_emballage;
-            image.setImageResource(R.drawable.poubelle_verte);
-
-        }
-        return text;
-    }
-
-    public static String upperCaseFirst(String val) {
-        char[] arr = val.toCharArray();
-        arr[0] = Character.toUpperCase(arr[0]);
-        return new String(arr);
     }
 }
