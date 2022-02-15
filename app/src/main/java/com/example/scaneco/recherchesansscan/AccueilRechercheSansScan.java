@@ -54,10 +54,6 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Empêche le clavier de se réactiver quand on revient en arrière après avoir vu un produit
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_recherche_sans_scan);
         _gridLayout = (GridLayout) findViewById(R.id.gridViewRechercheSansScan);
@@ -106,6 +102,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     }
 
     protected void setSingleEvent(GridLayout mainGrid) {
+
         arrayEmballage.addAll(Arrays.asList(getResources().getStringArray(R.array.mes_dechets)));
 
         for (int i = 0; i < mainGrid.getChildCount(); i++) {
@@ -125,6 +122,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView() {
+
         scrlView = findViewById(R.id.scrollView);
         scrlView.setVisibility(View.INVISIBLE);
         recyclerView = findViewById(R.id.recy);
@@ -138,6 +136,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     private void rechercheDuProduit(String s) {
         jsonFromKeyword = new JsonFromKeyword();
+
         jsonFromKeyword.activity = this;
         jsonFromKeyword.execute(s);
     }
@@ -160,10 +159,13 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_recherche_sans_scan, menu);
+
         MenuItem item = menu.findItem(R.id.search_product);
         SearchView searchView = (SearchView) item.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -189,8 +191,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 }
 
                 //Cache le clavier après que l'utilisateur ait validé sa saisie
-                hideKeyboard(AccueilRechercheSansScan.this);
-
+                searchView.clearFocus();
                 return true;
             }
 
@@ -213,6 +214,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
      * sur le produit qui n'a pas d'emballage
      */
     private void setOnClickListner() {
+
         recyclerViewClickListner = new RecyclerViewClickListner() {
             @Override
             public void onClick(View v, int position) {
@@ -226,16 +228,5 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             }
 
         };
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
