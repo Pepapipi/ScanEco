@@ -17,13 +17,6 @@
         android:text="Horaires de ramassages des poubelles"
         android:textSize="22sp" />
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignTop="@+id/camionHorloge"
-        android:layout_marginStart="-262dp"
-        android:layout_marginTop="-132dp"
-        android:src="@drawable/ping_home" />
 
     <TextView
         android:id="@+id/NomDeLaVille"
@@ -73,7 +66,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="350dp"
+        android:layout_marginBottom="340dp"
         android:background="@android:color/white">
 
         <!-- Premiere ligne -->
@@ -82,7 +75,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:text="@string/col1"
@@ -103,10 +96,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:text="@string/col3"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.1"
+                android:gravity="center_horizontal"
+                android:padding="10sp"
+                android:text="@string/col4"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
@@ -118,7 +121,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row1Type"
@@ -136,20 +139,29 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row1Heures"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="2.1"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/poubelle_noire"
+                />
+
         </TableRow>
+
 
         <TableRow android:background="@color/gris_clair">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row2Type"
@@ -157,9 +169,9 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:gravity="center_horizontal"
+                android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row2Jours"
                 android:textSize="12sp" />
@@ -167,20 +179,29 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row2Heures"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="2.1"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/poubelle_jaune"
+                />
+
         </TableRow>
 
         <TableRow>
 
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row3Type"
@@ -188,9 +209,9 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:gravity="center_horizontal"
+                android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row3Jours"
                 android:textSize="12sp" />
@@ -198,13 +219,23 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row3Heures"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="2.1"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/poubelle_verte"
+                />
+
         </TableRow>
+
+
     </TableLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
