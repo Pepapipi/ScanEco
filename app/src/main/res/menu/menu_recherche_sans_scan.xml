@@ -6,8 +6,8 @@
     <item
         android:id="@+id/search_product"
         android:icon="@drawable/ic_loupe_blanche"
-        android:title="Ville:"
-        
+        android:title="Produit"
         app:actionViewClass="android.widget.SearchView"
+        app:actionProviderClass="android.app.MediaRouteActionProvider"
         app:showAsAction="always"/>
 </menu>
