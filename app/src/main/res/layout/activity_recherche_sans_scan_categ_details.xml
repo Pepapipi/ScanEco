@@ -84,19 +84,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="154dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="270dp"
-        android:layout_marginEnd="146dp"
+        android:layout_marginEnd="149dp"
         android:src="@drawable/poubelle_bleue" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="400dp"
+        android:layout_below="@+id/imageView_imagePoubelle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="8dp"
         android:elevation="6dp"
         app:cardCornerRadius="12dp"
@@ -104,8 +104,8 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@color/rech_sans_scan_categ_det_gris_clair"
             android:gravity="center"
             android:orientation="vertical"
@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="10dp"
                 android:text="Information"
                 android:textColor="#6f6f6f"
                 android:textSize="18sp"
@@ -126,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="Tous les papiers vont dans la poubelle bleue !"
                 android:textColor="#6f6f6f"
