@@ -16,6 +16,7 @@ import com.example.scaneco.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {
 
@@ -26,7 +27,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
     private final List<String> listeRecyclable= new ArrayList<>();
     private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
             "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable", "Boite en métal", "Boite en carton"
-            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule papier", "Pot en plastique", "Couvercle en plastique"};
+            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule en papier", "Pot en plastique", "Couvercle en plastique"};
 
     private final List<String> listeVerre = new ArrayList<>();
     private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
@@ -88,55 +89,52 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         {
             views = new ViewHolder(view);
         }
-        catch(Exception e)
+        catch(Exception ignored)
         { }
-        return views;
+        return Objects.requireNonNull(views);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Initialisation des listes
-        listeRecyclable.addAll(Arrays.asList(tabRecyclable));
-        listeNonRecyclable.addAll(Arrays.asList(tabNonRecyclabe));
-        listeVerre.addAll(Arrays.asList(tabVerre));
-        String text1="";
-        String text2="";
-        String text3="";
-        int img1=0;
-        int img2=0;
-        int img3=0;
-        try {
-            String nomPdt = lpdt.get(position).getNom();
-            String marquePdt = lpdt.get(position).getMarque();
-            lpdt.get(position).loadImage();
-            Drawable imagePdt = lpdt.get(position).getImage();
-            //Affiche les poubelles correspondantes, tant que il n'y a pas de text
-            //Ce qui veut dire qu'aucun emballage a était trouvé..
-            int i=0;
-            while(i<lpdt.get(position).emball.length && text1.isEmpty())
-            {
-                text1 = verificationNomDeEmballage(position,i,text1);
-                img1=envoieImage(text1);
-                i++;
-            }
-            while(i<lpdt.get(position).emball.length && text2.isEmpty())
-            {
-                text2 = verificationNomDeEmballage(position,i,text2);
-                img2=envoieImage(text2);
-                i++;
-            }
-            while(i<lpdt.get(position).emball.length && text3.isEmpty())
-            {
-                text3 = verificationNomDeEmballage(position,i,text3);
-                img3=envoieImage(text3);
-                i++;
-            }
+            //Initialisation des listes
+            listeRecyclable.addAll(Arrays.asList(tabRecyclable));
+            listeNonRecyclable.addAll(Arrays.asList(tabNonRecyclabe));
+            listeVerre.addAll(Arrays.asList(tabVerre));
+            String text1 = "";
+            String text2 = "";
+            String text3 = "";
+            int img1 = 0;
+            int img2 = 0;
+            int img3 = 0;
+                try {
+                    String nomPdt = lpdt.get(position).getNom();
+                    String marquePdt = lpdt.get(position).getMarque();
+                    lpdt.get(position).loadImage();
+                    Drawable imagePdt = lpdt.get(position).getImage();
+                    //Affiche les poubelles correspondantes, tant que il n'y a pas de text
+                    //Ce qui veut dire qu'aucun emballage a était trouvé..
+                    int i = 0;
+                    while (i < lpdt.get(position).emball.length && text1.isEmpty()) {
+                        text1 = verificationNomDeEmballage(position, i, text1);
+                        img1 = envoieImage(text1);
+                        i++;
+                    }
+                    while (i < lpdt.get(position).emball.length && text2.isEmpty()) {
+                        text2 = verificationNomDeEmballage(position, i, text2);
+                        img2 = envoieImage(text2);
+                        i++;
+                    }
+                    while (i < lpdt.get(position).emball.length && text3.isEmpty()) {
+                        text3 = verificationNomDeEmballage(position, i, text3);
+                        img3 = envoieImage(text3);
+                        i++;
+                    }
 
-            holder.setData(nomPdt,marquePdt, imagePdt, img1, img2, img3);
-        }
-        catch (Exception ignored){}
+                    holder.setData(nomPdt, marquePdt, imagePdt, img1, img2, img3);
 
 
+                } catch (Exception ignored) {
+                }
 
     }
 
