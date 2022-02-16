@@ -35,6 +35,7 @@ public class DoneesProduit {
 
     public void afficherPoubelleSansTexte(Produit pdt, ImageView img1, ImageView img2, ImageView img3)
     {
+        try{
         text1="";
         text2="";
         text3="";
@@ -60,6 +61,10 @@ public class DoneesProduit {
         {
             text3 = affichageCorrect(pdt,i,text3,img3);
             i++;
+        }}
+        catch (Exception ignored)
+        {
+
         }
     }
 

@@ -23,11 +23,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
 
     List<Produit> lpdt;
+
+    public List<List<String>> listeEmballageChaqueProduit = new ArrayList<>();
     RecyclerViewClickListner recyclerViewClickListner;
     private DoneesProduit m_donnees;
-    public String texte1;
-    public String texte2;
-    public String texte3;
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView _imageViewPoubelle1;
@@ -87,26 +87,28 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
             //Initialisation des listes
             m_donnees = new DoneesProduit();
             m_donnees.initialisationDesListes();
-            m_donnees.afficherPoubelleSansTexte(lpdt.get(position), holder._imageViewPoubelle1, holder._imageViewPoubelle2, holder._imageViewPoubelle3);
-
+           List<String> listeEmballageA = new ArrayList<>();
                 try {
-                    String nomPdt = lpdt.get(position).getNom();
-                    String marquePdt = lpdt.get(position).getMarque();
-                    lpdt.get(position).loadImage();
-                    Drawable imagePdt = lpdt.get(position).getImage();
-                    texte1 = m_donnees.text1;
-                    texte2 = m_donnees.text2;
-                    texte3 = m_donnees.text3;
-                    holder.setData(nomPdt, marquePdt, imagePdt, holder._imageViewPoubelle1, holder._imageViewPoubelle2, holder._imageViewPoubelle3);
+                        m_donnees.afficherPoubelleSansTexte(lpdt.get(position), holder._imageViewPoubelle1, holder._imageViewPoubelle2, holder._imageViewPoubelle3);
+
+                        String nomPdt = lpdt.get(position).getNom();
+                        String marquePdt = lpdt.get(position).getMarque();
+                        lpdt.get(position).loadImage();
+                        Drawable imagePdt = lpdt.get(position).getImage();
+                        listeEmballageA.add(m_donnees.text1);
+                        listeEmballageA.add(m_donnees.text2);
+                        listeEmballageA.add(m_donnees.text3);
+                        listeEmballageChaqueProduit.add(listeEmballageA);
+
+                        holder.setData(nomPdt, marquePdt, imagePdt, holder._imageViewPoubelle1, holder._imageViewPoubelle2, holder._imageViewPoubelle3);
 
 
                 } catch (Exception ignored) {
                 }
-
     }
 
     @Override
