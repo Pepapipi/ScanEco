@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -30,6 +31,7 @@ import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -218,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     **/
     public void ouvrirRechercheSansScan(){
         Intent intent = new Intent(this, AccueilRechercheSansScan.class);
+
         startActivity(intent);
     }
 
@@ -235,8 +238,13 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public void ouvrirProduitDetail()
     {
         Intent intent = new Intent(this, ProduitDetails.class);
-        intent.putExtra("nomPdt", _nomProduitRecupere);
-        intent.putExtra("marquePdt", _marqueProduitRecupere);
+        intent.putExtra("nomProduit", _nomProduitRecupere);
+        intent.putExtra("marqueProduit", _marqueProduitRecupere);
+        intent.putExtra("nomEmballage1", m_donneesDuProduit.text1);
+        intent.putExtra("nomEmballage2", m_donneesDuProduit.text2);
+        intent.putExtra("nomEmballage3", m_donneesDuProduit.text3);
+        intent.putExtra("marqueProduit", _marqueProduitRecupere);
+        //intent.putExtra("imageEmballage", (Parcelable) _imageEmballage.getDrawable());
         intent.putExtra("codeBarre", _codeBarre);
         startActivity(intent);
     }

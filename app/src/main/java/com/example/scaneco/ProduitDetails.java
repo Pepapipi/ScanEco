@@ -58,11 +58,17 @@ public class ProduitDetails extends AppCompatActivity{
         try {
             String _codeBarre = getIntent().getStringExtra("codeBarre");
             m_produitObtenu = Produit.getProductFromBarCode(_codeBarre);
-            m_nomProduit.setText(m_produitObtenu.getNom());
-            m_marqueProduit.setText(m_produitObtenu.getMarque());
+            m_nomProduit.setText(getIntent().getStringExtra("nomProduit"));
+            m_marqueProduit.setText(getIntent().getStringExtra("marqueProduit"));
+            String nomEmballageRecup1 = getIntent().getStringExtra("nomEmballage1");
+            String nomEmballageRecup2 = getIntent().getStringExtra("nomEmballage2");
+            String nomEmballageRecup3 = getIntent().getStringExtra("nomEmballage3");
             m_produitObtenu.loadImage();
             m_imageProduit.setImageDrawable(m_produitObtenu.getImage());
-            m_produitDonnee.affichageCardViewAvecTexte(m_produitObtenu,m_nomEmballage1,m_nomEmballage2,m_nomEmballage3,m_imagePoubelle1,m_imagePoubelle2,m_imagePoubelle3,m_cardViewPoubelle1,m_cardViewPoubelle2,m_cardViewPoubelle3);
+            m_produitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup1,m_nomEmballage1,m_imagePoubelle1,m_cardViewPoubelle1);
+            m_produitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup2,m_nomEmballage2,m_imagePoubelle2,m_cardViewPoubelle2);
+            m_produitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup3,m_nomEmballage3,m_imagePoubelle3,m_cardViewPoubelle3);
+
         }
         catch (Exception ignored) {}
 

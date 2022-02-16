@@ -23,6 +23,9 @@ public class DoneesProduit {
     private List<String> listeNonRecyclable = new ArrayList<String>();
     private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Plastique", "Barquette en plastique"};
 
+    public String text1="";
+    public String text2="";
+    public String text3="";
     public void initialisationDesListes()
     {
         listeRecyclable.addAll(Arrays.asList(tabRecyclable));
@@ -32,9 +35,9 @@ public class DoneesProduit {
 
     public void afficherPoubelleSansTexte(Produit pdt, ImageView img1, ImageView img2, ImageView img3)
     {
-        String text1="";
-        String text2="";
-        String text3="";
+        text1="";
+        text2="";
+        text3="";
         img1.setImageResource(0);
         img2.setImageResource(0);
         img3.setImageResource(0);
@@ -45,6 +48,7 @@ public class DoneesProduit {
         while(i<pdt.emball.length && text1.isEmpty())
         {
             text1 = affichageCorrect(pdt,i,text1,img1);
+
             i++;
         }
         while(i<pdt.emball.length && text2.isEmpty())
@@ -57,33 +61,6 @@ public class DoneesProduit {
             text3 = affichageCorrect(pdt,i,text3,img3);
             i++;
         }
-    }
-
-    public void affichageCardViewAvecTexte(Produit pdt, TextView txtPasse1, TextView txtPasse2, TextView txtPasse3, ImageView img1, ImageView img2, ImageView img3, CardView card1, CardView card2, CardView card3)
-    {
-        String text1="";
-        String text2="";
-        String text3="";
-        img1.setImageResource(0);
-        img2.setImageResource(0);
-        img3.setImageResource(0);
-        int i=0;
-        while(i<pdt.emball.length && text1.isEmpty())
-        {
-            text1 = affichageCardViewAvecTexteEtImage(pdt,i,txtPasse1,text1,img1, card1);
-            i++;
-        }
-        while(i<pdt.emball.length && text2.isEmpty())
-        {
-            text2 = affichageCardViewAvecTexteEtImage(pdt,i,txtPasse2,text2,img2, card2);
-            i++;
-        }
-        while(i<pdt.emball.length && text3.isEmpty())
-        {
-            text3 = affichageCardViewAvecTexteEtImage(pdt,i,txtPasse3,text3,img3, card3);
-            i++;
-        }
-
     }
 
     /**
@@ -100,6 +77,7 @@ public class DoneesProduit {
         if (listeRecyclable.contains(_emballage))
         {
             text=_emballage;
+
             image.setImageResource(R.drawable.poubelle_jaune);
 
         }
@@ -126,33 +104,28 @@ public class DoneesProduit {
         return new String(arr);
     }
 
-    private String affichageCardViewAvecTexteEtImage(Produit pdt, int i,TextView textV, String text, ImageView img, CardView cardv)
+    public void affichageCardViewAvecTexteEtImage(String txtRecu, TextView textV, ImageView img, CardView cardv)
     {
-        String _emballage = upperCaseFirst(pdt.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
-        if (listeRecyclable.contains(_emballage))
+        if (listeRecyclable.contains(txtRecu))
         {
-            text=_emballage;
-            textV.setText(text);
+            textV.setText(txtRecu);
             img.setImageResource(R.drawable.poubelle_jaune);
             cardv.setVisibility(View.VISIBLE);
 
         }
-        else if (listeNonRecyclable.contains(_emballage))
+        else if (listeNonRecyclable.contains(txtRecu))
         {
-            text=_emballage;
-            textV.setText(text);
+            textV.setText(txtRecu);
             img.setImageResource(R.drawable.poubelle_noire);
             cardv.setVisibility(View.VISIBLE);
 
         }
-        else if(listeVerre.contains(_emballage))
+        else if(listeVerre.contains(txtRecu))
         {
-            text=_emballage;
-            textV.setText(text);
+            textV.setText(txtRecu);
             img.setImageResource(R.drawable.poubelle_verte);
             cardv.setVisibility(View.VISIBLE);
 
         }
-        return text;
     }
 }

@@ -50,7 +50,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     List<Produit> produits;
     RecyclerViewClickListner recyclerViewClickListner;
     ScrollView scrlView;
-    DoneesProduit m_produitDonnees;
+    DoneesProduit doneesProduit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,24 +80,26 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 ouvrirLeScan();
             }
         });
-        m_produitDonnees = new DoneesProduit();
-        m_produitDonnees.initialisationDesListes();
+
         setOnClickListner();
 
     }
 
     protected void ouvrirLeScan() {
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
     protected void ouvrirHorRamPoubelles() {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
+        finish();
         startActivity(intent);
     }
 
     public void ouvrirAnimations() {
         Intent intent = new Intent(this, AccueilAnimations.class);
+        finish();
         startActivity(intent);
     }
 
@@ -136,7 +138,6 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     private void rechercheDuProduit(String s) {
         jsonFromKeyword = new JsonFromKeyword();
-
         jsonFromKeyword.activity = this;
         jsonFromKeyword.execute(s);
     }
@@ -219,7 +220,14 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 try {
+                    doneesProduit = new DoneesProduit();
                     Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
+                    //A mofifier
+                    intent.putExtra("nomProduit", adapter.lpdt.get(position).getNom());
+                    intent.putExtra("marque", adapter.lpdt.get(position).getMarque());
+                    intent.putExtra("nomEmballage1", adapter.texte1);
+                    intent.putExtra("nomEmballage2", adapter.texte2);
+                    intent.putExtra("nomEmballage3", adapter.texte3);
                     intent.putExtra("codeBarre", produits.get(position).getCode());
                     startActivity(intent);
                 } catch (Exception e) {

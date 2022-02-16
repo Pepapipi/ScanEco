@@ -108,12 +108,14 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
     public void ouvrirLeScan()
     {
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
     public void ouvrirAnimations()
     {
         Intent intent = new Intent(this, AccueilAnimations.class);
+        finish();
         startActivity(intent);
     }
 
