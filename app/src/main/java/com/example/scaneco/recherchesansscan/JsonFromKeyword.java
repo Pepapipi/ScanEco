@@ -20,6 +20,7 @@ public class JsonFromKeyword extends AsyncTask<String, Void, String> {
         try {
             String keywords = strings[0];
 
+
             keywords = keywords.replaceAll(" ", "+");
 
             URL url = new URL("https://fr.openfoodfacts.org/cgi/search.pl?action=process&search_terms=" + keywords + "&sort_by=unique_scans_n&page_size=24&page=1&json=1");
