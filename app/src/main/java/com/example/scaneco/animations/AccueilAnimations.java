@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.example.scaneco.MainActivity;
@@ -16,6 +21,7 @@ import com.example.scaneco.R;
 import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.InputStream;
 import java.net.URL;
 
 
@@ -45,20 +51,31 @@ public class AccueilAnimations extends AppCompatActivity {
         });
         //Bouton de retour
         _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ouvrirLeScan();
-            }
-        });
+        _boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
 
 
         //VIDEOS
 
-        _videoView = findViewById(R.id.videoView);
-        _videoView.setVideoPath("https://youtu.be/REh-GAV1cfA");
-        _videoView.start();
-
+        String videoKey = "REh-GAV1cfA";
+        ImageView imageView = findViewById(R.id.imageView2);
+        imageView.setOnClickListener(v -> {
+            Log.println(Log.INFO, "info", "redirection");
+            Intent youtube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoKey));
+            youtube.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            youtube.setPackage("com.google.android.youtube");
+            try {
+                getApplication().startActivity(youtube);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+        try {
+            new SetImageFromUrl(imageView, "https://img.youtube.com/vi/" + videoKey + "/0.jpg");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     protected void ouvrirLeScan()
@@ -70,23 +87,5 @@ public class AccueilAnimations extends AppCompatActivity {
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
-    }
-
-    /*
-    Reprendre l'affichage de l'activité
-     */
-    @Override
-    protected void onResume(){
-        super.onResume();
-        _videoView.start();
-    }
-
-    /*
-    Suspend l'execution de la video
-     */
-    @Override
-    protected void onPause(){
-        super.onPause();
-        _videoView.suspend();
     }
 }
