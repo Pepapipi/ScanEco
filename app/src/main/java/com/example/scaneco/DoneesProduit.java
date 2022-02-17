@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
@@ -48,18 +49,18 @@ public class DoneesProduit {
         int i=0;
         while(i<pdt.emball.length && text1.isEmpty())
         {
-            text1 = affichageCorrect(pdt,i,text1,img1);
+            text1 = affichageCorrectImage(pdt,i,text1,img1);
 
             i++;
         }
         while(i<pdt.emball.length && text2.isEmpty())
         {
-            text2 = affichageCorrect(pdt, i,text2,img2);
+            text2 = affichageCorrectImage(pdt, i,text2,img2);
             i++;
         }
         while(i<pdt.emball.length && text3.isEmpty())
         {
-            text3 = affichageCorrect(pdt,i,text3,img3);
+            text3 = affichageCorrectImage(pdt,i,text3,img3);
             i++;
         }}
         catch (Exception ignored)
@@ -67,7 +68,6 @@ public class DoneesProduit {
 
         }
     }
-
     /**
      * Fonction qui permet regarde dans les 3 listes si l'emballage qu'on a dans le tableau
      * _produitObtenu.emball
@@ -76,7 +76,7 @@ public class DoneesProduit {
      * @param image
      * @return
      */
-    private String affichageCorrect(Produit pdt, int i,String text, ImageView image)
+    private String affichageCorrectImage(Produit pdt, int i,String text, ImageView image)
     {
         String _emballage = upperCaseFirst(pdt.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
         if (listeRecyclable.contains(_emballage))
@@ -97,6 +97,55 @@ public class DoneesProduit {
             text=_emballage;
             image.setImageResource(R.drawable.poubelle_verte);
 
+        }
+        return text;
+    }
+
+    public void recupererLeTextePourEnvoyerAuxDetails(Produit pdt)
+    {
+        try{
+            //Affiche les poubelles correspondantes, tant que il n'y a pas de text
+            //Ce qui veut dire qu'aucun emballage a était trouvé..
+            int i=0;
+            while(i<pdt.emball.length && text1.isEmpty())
+            {
+                text1 = retourneTexte(pdt,i,text1);
+                i++;
+            }
+            while(i<pdt.emball.length && text2.isEmpty())
+            {
+                text2 = retourneTexte(pdt, i,text2);
+                i++;
+            }
+            while(i<pdt.emball.length && text3.isEmpty())
+            {
+                text3 = retourneTexte(pdt,i,text3);
+                i++;
+            }}
+        catch (Exception ignored)
+        {
+
+        }
+
+    }
+
+
+    private String retourneTexte(Produit pdt, int i, String text)
+    {
+        String _emballage = upperCaseFirst(pdt.emball[i].replaceAll(" fr:","").replaceAll(" 100% recyclable",""));
+        if (listeRecyclable.contains(_emballage))
+        {
+            text=_emballage;
+
+        }
+        else if (listeNonRecyclable.contains(_emballage))
+        {
+            text=_emballage;
+
+        }
+        else if(listeVerre.contains(_emballage))
+        {
+            text=_emballage;
         }
         return text;
     }

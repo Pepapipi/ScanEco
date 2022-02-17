@@ -177,9 +177,17 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 try {
                     long nombreRecup = Long.parseLong(s);
                     if (s.length() == 8 || s.length() == 13) {
+                        doneesProduit = new DoneesProduit();
                         //Il faut maintenant envoyé les données à la page produit.
                         Produit _produitAEnvoyer = Produit.getProductFromBarCode(s);
                         Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
+                        doneesProduit.initialisationDesListes();
+                        doneesProduit.recupererLeTextePourEnvoyerAuxDetails(_produitAEnvoyer);
+                        intent.putExtra("nomProduit", _produitAEnvoyer.getNom());
+                        intent.putExtra("marqueProduit", _produitAEnvoyer.getMarque());
+                        intent.putExtra("nomEmballage1", doneesProduit.text1);
+                        intent.putExtra("nomEmballage2", doneesProduit.text2);
+                        intent.putExtra("nomEmballage3", doneesProduit.text3);
                         intent.putExtra("codeBarre", _produitAEnvoyer.getCode());
                         startActivity(intent);
                         Toast.makeText(AccueilRechercheSansScan.this, "Yes codeBrre Ok", Toast.LENGTH_SHORT).show();
