@@ -7,18 +7,47 @@
     android:layout_height="match_parent"
     tools:context=".recherchesansscan.AccueilRechercheSansScan">
 
+
     <LinearLayout
+        android:id="@+id/linearRecy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/single_item" />
+            tools:listitem="@layout/single_item"
+            android:visibility="visible"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutDesBoutons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/boutonPagePrecedente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Précédent"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:id="@+id/boutonPageSuivante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suivant"
+            android:layout_marginLeft="60dp"/>
+    </LinearLayout>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -39,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        >
+        android:visibility="visible">
 
         <!--Grille des catégorie -->
 
@@ -500,5 +529,6 @@
         android:background="@drawable/btn_rond_vert"
 
         android:src="@drawable/ic_code_scanner_auto_focus_on" />
+
 
 </RelativeLayout>

@@ -19,11 +19,11 @@ public class JsonFromKeyword extends AsyncTask<String, Void, String> {
         String ret = null;
         try {
             String keywords = strings[0];
-
+            String page = strings[1];
 
             keywords = keywords.replaceAll(" ", "+");
 
-            URL url = new URL("https://fr.openfoodfacts.org/cgi/search.pl?action=process&search_terms=" + keywords + "&sort_by=unique_scans_n&page_size=24&page=1&json=1");
+            URL url = new URL("https://fr.openfoodfacts.org/cgi/search.pl?action=process&search_terms=" + keywords + "&sort_by=unique_scans_n&page_size=24&page="+page+"&json=1");
 
             URLConnection connection = url.openConnection();
             connection.setRequestProperty("User-Agent", "ScanEco - Android - Version 0.1");

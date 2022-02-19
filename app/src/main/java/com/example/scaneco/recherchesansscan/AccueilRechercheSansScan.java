@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,9 +20,11 @@ import android.view.View;
 
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -51,6 +54,12 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     RecyclerViewClickListner recyclerViewClickListner;
     ScrollView scrlView;
     DoneesProduit doneesProduit;
+    LinearLayout layoutBoutons;
+    String saisieRecup;
+    Integer page;
+    Button boutonPrecedent;
+    Button boutonSuivant;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +86,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         _boutonRetourScan = findViewById(R.id.boutonRetourScan);
         _boutonRetourScan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ouvrirLeScan();
-            }
-        });
+                ouvrirLeScan(); }});
 
         setOnClickListner();
 
@@ -124,9 +131,44 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView() {
-
         scrlView = findViewById(R.id.scrollView);
         scrlView.setVisibility(View.INVISIBLE);
+        layoutBoutons = findViewById(R.id.layoutDesBoutons);
+        layoutBoutons.setVisibility(View.VISIBLE);
+        boutonPrecedent = findViewById(R.id.boutonPagePrecedente);
+        boutonSuivant = findViewById(R.id.boutonPageSuivante);
+        if(page == 1)
+        {
+            boutonPrecedent.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            boutonPrecedent.setVisibility(View.VISIBLE);
+            boutonPrecedent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"Passage page précedente",Toast.LENGTH_SHORT).show();
+                    page--;
+                    rechercheDuProduit(saisieRecup,page.toString());
+                }
+            });
+        }
+        if (produits.size() != 24)
+        {
+            boutonSuivant.setVisibility(View.INVISIBLE);
+        }
+        else
+            {
+                boutonSuivant.setVisibility(View.VISIBLE);
+                boutonSuivant.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"Passage page suivante",Toast.LENGTH_SHORT).show();
+                    page++;
+                    rechercheDuProduit(saisieRecup,page.toString());
+                }
+            });
+        }
         recyclerView = findViewById(R.id.recy);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -136,10 +178,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void rechercheDuProduit(String s) {
+    public void rechercheDuProduit(String s, String page) {
         jsonFromKeyword = new JsonFromKeyword();
         jsonFromKeyword.activity = this;
-        jsonFromKeyword.execute(s);
+        jsonFromKeyword.execute(s, page);
     }
 
     public void jsonGot(String json) {
@@ -195,8 +237,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                         Toast.makeText(AccueilRechercheSansScan.this, "Malheuresement le code barre est faux", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
+                    saisieRecup = s;
+                    page =1;
                     Toast.makeText(AccueilRechercheSansScan.this, "On lance la recherche", Toast.LENGTH_SHORT).show();
-                    rechercheDuProduit(s);
+                    rechercheDuProduit(s,page.toString());
                 }
 
                 //Cache le clavier après que l'utilisateur ait validé sa saisie
@@ -227,6 +271,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         recyclerViewClickListner = new RecyclerViewClickListner() {
             @Override
             public void onClick(View v, int position) {
+
                 try {
                     doneesProduit = new DoneesProduit();
                     Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
@@ -244,5 +289,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             }
 
         };
+    }
+
+    protected void cliqueSuivant()
+    {
+
     }
 }

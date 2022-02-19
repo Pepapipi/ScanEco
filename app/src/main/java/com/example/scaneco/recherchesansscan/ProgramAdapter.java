@@ -1,5 +1,6 @@
 package com.example.scaneco.recherchesansscan;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scaneco.DoneesProduit;
@@ -30,10 +32,8 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
     RecyclerViewClickListner recyclerViewClickListner;
     private DoneesProduit m_donnees;
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private Button boutonPrecedent;
-        private Button boutonSuivant;
+
         private ImageView _imageViewPoubelle1;
         private ImageView _imageViewPoubelle2;
         private ImageView _imageViewPoubelle3;
@@ -49,8 +49,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             _imageViewPoubelle1 = itemView.findViewById(R.id.poubelle1);
             _imageViewPoubelle2 = itemView.findViewById(R.id.poubelle2);
             _imageViewPoubelle3 = itemView.findViewById(R.id.poubelle3);
-            boutonPrecedent = (Button) itemView.findViewById(R.id.boutonPagePrecedente);
-            boutonSuivant = (Button) itemView.findViewById(R.id.boutonPageSuivante);
+
             itemView.setOnClickListener(this);
 
         }
@@ -82,15 +81,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
-
-        if(viewType == R.layout.single_item){
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_item, parent, false);
-        }
-
-        else {
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.choose_arrow, parent, false);
-        }
-
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_item, parent, false);
         ViewHolder views = null;
         try
         {
@@ -103,25 +94,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position==lpdt.size())
-        {
-            //Clique sur le bouton précedent
-            holder.boutonPrecedent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Bouton précédent cliqué", Toast.LENGTH_SHORT).show();
-                }
-            });
-            //Clique sur le bouton Suivant
-            holder.boutonSuivant.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Bouton suivant cliqué", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
-        else {
 
             //Initialisation des listes
             m_donnees = new DoneesProduit();
@@ -143,16 +115,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             } catch (Exception ignored) {}
 
         }
-    }
+
 
     @Override
     public int getItemCount() {
-        return lpdt.size() +1 ;
+        return lpdt.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return (position == lpdt.size()) ? R.layout.choose_arrow : R.layout.single_item;
-    }
 
 }
