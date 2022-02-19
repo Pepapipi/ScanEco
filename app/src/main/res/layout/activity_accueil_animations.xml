@@ -18,6 +18,61 @@
         app:itemTextColor="#ffffff"
         app:menu="@menu/barre_de_menu" />
 
+
+    <FrameLayout
+        android:id="@+id/frameVideo1"
+        android:layout_below="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="413dp"
+            android:layout_height="268dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="-2dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AMOGUS"
+        android:textSize="30dp" />
+
+    <FrameLayout
+        android:layout_below="@id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <VideoView
+            android:id="@+id/videoView2"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="-2dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frameVideo1"
+        android:text="WIDE SCANECO"
+        android:textSize="30dp" />
+
     <ImageButton
         android:id="@+id/boutonRetourScan"
         android:layout_width="60dp"
@@ -30,18 +85,6 @@
         android:background="@drawable/btn_rond_vert"
 
         android:src="@drawable/ic_code_scanner_auto_focus_on" />
-
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp" />
 
 </RelativeLayout>
 

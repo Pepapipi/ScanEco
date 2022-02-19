@@ -20,6 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".animations.AccueilAnimations"
+
             android:exported="false" />
         <activity
             android:name=".recherchesansscan.RechercheSansScanCategDetails"
