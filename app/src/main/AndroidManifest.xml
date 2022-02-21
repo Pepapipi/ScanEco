@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ScanEco">
         <activity
-            android:name=".PointsDeCollecte"
-            android:exported="false" />
-        <activity
             android:name=".ProduitDetails"
             android:exported="false" />
         <activity
