@@ -45,6 +45,20 @@
         android:background="@drawable/btn_rond_vert"
         android:src="@drawable/ic_loupe_blanche" />
 
+    <ImageButton
+        android:id="@+id/boutonReglages"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignRight="@id/scanner_view"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/btn_rond_vert"
+        android:src="@drawable/ic_reglages" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"

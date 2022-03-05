@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private CodeScanner _mCodeScanner;
     private CodeScannerView _mCodeScannerView;
     private ImageButton _boutonRechercheSansScan;
+    private ImageButton _boutonReglages;
 
     private ImageView _imageEmballage;
 
@@ -118,6 +119,14 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             public void onClick(View v) {
                 ouvrirRechercheSansScan();
             }
+        });
+
+        //Initialisation du bouton qui ouvre la page des réglages
+        _boutonReglages = findViewById(R.id.boutonReglages);
+        //Quand le bouton est cliqué alors il sera redirigé vers la page des réglages
+        _boutonReglages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { ouvrirReglages(); }
         });
 
 
@@ -224,17 +233,40 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         startActivity(intent);
     }
 
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder aux Animations
+     **/
     public void ouvrirAnimations()
     {
         Intent intent = new Intent(this, AccueilAnimations.class);
         startActivity(intent);
     }
 
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page des horaires de ramassage des poubelles
+     **/
     public void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
     }
+
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page des réglages
+     **/
+    public void ouvrirReglages()
+    {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page des détails des produits lors du scan
+     **/
     public void ouvrirProduitDetail()
     {
         Intent intent = new Intent(this, ProduitDetails.class);
