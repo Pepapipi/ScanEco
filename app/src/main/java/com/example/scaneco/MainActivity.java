@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;

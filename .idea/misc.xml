@@ -54,9 +54,13 @@
         <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_logo_scanEco.xml" value="0.115625" />
         <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_logo_scaneco.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/33781/Documents/DUT/ScanEco/app/src/main/res/mipmap-anydpi-v26/ic_logo_scaneco_round.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/drawable/ic_flechederetour.xml" value="0.1225" />
         <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/layout/activity_accueil_animations.xml" value="0.2" />
+        <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/layout/activity_accueil_hor_ram_poubelles.xml" value="0.25" />
         <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/layout/activity_accueil_recherche_sans_scan.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/layout/activity_animations.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/layout/activity_hor_ram_poubelles_details_ville.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/layout/activity_villes_dans_la_liste.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/menu/barre_de_menu.xml" value="0.25" />
         <entry key="..\:/Users/jules/AndroidStudioProjects/ScanEco/app/src/main/res/menu/menu_hor_ram_poubelles.xml" value="0.25" />
       </map>

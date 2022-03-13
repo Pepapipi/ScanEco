@@ -13,11 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ScanEco">
         <activity
+            android:name=".horRamPoubelles.VillesDansLaListe"
+            android:exported="false" />
+        <activity
             android:name=".ProduitDetails"
             android:exported="false" />
         <activity
             android:name=".animations.AccueilAnimations"
-
             android:exported="false" />
         <activity
             android:name=".recherchesansscan.RechercheSansScanCategDetails"

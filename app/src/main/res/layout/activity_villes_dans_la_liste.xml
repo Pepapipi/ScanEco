@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".horRamPoubelles.AccueilHorRamPoubelles">
+    tools:context=".horRamPoubelles.VillesDansLaListe">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,6 +17,8 @@
         android:layout_height="wrap_content"
         android:padding="20dp">
     </ListView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -32,7 +34,7 @@
         app:menu="@menu/barre_de_menu" />
 
     <ImageButton
-        android:id="@+id/boutonRetourScan"
+        android:id="@+id/boutonRetourAccueilHorRamPoubelles"
         android:layout_width="60dp"
         android:layout_height="60dp"
 
@@ -41,7 +43,6 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/btn_rond_vert"
-
-        android:src="@drawable/ic_code_scanner_auto_focus_on" />
+        android:src="@drawable/ic_flechederetour" />
 
 </RelativeLayout>

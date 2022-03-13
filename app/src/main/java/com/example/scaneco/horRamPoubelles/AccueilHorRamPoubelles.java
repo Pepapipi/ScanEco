@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,19 +16,34 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.scaneco.BaseDonneesHorRamVilles;
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.SplashScreen;
 import com.example.scaneco.animations.AccueilAnimations;
+
+import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class AccueilHorRamPoubelles extends AppCompatActivity {
 
+    ///////////////Variables\\\\\\\\\\\\\\\
     ListView recherche_ville;
     ArrayAdapter<String> adapter;
     private ImageButton _boutonRetourScan;
+    String fichierJson;
+    static List<List<Ville>> listeDeListeDeVilles;
+    Intent intent;
+
+    BaseDonneesHorRamVilles baseDonneesHorRamVilles;
+    ArrayList<String> arrayVille= new ArrayList<>();;
+
+
 
 
     @Override
@@ -35,44 +51,67 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_hor_ram_poubelles);
 
-        recherche_ville= (ListView) findViewById(R.id.recherche_ville);
 
-        ArrayList<String> arrayVille = new ArrayList<>();
-        arrayVille.addAll(Arrays.asList(getResources().getStringArray(R.array.mes_villes)));
+        baseDonneesHorRamVilles = new BaseDonneesHorRamVilles();
+        baseDonneesHorRamVilles.activity = this;
 
-        _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                ouvrirLeScan();
-            }
-        });
+        ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
+        try {
+            baseDonneesHorRamVilles.execute("https://api.npoint.io/d3f9c37f03c56013060c");
+        }
+        catch (Exception e) {}
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+    }
 
-        bottomNavigationView.setOnItemSelectedListener(item ->{
-            switch (item.getItemId()){
+    public void json(String fichierJson) {
+        try {
+            listeDeListeDeVilles = FichierJsonManager.valeurRenvoyeeJson(fichierJson);
 
-                case R.id.accueilAnimations:
-                    ouvrirAnimations();
-                    break;
-            }
-            return true;
-        });
+        } catch (Exception e) {
+            listeDeListeDeVilles = null;
+        }
+        int tableauCompteurVille[]=new int[listeDeListeDeVilles.size()];
 
-        adapter = new ArrayAdapter<String>(AccueilHorRamPoubelles.this, android.R.layout.simple_list_item_1, arrayVille);
+
+
+
+        ///////////////Ajout à mon tableau de tout les noms de mes villes et du code postal \\\\\\\\\\\\\\\
+        for (int i = 0; i < listeDeListeDeVilles.size(); i++) {
+            arrayVille.add(listeDeListeDeVilles.get(i).get(0).nom +" / "+listeDeListeDeVilles.get(i).get(0).codePostal);
+            tableauCompteurVille[i]=listeDeListeDeVilles.get(i).size();
+        }
+
+
+
+        ///////////////Affichage des villes dans la liste \\\\\\\\\\\\\\\
+        recherche_ville = (ListView) findViewById(R.id.list_villes);
+
+        adapter = new ArrayAdapter<String>(
+                AccueilHorRamPoubelles.this,
+                android.R.layout.simple_list_item_1,
+                arrayVille
+        );
         recherche_ville.setAdapter(adapter);
 
         recherche_ville.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent , View view, int position, long id){
 
-                Toast.makeText(AccueilHorRamPoubelles.this,"Selectionné "+recherche_ville.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(AccueilHorRamPoubelles.this, HorRamPoubellesDetailsVille.class);
+                int nombreDeVilleDansLaListe=tableauCompteurVille[position];
 
-                String nomVille= recherche_ville.getItemAtPosition(position).toString();
-                intent.putExtra("valRecup",nomVille);
+                //Si on a plus d'une ville dans la liste on va ouvrir un page intermédiaire avec un autre choix
+                if(nombreDeVilleDansLaListe>1)
+                {
+                    intent = new Intent(AccueilHorRamPoubelles.this, VillesDansLaListe.class);
+                    VillesDansLaListe.maListeDePlusiersVilles=listeDeListeDeVilles.get(position);
+                }
+                //Sinon on ouvre le détail des horaires directement
+                else
+                {
+                    intent = new Intent(AccueilHorRamPoubelles.this, HorRamPoubellesDetailsVille.class);
+                    HorRamPoubellesDetailsVille.villeRecuperee=listeDeListeDeVilles.get(position).get(0);
+                }
 
                 startActivity(intent);
             }
@@ -80,6 +119,10 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
 
     }
 
+
+
+
+    ///////////////Loupe de recherche\\\\\\\\\\\\\\\
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -105,19 +148,8 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
     }
 
 
-    public void ouvrirLeScan()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        finish();
-        startActivity(intent);
-    }
 
-    public void ouvrirAnimations()
-    {
-        Intent intent = new Intent(this, AccueilAnimations.class);
-        finish();
-        startActivity(intent);
-    }
+
 
 
 
