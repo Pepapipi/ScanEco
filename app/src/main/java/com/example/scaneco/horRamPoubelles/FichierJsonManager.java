@@ -19,17 +19,7 @@ import java.util.Scanner;
 
 public class FichierJsonManager {
 
-
-
-
-
-
-
-
-
     public static List<List<Ville>> valeurRenvoyeeJson(String fichierJson) throws Exception{
-
-
 
         List<List<Ville>> listeListeVilles = new ArrayList<>();
 

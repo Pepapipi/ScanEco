@@ -51,6 +51,19 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_hor_ram_poubelles);
 
+        //BARRE DE NAVIGATION
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.accueilAnimations:
+                    ouvrirAnimations();
+                    break;
+            }
+            return true;
+        });
+        //Bouton de retour
+        _boutonRetourScan = findViewById(R.id.boutonRetourScan);
+        _boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
         baseDonneesHorRamVilles = new BaseDonneesHorRamVilles();
         baseDonneesHorRamVilles.activity = this;
@@ -147,7 +160,16 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
+    protected void ouvrirLeScan()
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    protected void ouvrirAnimations()
+    {
+        Intent intent = new Intent(this, AccueilAnimations.class);
+        startActivity(intent);
+    }
 
 
 

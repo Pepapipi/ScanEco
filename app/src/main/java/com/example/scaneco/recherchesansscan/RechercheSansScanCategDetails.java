@@ -15,7 +15,7 @@ public class RechercheSansScanCategDetails extends AppCompatActivity {
     private ImageView _imageEmballage;
     private ImageView _imagePoubelle;
     private TextView _texteExplicatif;
-    private Drawable _test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
