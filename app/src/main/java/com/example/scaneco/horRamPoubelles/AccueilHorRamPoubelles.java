@@ -22,6 +22,7 @@ import com.example.scaneco.R;
 import com.example.scaneco.SplashScreen;
 import com.example.scaneco.animations.AccueilAnimations;
 
+import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
 import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -57,6 +58,9 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.accueilAnimations:
                     ouvrirAnimations();
+                    break;
+                case R.id.accueilPointDeCollecte:
+                    ouvrirRecherchePointDeCollecte();
                     break;
             }
             return true;
@@ -168,6 +172,11 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
     protected void ouvrirAnimations()
     {
         Intent intent = new Intent(this, AccueilAnimations.class);
+        startActivity(intent);
+    }
+    protected void ouvrirRecherchePointDeCollecte()
+    {
+        Intent intent = new Intent(this, RecherchePointDeCollecte.class);
         startActivity(intent);
     }
 

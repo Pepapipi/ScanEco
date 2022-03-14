@@ -18,6 +18,7 @@ import android.widget.VideoView;
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
 import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.InputStream;
@@ -26,7 +27,7 @@ import java.net.URL;
 
 public class AccueilAnimations extends AppCompatActivity {
     private ImageButton _boutonRetourScan;
-    private VideoView _videoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,9 @@ public class AccueilAnimations extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.accueilHorRamPoubelles:
                     ouvrirHorRamPoubelles();
+                    break;
+                case R.id.accueilPointDeCollecte:
+                    ouvrirRecherchePointDeCollecte();
                     break;
             }
             return true;
@@ -119,4 +123,11 @@ public class AccueilAnimations extends AppCompatActivity {
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
-    }}
+    }
+    protected void ouvrirRecherchePointDeCollecte()
+    {
+        Intent intent = new Intent(this, RecherchePointDeCollecte.class);
+        startActivity(intent);
+    }
+
+}

@@ -28,6 +28,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
 import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
@@ -107,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 case R.id.accueilAnimations:
                     ouvrirAnimations();
                     break;
+                case R.id.accueilPointDeCollecte:
+                    ouvrirRecherchePointDeCollecte();
             }
             return true;
         });
@@ -253,7 +256,15 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
         startActivity(intent);
     }
-
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page des points de collecte
+     **/
+    protected void ouvrirRecherchePointDeCollecte()
+    {
+        Intent intent = new Intent(this, RecherchePointDeCollecte.class);
+        startActivity(intent);
+    }
     /**
      * Fonction permettant d'aller sur une autre page(vue)
      * Ici cette fonction permettra d'accéder à la page des réglages

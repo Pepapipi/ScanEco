@@ -71,16 +71,16 @@ public class HorRamPoubellesDetailsVille extends AppCompatActivity {
                 villeRecuperee.codePostal.equals("64100")||
                 villeRecuperee.codePostal.equals("64340")||villeRecuperee.codePostal.equals("64210"))
         {
-            bImage= BitmapFactory.decodeResource(this.getResources(), R.drawable.cartographie_bayonne);
+            //bImage= BitmapFactory.decodeResource(this.getResources(), R.drawable.cartographie_bayonne);
             imageView = findViewById(R.id.cartographie);
-            imageView.setImageBitmap(bImage);
+            //imageView.setImageBitmap(bImage);
         }
 
         if (villeRecuperee.codePostal.equals("64990"))
         {
-            bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.saint_pierre_dirube);
+            //bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.saint_pierre_dirube);
             imageView = findViewById(R.id.cartographie);
-            imageView.setImageBitmap(bImage);
+            //imageView.setImageBitmap(bImage);
         }
 
 

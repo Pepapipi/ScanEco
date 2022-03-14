@@ -38,6 +38,7 @@ import com.example.scaneco.ProduitDetails;
 import com.example.scaneco.R;
 import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccueilRechercheSansScan extends AppCompatActivity {
@@ -78,7 +79,8 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 case R.id.accueilAnimations:
                     ouvrirAnimations();
                     break;
-
+                case R.id.accueilPointDeCollecte:
+                    ouvrirRecherchePointDeCollecte();
             }
             return true;
         });
@@ -107,6 +109,11 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     public void ouvrirAnimations() {
         Intent intent = new Intent(this, AccueilAnimations.class);
         finish();
+        startActivity(intent);
+    }
+    protected void ouvrirRecherchePointDeCollecte()
+    {
+        Intent intent = new Intent(this, RecherchePointDeCollecte.class);
         startActivity(intent);
     }
 
@@ -291,8 +298,5 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         };
     }
 
-    protected void cliqueSuivant()
-    {
 
-    }
 }
