@@ -7,13 +7,16 @@
     tools:context=".horRamPoubelles.HorRamPoubellesDetailsVille">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/LinearLayoutNomVille"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/TitrePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Horaires de ramassages des poubelles"
             android:textSize="22sp" />
@@ -23,12 +26,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="22sp"/>
+            android:layout_gravity="center"
+            android:textSize="22sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/LinearLayoutIcons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayoutNomVille"
+        android:layout_marginTop="0dp"
         android:orientation="horizontal">
 
 
@@ -36,11 +43,7 @@
             android:id="@+id/camionHorloge"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignTop="@+id/flecheDroite"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="111dp"
+            android:layout_marginStart="25dp"
             android:src="@drawable/ic_camion_poubelle" />
 
         <ImageView
@@ -49,7 +52,7 @@
             android:layout_height="80dp"
             android:layout_alignTop="@+id/camionHorloge"
             android:layout_marginStart="43dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/camionHorloge"
             android:src="@drawable/fleche_droite" />
@@ -64,18 +67,16 @@
             android:src="@drawable/ping_home" />
     </LinearLayout>
 
-
-
-
     <TableLayout
+        android:id="@+id/tabHorPoub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayoutIcons"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="480dp"
         android:background="@android:color/white">
 
         <!-- Premiere ligne -->
@@ -84,7 +85,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:text="@string/col1"
@@ -105,10 +106,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:text="@string/col3"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.1"
+                android:gravity="center_horizontal"
+                android:padding="10sp"
+                android:text="@string/col4"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
@@ -120,29 +131,46 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row1Type"
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/joursMenagers"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center_horizontal"
+                android:padding="10sp"
+                android:textSize="12sp" />
+
+            <TextView
                 android:id="@+id/heuresMenagers"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2.1"
+                android:src="@drawable/poubelle_noire" />
+
         </TableRow>
+
 
         <TableRow android:background="@color/gris_clair">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:text="@string/row2Type"
@@ -151,9 +179,9 @@
             <TextView
                 android:id="@+id/joursSelectifs"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:gravity="center_horizontal"
+                android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:textSize="12sp" />
 
@@ -161,14 +189,61 @@
                 android:id="@+id/heuresSelectifs"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="10sp"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2.1"
+                android:src="@drawable/poubelle_jaune" />
+
+        </TableRow>
+
+        <TableRow>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="10sp"
+                android:text="@string/row3Type"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/joursVerre"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="10sp"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/heuresVerre"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="10sp"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2.1"
+                android:src="@drawable/poubelle_verte" />
+
         </TableRow>
 
     </TableLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
@@ -199,20 +274,13 @@
         android:id="@+id/cartographie"
         android:layout_width="match_parent"
         android:layout_height="308dp"
-        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@+id/tabHorPoub"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="93dp" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="-2dp" />
 
-    <TextView
-        android:id="@+id/joursMenagers"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:gravity="center_horizontal"
-        android:padding="10sp"
-        android:textSize="12sp" />
+
 
 </RelativeLayout>
