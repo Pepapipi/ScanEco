@@ -18,8 +18,8 @@ public class SetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
         try {
             bitmap = BitmapFactory.decodeStream((InputStream) new URL(strings[0]).getContent());
         }
-        catch (Exception e){
-            this.e = e;
+        catch (Exception exception){
+            this.e = exception;
         }
         return bitmap;
     }
