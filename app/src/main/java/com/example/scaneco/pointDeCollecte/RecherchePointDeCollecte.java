@@ -303,6 +303,7 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
                     listeMarkerPoubelleBleue.add(m);
                     break;
                 case "Dechetterie":
+                    m.setIcon(getDrawable(R.drawable.ic_ping_dechetterie));
                     listeMarkerDechetterie.add(m);
                     break;
             }
