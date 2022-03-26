@@ -3,6 +3,7 @@ package com.example.scaneco;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -12,7 +13,7 @@ public class TaskRunner {
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     public interface Callback<R>{
-        void onComplete(R result);
+        void onComplete(R result) throws IOException;
     }
 
     public <V> void executeAsync(Callable<V> callable, Callback<V> callback){
@@ -24,7 +25,13 @@ public class TaskRunner {
                 exception.printStackTrace();
             }
             final V finalResult = result;
-            handler.post(()-> callback.onComplete(finalResult));
+            handler.post(()-> {
+                try {
+                    callback.onComplete(finalResult);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         });
     }
 }

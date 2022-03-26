@@ -146,31 +146,31 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 //Code-barres scanné
                 mCodeBarre = result.getText();
                 //Le produit rendu par OFF
-                mProduitObtenu = Produit.getProductFromBarCode(mCodeBarre);
+                Produit.getProductFromBarCode(mCodeBarre , produit -> {
+                    mProduitObtenu = produit;
 
-                //Nom produit
-                mNomProduitRecupere = mProduitObtenu.getNom();
-                mMarqueProduitRecupere = mProduitObtenu.getMarque();
+                    //Nom produit
+                    mNomProduitRecupere = mProduitObtenu.getNom();
+                    mMarqueProduitRecupere = mProduitObtenu.getMarque();
 
-                //Image emballage
-                mProduitObtenu.loadImageInView(mImageEmballage);
+                    //Image emballage
+                    mProduitObtenu.loadImageInView(mImageEmballage);
 
-                mDonneesDuProduit.afficherPoubelleSansTexte(mProduitObtenu, mImageViewPoubelle1, mImageViewPoubelle2, mImageViewPoubelle3);
-            }
-            catch (InterruptedException interruptedException){
-                Thread.currentThread().interrupt();
+                    mDonneesDuProduit.afficherPoubelleSansTexte(mProduitObtenu, mImageViewPoubelle1, mImageViewPoubelle2, mImageViewPoubelle3);
+
+                    mNomProduit.setText(mNomProduitRecupere);
+                    mMarqueProduit.setText(mMarqueProduitRecupere);
+                    //On les affiche en rendant le texte visible
+                    mEcranBlanc.setVisibility(View.VISIBLE);
+                    mNomProduit.setVisibility(View.VISIBLE);
+                    mMarqueProduit.setVisibility(View.VISIBLE);
+                    mTraitView.setVisibility(View.VISIBLE);
+                    mCodeScanner.startPreview();
+                });
             }
             catch (Exception e){
                 mNomProduitRecupere =e.toString();
             }
-            mNomProduit.setText(mNomProduitRecupere);
-            mMarqueProduit.setText(mMarqueProduitRecupere);
-            //On les affiche en rendant le texte visible
-            mEcranBlanc.setVisibility(View.VISIBLE);
-            mNomProduit.setVisibility(View.VISIBLE);
-            mMarqueProduit.setVisibility(View.VISIBLE);
-            mTraitView.setVisibility(View.VISIBLE);
-            mCodeScanner.startPreview();
         }));
 
     }

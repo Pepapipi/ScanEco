@@ -1,28 +1,24 @@
 package com.example.scaneco;
-import android.os.AsyncTask;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
 
-public class OpenFoodFactsAPI extends AsyncTask<String, Void, String> {
-    //TODO deprecated async task
-    @Override
-    protected String doInBackground(String... urls) {
-        String ret;
-        try{
-            URL url = new URL(urls[0]);
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent", "ScanEco - Android - Version 0.1");
-            InputStream inputStream = connection.getInputStream();
-            Scanner scanner = new Scanner(inputStream);
-            ret = scanner.useDelimiter("\\A").next();
+public class OpenFoodFactsAPI implements Callable<String> {
+    private final String input;
+    private final String userAgent;
 
-        }catch (Exception e){
-            ret = e.toString();
-        }
-        return ret;
+    public OpenFoodFactsAPI(String input, String userAgent) {
+        this.input = input;
+        this.userAgent = userAgent;
     }
 
+    @Override
+    public String call() throws IOException {
+        URLConnection urlConnection = new URL(input).openConnection();
+        urlConnection.setRequestProperty("User-Agent", userAgent);
+        return new Scanner(urlConnection.getInputStream()).useDelimiter("\\A").next();
+    }
 }

@@ -13,8 +13,6 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Récupère à partir de données json où un code barres avec l'API d'OpenFoodFacts un objet Produit
@@ -188,22 +186,17 @@ public class Produit implements Serializable {
         this.urlImage = urlImage;
     }
 
-    /**
-     * Créé et renvoit un Produit à partir d'un code barres. Seulement si les permissions internet
-     * ont été accordées.
-     *
-     * @param barCode Code barres du produit sous forme de chaîne de caractères.
-     * @return Le produit correspondant au code barres.
-     * @throws IOException Si les données json fournies ne sont pas valides.
-     * @throws Resources.NotFoundException Si le produit n'a pas été trouvé.
-     * @throws CancellationException If the computation was cancelled.
-     * @throws ExecutionException If the computation threw an exception.
-     * @throws InterruptedException If the current thread was interrupted while waiting.
-     */
-    public static Produit getProductFromBarCode(String barCode) throws IOException, Resources.NotFoundException, CancellationException, ExecutionException, InterruptedException {
-        //TODO deprecated async task
-        return new Produit(new OpenFoodFactsAPI().execute("https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json").get());
+
+    public static void getProductFromBarCode(String barCode, Cmd cmd) {
+        TaskRunner taskRunner = new TaskRunner();
+        String url = "https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json";
+        taskRunner.executeAsync(new OpenFoodFactsAPI(url, MainActivity.USER_AGENT), data->cmd.execute(new Produit(data)));
     }
+
+    public interface Cmd{
+        void execute(Produit produit);
+    }
+
 
 
     /**
