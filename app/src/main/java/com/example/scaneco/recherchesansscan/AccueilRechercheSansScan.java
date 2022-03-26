@@ -37,8 +37,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccueilRechercheSansScan extends AppCompatActivity {
 
-    private ImageButton _boutonRetourScan;
-    private GridLayout _gridLayout;
     ArrayList<String> arrayEmballage = new ArrayList<>();
 
     RecyclerView recyclerView;
@@ -60,29 +58,24 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_recherche_sans_scan);
-        _gridLayout = (GridLayout) findViewById(R.id.gridViewRechercheSansScan);
-        setSingleEvent(_gridLayout);
+        GridLayout gridLayout = findViewById(R.id.gridViewRechercheSansScan);
+        setSingleEvent(gridLayout);
         //Barre de navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.accueilHorRamPoubelles:
-                    ouvrirHorRamPoubelles();
-                    break;
-
-                case R.id.accueilAnimations:
-                    ouvrirAnimations();
-                    break;
-                case R.id.accueilPointDeCollecte:
-                    ouvrirRecherchePointDeCollecte();
+            int itemId = item.getItemId();
+            if (itemId == R.id.accueilHorRamPoubelles) {
+                ouvrirHorRamPoubelles();
+            } else if (itemId == R.id.accueilAnimations) {
+                ouvrirAnimations();
+            } else if (itemId == R.id.accueilPointDeCollecte) {
+                ouvrirRecherchePointDeCollecte();
             }
             return true;
         });
         //Bouton de retour
-        _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ouvrirLeScan(); }});
+        ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
+        boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
         setOnClickListner();
 
@@ -116,15 +109,12 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         arrayEmballage.addAll(Arrays.asList(getResources().getStringArray(R.array.mes_dechets)));
 
         for (int i = 0; i < mainGrid.getChildCount(); i++) {
-            CardView _cardView = (CardView) mainGrid.getChildAt(i);
+            CardView cardView = (CardView) mainGrid.getChildAt(i);
             final int _finalI = i;
-            _cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(AccueilRechercheSansScan.this, RechercheSansScanCategDetails.class);
-                    intent.putExtra("info", arrayEmballage.get(_finalI));
-                    startActivity(intent);
-                }
+            cardView.setOnClickListener(v -> {
+                Intent intent = new Intent(AccueilRechercheSansScan.this, RechercheSansScanCategDetails.class);
+                intent.putExtra("info", arrayEmballage.get(_finalI));
+                startActivity(intent);
             });
         }
     }
@@ -145,13 +135,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         else
         {
             boutonPrecedent.setVisibility(View.VISIBLE);
-            boutonPrecedent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(),"Passage page précedente",Toast.LENGTH_SHORT).show();
-                    page--;
-                    rechercheDuProduit(saisieRecup,page.toString());
-                }
+            boutonPrecedent.setOnClickListener(v -> {
+                Toast.makeText(getApplicationContext(),"Passage page précedente",Toast.LENGTH_SHORT).show();
+                page--;
+                rechercheDuProduit(saisieRecup,page.toString());
             });
         }
         if (produits.size() != 24)
@@ -161,14 +148,11 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
         else
             {
                 boutonSuivant.setVisibility(View.VISIBLE);
-                boutonSuivant.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                boutonSuivant.setOnClickListener(v -> {
                     Toast.makeText(getApplicationContext(),"Passage page suivante",Toast.LENGTH_SHORT).show();
                     page++;
                     rechercheDuProduit(saisieRecup,page.toString());
-                }
-            });
+                });
         }
         recyclerView = findViewById(R.id.recy);
         layoutManager = new LinearLayoutManager(this);
@@ -196,7 +180,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     }
 
     /**
-     * @param menu
+     * @param menu ToDO ajouter description
      * @return boolean
      * Quand l'utilisateur clique sur la loupe et écrit le nom du produit
      * Il faut voir si c'est un code-barres
@@ -218,20 +202,19 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     Il faut savoir que un code barre est composé de 8 ou 13 chiffres
                  */
                 try {
-                    long nombreRecup = Long.parseLong(s);
                     if (s.length() == 8 || s.length() == 13) {
                         doneesProduit = new DoneesProduit();
                         //Il faut maintenant envoyé les données à la page produit.
-                        Produit _produitAEnvoyer = Produit.getProductFromBarCode(s);
+                        Produit produitAEnvoyer = Produit.getProductFromBarCode(s);
                         Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
                         doneesProduit.initialisationDesListes();
-                        doneesProduit.recupererLeTextePourEnvoyerAuxDetails(_produitAEnvoyer);
-                        intent.putExtra("nomProduit", _produitAEnvoyer.getNom());
-                        intent.putExtra("marqueProduit", _produitAEnvoyer.getMarque());
+                        doneesProduit.recupererLeTextePourEnvoyerAuxDetails(produitAEnvoyer);
+                        intent.putExtra("nomProduit", produitAEnvoyer.getNom());
+                        intent.putExtra("marqueProduit", produitAEnvoyer.getMarque());
                         intent.putExtra("nomEmballage1", doneesProduit.text1);
                         intent.putExtra("nomEmballage2", doneesProduit.text2);
                         intent.putExtra("nomEmballage3", doneesProduit.text3);
-                        intent.putExtra("codeBarre", _produitAEnvoyer.getCode());
+                        intent.putExtra("codeBarre", produitAEnvoyer.getCode());
                         startActivity(intent);
                         Toast.makeText(AccueilRechercheSansScan.this, "Yes codeBrre Ok", Toast.LENGTH_SHORT).show();
                     } else {
@@ -269,26 +252,22 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
      */
     private void setOnClickListner() {
 
-        recyclerViewClickListner = new RecyclerViewClickListner() {
-            @Override
-            public void onClick(View v, int position) {
+        recyclerViewClickListner = (v, position) -> {
 
-                try {
-                    doneesProduit = new DoneesProduit();
-                    Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
-                    //A mofifier
-                    intent.putExtra("nomProduit", adapter.lpdt.get(position).getNom());
-                    intent.putExtra("marque", adapter.lpdt.get(position).getMarque());
-                    intent.putExtra("nomEmballage1", (String) adapter.listeEmballageChaqueProduit.get(position).get(0));
-                    intent.putExtra("nomEmballage2", (String)adapter.listeEmballageChaqueProduit.get(position).get(1));
-                    intent.putExtra("nomEmballage3",(String) adapter.listeEmballageChaqueProduit.get(position).get(2));
-                    intent.putExtra("codeBarre", produits.get(position).getCode());
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(AccueilRechercheSansScan.this, e.toString(), Toast.LENGTH_SHORT).show();
-                }
+            try {
+                doneesProduit = new DoneesProduit();
+                Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
+                //A mofifier
+                intent.putExtra("nomProduit", adapter.lpdt.get(position).getNom());
+                intent.putExtra("marque", adapter.lpdt.get(position).getMarque());
+                intent.putExtra("nomEmballage1", adapter.listeEmballageChaqueProduit.get(position).get(0));
+                intent.putExtra("nomEmballage2", adapter.listeEmballageChaqueProduit.get(position).get(1));
+                intent.putExtra("nomEmballage3", adapter.listeEmballageChaqueProduit.get(position).get(2));
+                intent.putExtra("codeBarre", produits.get(position).getCode());
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(AccueilRechercheSansScan.this, e.toString(), Toast.LENGTH_SHORT).show();
             }
-
         };
     }
 
