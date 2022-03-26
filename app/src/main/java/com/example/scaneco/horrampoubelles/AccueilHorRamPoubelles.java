@@ -13,9 +13,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.example.scaneco.BaseDonneesHorRamVilles;
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.TaskRunner;
 import com.example.scaneco.animations.AccueilAnimations;
 
 import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
@@ -32,7 +32,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
     List<List<Ville>> listeDeListeDeVilles;
     Intent intent;
 
-    BaseDonneesHorRamVilles baseDonneesHorRamVilles;
+    TaskRunner taskRunner = new TaskRunner();
     ArrayList<String> arrayVille= new ArrayList<>();
 
 
@@ -57,13 +57,9 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         //Bouton de retour
         ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
         boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
-
-        baseDonneesHorRamVilles = new BaseDonneesHorRamVilles(this);
-
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         try {
-            //TODO deprecated async task
-            baseDonneesHorRamVilles.execute("https://api.npoint.io/d3f9c37f03c56013060c");
+            taskRunner.executeAsync(new BaseDonneesHorRamVilles("https://api.npoint.io/d3f9c37f03c56013060c", MainActivity.USER_AGENT), this::json);
         }
         catch (Exception e) {
             e.printStackTrace();

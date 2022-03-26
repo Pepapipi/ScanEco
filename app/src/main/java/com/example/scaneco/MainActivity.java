@@ -31,6 +31,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
+    public static final String USER_AGENT = "ScanEco - Android - Version 0.1";
+
     private DoneesProduit mDonneesDuProduit;
     private TextView mNomProduit;
     private View mEcranBlanc;
