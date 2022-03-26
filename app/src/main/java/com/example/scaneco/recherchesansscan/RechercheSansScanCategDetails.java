@@ -25,65 +25,64 @@ public class RechercheSansScanCategDetails extends AppCompatActivity {
             nomEmballage.setText(info);
             switch(info)
             {
-                // TODO changer les setText par de ressources android
                 case "Papiers" : imageEmballage.setImageResource(R.drawable.papier);
                                  imagePoubelle.setImageResource(R.drawable.poubelle_bleue);
                                 break;
                 case "Verres" :
                     imageEmballage.setImageResource(R.drawable.duvin);
                     imagePoubelle.setImageResource(R.drawable.poubelle_verte);
-                    texteExplicatif.setText("Les bouteilles et autres contenant en verre vont dans la poubelle des verres");
+                    texteExplicatif.setText(R.string.verre);
                                 break;
                 case "Plastiques" :
                     imageEmballage.setImageResource(R.drawable.plastique);
                     imagePoubelle.setImageResource(R.drawable.poubelle_jaune);
-                    texteExplicatif.setText("Les plastiques recyclabes tels que les bouteilles en plastiques vont dans la poubelle jaune");
+                    texteExplicatif.setText(R.string.plastique);
                     break;
                 case "Piles" :
                     imageEmballage.setImageResource(R.drawable.batterie);
                     imagePoubelle.setImageResource(R.drawable.dechetterie);
-                    texteExplicatif.setText("Les conteneurs de piles peuvent être aussi dans les hypermarchés");
+                    texteExplicatif.setText(R.string.pile);
                     break;
                 case "Fruits et Légumes" :
                     imageEmballage.setImageResource(R.drawable.la_nourriture_saine);
                     imagePoubelle.setImageResource(R.drawable.poubelle_noire);
-                    texteExplicatif.setText("Si vous avez un conteneur avec du compost mettez les plutôt là dedans");
+                    texteExplicatif.setText(R.string.compost);
                     break;
                 case "Verdures" :
                     imageEmballage.setImageResource(R.drawable.herbe);
                     imagePoubelle.setImageResource(R.drawable.dechetterie);
-                    texteExplicatif.setText("La verdure comme le gazon vont en déchetterie");
+                    texteExplicatif.setText(R.string.verdure);
                     break;
                 case "Vaisselles" :
                     imageEmballage.setImageResource(R.drawable.assiette);
                     imagePoubelle.setImageResource(R.drawable.poubelle_noire);
-                    texteExplicatif.setText("La vaisselle se jette dans la poubelle des déchets ménagers");
+                    texteExplicatif.setText(R.string.vaisselle);
                     break;
                 case "Médicament" :
                     imageEmballage.setImageResource(R.drawable.medicament);
                     imagePoubelle.setImageResource(R.drawable.pharmacie);
-                    texteExplicatif.setText("Tout médicament se ramène en pharmacie !");
+                    texteExplicatif.setText(R.string.medicament);
                     break;
                 case "Cartons" :
                     imageEmballage.setImageResource(R.drawable.papiercarton);
                     imagePoubelle.setImageResource(R.drawable.poubelle_jaune);
-                    texteExplicatif.setText("Les petits emballages en carton vont dans la poubelle jaune, sinon c'est à la déchetterie");
+                    texteExplicatif.setText(R.string.carton);
                     break;
                 case "Vêtements" :
                     imageEmballage.setImageResource(R.drawable.vetements);
                     imagePoubelle.setImageResource(R.drawable.poubelle_noire);
-                    texteExplicatif.setText("S'ils sont en bon état veuillez les donner à une association");
+                    texteExplicatif.setText(R.string.Vetements);
                     break;
                 case "Meubles" :
                     imageEmballage.setImageResource(R.drawable.meubles);
                     imagePoubelle.setImageResource(R.drawable.dechetterie);
-                    texteExplicatif.setText("S'ils sont en bon état veuillez les donner à une association");
+                    texteExplicatif.setText(R.string.Meubles);
                     break;
                 case "Electroménager" :
                     imageEmballage.setImageResource(R.drawable.electromenager);
                     imagePoubelle.setImageResource(R.drawable.dechetterie);
 
-                    texteExplicatif.setText("S'ils sont en bon état veuillez les donner à une association");
+                    texteExplicatif.setText(R.string.Electromenager);
                     break;
                 default:
                     break;

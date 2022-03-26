@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="verre">Les bouteilles et autres contenant en verre vont dans la poubelle des verres</string>
+        <string name="plastique">Les plastiques recyclabes tels que les bouteilles en plastiques vont dans la poubelle jaune</string>
+        <string name="pile">Les conteneurs de piles peuvent être aussi dans les hypermarchés</string>
+        <string name="compost">Si vous avez un conteneur avec du compost mettez les plutôt là dedans</string>
+        <string name="verdure">La verdure comme le gazon vont en déchetterie</string>
+        <string name="vaisselle">La vaisselle se jette dans la poubelle des déchets ménagers</string>
+        <string name="medicament">Tout médicament se ramène en pharmacie !</string>
+        <string name="carton">Les petits emballages en carton vont dans la poubelle jaune, sinon c\'est à la déchetterie</string>
+        <string name="Vetements">S\'ils sont en bon état veuillez les donner à une association</string>
+        <string name="Meubles">S\'ils sont en bon état veuillez les donner à une association</string>
+        <string name="Electromenager">S\'ils sont en bon état veuillez les donner à une association</string>
+</resources>
