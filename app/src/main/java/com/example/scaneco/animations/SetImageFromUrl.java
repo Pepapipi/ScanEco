@@ -1,5 +1,6 @@
 package com.example.scaneco.animations;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -10,7 +11,8 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class SetImageFromUrl extends AsyncTask<String, Void, Bitmap> {
-    private ImageView bmImage;
+    @SuppressLint("StaticFieldLeak")
+    private final ImageView bmImage;
     Exception e;
     @Override
     protected Bitmap doInBackground(String... strings) {
