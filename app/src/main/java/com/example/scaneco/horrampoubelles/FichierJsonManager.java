@@ -2,14 +2,17 @@ package com.example.scaneco.horrampoubelles;
 
 import android.util.JsonReader;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FichierJsonManager {
+class FichierJsonManager {
 
-    public static List<List<Ville>> valeurRenvoyeeJson(String fichierJson) throws Exception{
+    private FichierJsonManager(){}
+
+    public static List<List<Ville>> valeurRenvoyeeJson(String fichierJson) throws IOException {
 
         List<List<Ville>> listeListeVilles = new ArrayList<>();
 
@@ -48,6 +51,9 @@ public class FichierJsonManager {
                                 case "heuresMenagers":
                                     v.heuresMenagers = reader.nextString();
                                     break;
+                                default:
+                                    reader.skipValue();
+                                    break;
                             }
 
                         }
@@ -61,10 +67,6 @@ public class FichierJsonManager {
                 reader.endArray();
             }
             reader.endObject();
-        }
-        catch (Exception e)
-        {
-            throw e;
         }
         return listeListeVilles;
     }
