@@ -111,6 +111,7 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         ConnexionJsonPointDeCollecte baseDeDonneesPdtCollectes = new ConnexionJsonPointDeCollecte(this);
         try {
+            //TODO deprecated async task
             baseDeDonneesPdtCollectes.execute("https://api.npoint.io/6696673b4c1fdcfcff8e");
         } catch (Exception e) {
             e.printStackTrace();

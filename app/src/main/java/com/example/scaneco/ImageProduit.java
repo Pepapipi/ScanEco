@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class ImageProduit extends AsyncTask<String, Void, Drawable> {
+    //TODO deprecated async task
     @Override
     protected Drawable doInBackground(String... urls) {
         Drawable ret;

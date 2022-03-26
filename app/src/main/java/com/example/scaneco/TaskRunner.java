@@ -15,15 +15,15 @@ public class TaskRunner {
         void onComplete(R result);
     }
 
-    public <R> void executeAsync(Callable<R> callable, Callback<R> callback){
+    public <V> void executeAsync(Callable<V> callable, Callback<V> callback){
         executor.execute(()->{
-            R result = null;
+            V result = null;
             try {
                 result = callable.call();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
-            R finalResult = result;
+            final V finalResult = result;
             handler.post(()-> callback.onComplete(finalResult));
         });
     }

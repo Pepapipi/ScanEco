@@ -158,6 +158,7 @@ public class Produit implements Serializable {
     public Drawable getImage(){return  image;}
 
     public void loadImage() throws ExecutionException, InterruptedException{
+        //TODO deprecated async task
         image = new ImageProduit().execute(urlImage).get();
     }
 
@@ -194,6 +195,7 @@ public class Produit implements Serializable {
      * @throws InterruptedException If the current thread was interrupted while waiting.
      */
     public static Produit getProductFromBarCode(String barCode) throws IOException, Resources.NotFoundException, CancellationException, ExecutionException, InterruptedException {
+        //TODO deprecated async task
         return new Produit(new OpenFoodFactsAPI().execute("https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json").get());
     }
 

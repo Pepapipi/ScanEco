@@ -7,6 +7,7 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class OpenFoodFactsAPI extends AsyncTask<String, Void, String> {
+    //TODO deprecated async task
     @Override
     protected String doInBackground(String... urls) {
         String ret;

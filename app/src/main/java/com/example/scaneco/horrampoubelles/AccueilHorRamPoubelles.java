@@ -62,6 +62,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
 
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         try {
+            //TODO deprecated async task
             baseDonneesHorRamVilles.execute("https://api.npoint.io/d3f9c37f03c56013060c");
         }
         catch (Exception e) {

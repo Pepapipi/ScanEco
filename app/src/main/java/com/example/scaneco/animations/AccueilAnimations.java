@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.TaskRunner;
 import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
 import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,7 +38,7 @@ public class AccueilAnimations extends AppCompatActivity {
         ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
         boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
-
+        TaskRunner taskRunner = new TaskRunner();
 
         //VIDEOS
         String messageRedirection = "redirection";
@@ -60,7 +61,7 @@ public class AccueilAnimations extends AppCompatActivity {
             }
         });
         try {
-            new SetImageFromUrl(imageView, baseUrlYoutubeThumbnail + videoKey + imgExtention);
+            taskRunner.executeAsync(new SetImageFromUrl(baseUrlYoutubeThumbnail + videoKey + imgExtention), imageView::setImageBitmap);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,7 +81,7 @@ public class AccueilAnimations extends AppCompatActivity {
             }
         });
         try {
-            new SetImageFromUrl(imageView2, baseUrlYoutubeThumbnail + videoKey2 + imgExtention);
+            taskRunner.executeAsync(new SetImageFromUrl(baseUrlYoutubeThumbnail + videoKey2 + imgExtention), imageView2::setImageBitmap);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -100,7 +101,7 @@ public class AccueilAnimations extends AppCompatActivity {
             }
         });
         try {
-            new SetImageFromUrl(imageView3, baseUrlYoutubeThumbnail + videoKey3 + imgExtention);
+            taskRunner.executeAsync(new SetImageFromUrl(baseUrlYoutubeThumbnail + videoKey3 + imgExtention), imageView3::setImageBitmap);
         }catch (Exception e){
             e.printStackTrace();
         }

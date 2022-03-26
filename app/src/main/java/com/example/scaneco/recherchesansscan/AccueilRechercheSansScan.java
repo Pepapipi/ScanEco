@@ -165,6 +165,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
 
     public void rechercheDuProduit(String s, String page) {
         jsonFromKeyword = new JsonFromKeyword(this);
+        //TODO deprecated async task
         jsonFromKeyword.execute(s, page);
     }
 

@@ -8,6 +8,7 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class ConnexionJsonPointDeCollecte extends AsyncTask<String, Void, String> {
+    //TODO deprecated async task
 
 
     @SuppressLint("StaticFieldLeak")
