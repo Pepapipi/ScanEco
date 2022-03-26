@@ -260,9 +260,9 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 //A mofifier
                 intent.putExtra("nomProduit", adapter.lpdt.get(position).getNom());
                 intent.putExtra("marque", adapter.lpdt.get(position).getMarque());
-                intent.putExtra("nomEmballage1", adapter.listeEmballageChaqueProduit.get(position).get(0));
-                intent.putExtra("nomEmballage2", adapter.listeEmballageChaqueProduit.get(position).get(1));
-                intent.putExtra("nomEmballage3", adapter.listeEmballageChaqueProduit.get(position).get(2));
+                intent.putExtra("nomEmballage1", adapter.getListeEmballageChaqueProduit().get(position).get(0));
+                intent.putExtra("nomEmballage2", adapter.getListeEmballageChaqueProduit().get(position).get(1));
+                intent.putExtra("nomEmballage3", adapter.getListeEmballageChaqueProduit().get(position).get(2));
                 intent.putExtra("codeBarre", produits.get(position).getCode());
                 startActivity(intent);
             } catch (Exception e) {
