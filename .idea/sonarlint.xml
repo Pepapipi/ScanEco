@@ -3,7 +3,7 @@
   <component name="SonarLintProjectSettings">
     <option name="fileExclusions">
       <list>
-        <option value="FILE:app/src/main/java/com/example/scaneco/recherchesansscan/AccueilRechercheSansScan.java" />
+        <option value="FILE:app/build/generated/source/buildConfig/debug/com/example/scaneco/BuildConfig.java" />
       </list>
     </option>
   </component>
