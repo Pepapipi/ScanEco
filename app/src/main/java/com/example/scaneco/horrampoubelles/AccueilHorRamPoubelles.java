@@ -1,5 +1,6 @@
 package com.example.scaneco.horrampoubelles;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -107,13 +108,13 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
             if(nombreDeVilleDansLaListe>1)
             {
                 intent = new Intent(AccueilHorRamPoubelles.this, VillesDansLaListe.class);
-                VillesDansLaListe.maListeDePlusiersVilles=listeDeListeDeVilles.get(position);
+                setMalisteDansVille(listeDeListeDeVilles, position);
             }
             //Sinon on ouvre le détail des horaires directement
             else
             {
                 intent = new Intent(AccueilHorRamPoubelles.this, HorRamPoubellesDetailsVille.class);
-                HorRamPoubellesDetailsVille.villeRecuperee=listeDeListeDeVilles.get(position).get(0);
+                setVilleDansHorRam(listeDeListeDeVilles, position);
             }
 
             startActivity(intent);
@@ -121,8 +122,13 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
 
     }
 
+    private static void setMalisteDansVille(@NonNull List<List<Ville>> listeDeListeDeVilles, int position){
+        VillesDansLaListe.maListeDePlusiersVilles=listeDeListeDeVilles.get(position);
+    }
 
-
+    private static void setVilleDansHorRam(@NonNull List<List<Ville>> listeDeListeDeVilles, int position){
+        HorRamPoubellesDetailsVille.villeRecuperee = listeDeListeDeVilles.get(position).get(0);
+    }
 
     ///////////////Loupe de recherche\\\\\\\\\\\\\\\
     @Override
