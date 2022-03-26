@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.TaskRunner;
 import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -57,6 +58,7 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
     ArrayList<Marker> listeMarkerPoubelleVerte = new ArrayList<>();
     ArrayList<Marker> listeMarkerPoubelleBleue = new ArrayList<>();
     ArrayList<Marker> listeMarkerDechetterie = new ArrayList<>();
+    TaskRunner taskRunner = new TaskRunner();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,10 +111,8 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         getOsm().addMapListener(mapListener);
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
-        ConnexionJsonPointDeCollecte baseDeDonneesPdtCollectes = new ConnexionJsonPointDeCollecte(this);
         try {
-            //TODO deprecated async task
-            baseDeDonneesPdtCollectes.execute("https://api.npoint.io/6696673b4c1fdcfcff8e");
+            taskRunner.executeAsync(new ConnexionJsonPointDeCollecte("https://api.npoint.io/6696673b4c1fdcfcff8e", MainActivity.USER_AGENT), this::json);
         } catch (Exception e) {
             e.printStackTrace();
         }
