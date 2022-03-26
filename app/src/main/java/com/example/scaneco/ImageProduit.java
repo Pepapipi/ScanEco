@@ -1,28 +1,25 @@
 package com.example.scaneco;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.Callable;
 
-public class ImageProduit extends AsyncTask<String, Void, Drawable> {
-    //TODO deprecated async task
-    @Override
-    protected Drawable doInBackground(String... urls) {
-        Drawable ret;
-        try{
-            URL url = new URL(urls[0]);
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent", "ScanEco - Android - Version 0.1");
-            InputStream inputStream = connection.getInputStream();
-            ret = Drawable.createFromStream(inputStream, "imageProduit");
+public class ImageProduit implements Callable<Drawable> {
+    private final String input;
+    private final String userAgent;
 
-        }catch (Exception e){
-            ret = null;
-        }
-        return ret;
+    public ImageProduit(String input, String userAgent) {
+        this.input = input;
+        this.userAgent = userAgent;
     }
 
+    @Override
+    public Drawable call() throws IOException {
+        URLConnection urlConnection = new URL(input).openConnection();
+        urlConnection.setRequestProperty("User-Agent", userAgent);
+        return Drawable.createFromStream(urlConnection.getInputStream(), "imageProduit");
+    }
 }

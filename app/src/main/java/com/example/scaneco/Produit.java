@@ -3,6 +3,7 @@ package com.example.scaneco;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
+import android.widget.ImageView;
 
 
 import androidx.annotation.NonNull;
@@ -157,9 +158,14 @@ public class Produit implements Serializable {
 
     public Drawable getImage(){return  image;}
 
-    public void loadImage() throws ExecutionException, InterruptedException{
-        //TODO deprecated async task
-        image = new ImageProduit().execute(urlImage).get();
+    public void loadImage() {
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.executeAsync(new ImageProduit(urlImage, MainActivity.USER_AGENT), data -> image = data);
+    }
+
+    public void loadImageInView(ImageView imageView){
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.executeAsync(new ImageProduit(urlImage, MainActivity.USER_AGENT), imageView::setImageDrawable);
     }
 
     public void setCode(String code) {

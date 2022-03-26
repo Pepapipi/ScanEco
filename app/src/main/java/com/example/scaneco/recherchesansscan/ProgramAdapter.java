@@ -56,10 +56,10 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
         }
 
-        public void setData(String nomPdt, String marquePdt, Drawable img, ImageView img1,ImageView img2, ImageView img3) {
-         mMarque.setText(marquePdt);
-         mNomPdt.setText(nomPdt);
-         mImage.setImageDrawable(img);
+        public void setData(Produit produit, ImageView img1,ImageView img2, ImageView img3) {
+         mMarque.setText(produit.getMarque());
+         mNomPdt.setText(produit.getNom());
+         produit.loadImageInView(mImage);
          mImageViewPoubelle1 = img1;
          mImageViewPoubelle2 = img2;
          mImageViewPoubelle3 = img3;
@@ -105,25 +105,15 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             try {
                 mDonnees.afficherPoubelleSansTexte(lpdt.get(position), holder.mImageViewPoubelle1, holder.mImageViewPoubelle2, holder.mImageViewPoubelle3);
 
-                String nomPdt = lpdt.get(position).getNom();
-                String marquePdt = lpdt.get(position).getMarque();
-                lpdt.get(position).loadImage();
-                Drawable imagePdt = lpdt.get(position).getImage();
                 listeEmballageA.add(mDonnees.getText1());
                 listeEmballageA.add(mDonnees.getText2());
                 listeEmballageA.add(mDonnees.getText3());
                 getListeEmballageChaqueProduit().add(listeEmballageA);
 
-                holder.setData(nomPdt, marquePdt, imagePdt, holder.mImageViewPoubelle1, holder.mImageViewPoubelle2, holder.mImageViewPoubelle3);
-            }
-            catch (InterruptedException interruptedException){
-                interruptedException.printStackTrace();
-                Thread.currentThread().interrupt();
-            }
-            catch (Exception exception) {
+                holder.setData(lpdt.get(position), holder.mImageViewPoubelle1, holder.mImageViewPoubelle2, holder.mImageViewPoubelle3);
+            } catch (Exception exception) {
                 exception.printStackTrace();
             }
-
         }
 
 

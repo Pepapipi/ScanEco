@@ -179,7 +179,6 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     }
 
     /**
-     * @param menu ToDO ajouter description
      * @return boolean
      * Quand l'utilisateur clique sur la loupe et écrit le nom du produit
      * Il faut voir si c'est un code-barres
@@ -209,12 +208,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
                         doneesProduit.initialisationDesListes();
                         doneesProduit.recupererLeTextePourEnvoyerAuxDetails(produitAEnvoyer);
-                        intent.putExtra("nomProduit", produitAEnvoyer.getNom());
-                        intent.putExtra("marqueProduit", produitAEnvoyer.getMarque());
+                        intent.putExtra("leProduit", produitAEnvoyer);
                         intent.putExtra("nomEmballage1", doneesProduit.getText1());
                         intent.putExtra("nomEmballage2", doneesProduit.getText2());
                         intent.putExtra("nomEmballage3", doneesProduit.getText3());
-                        intent.putExtra("codeBarre", produitAEnvoyer.getCode());
                         startActivity(intent);
                         Toast.makeText(AccueilRechercheSansScan.this, "Yes codeBrre Ok", Toast.LENGTH_SHORT).show();
                     } else {
@@ -261,13 +258,10 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
             try {
                 doneesProduit = new DoneesProduit();
                 Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
-                //A mofifier
-                intent.putExtra("nomProduit", adapter.lpdt.get(position).getNom());
-                intent.putExtra("marque", adapter.lpdt.get(position).getMarque());
                 intent.putExtra("nomEmballage1", adapter.getListeEmballageChaqueProduit().get(position).get(0));
                 intent.putExtra("nomEmballage2", adapter.getListeEmballageChaqueProduit().get(position).get(1));
                 intent.putExtra("nomEmballage3", adapter.getListeEmballageChaqueProduit().get(position).get(2));
-                intent.putExtra("codeBarre", produits.get(position).getCode());
+                intent.putExtra("leProduit", adapter.lpdt.get(position));
                 startActivity(intent);
             } catch (Exception e) {
                 Toast.makeText(AccueilRechercheSansScan.this, e.toString(), Toast.LENGTH_SHORT).show();

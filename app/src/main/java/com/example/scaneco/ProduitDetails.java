@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,25 +32,18 @@ public class ProduitDetails extends AppCompatActivity{
 
 
         try {
-            String codeBarre = getIntent().getStringExtra("codeBarre");
-            Produit mProduitObtenu = Produit.getProductFromBarCode(codeBarre);
-            mNomProduit.setText(getIntent().getStringExtra("nomProduit"));
-            mMarqueProduit.setText(getIntent().getStringExtra("marqueProduit"));
+            Produit mProduitObtenu =(Produit)  getIntent().getSerializableExtra("leProduit");
+            mNomProduit.setText(mProduitObtenu.getNom());
+            mMarqueProduit.setText(mProduitObtenu.getMarque());
             String nomEmballageRecup1 = getIntent().getStringExtra("nomEmballage1");
             String nomEmballageRecup2 = getIntent().getStringExtra("nomEmballage2");
             String nomEmballageRecup3 = getIntent().getStringExtra("nomEmballage3");
-            mProduitObtenu.loadImage();
-            mImageProduit.setImageDrawable(mProduitObtenu.getImage());
             mProduitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup1, mNomEmballage1, mImagePoubelle1, mCardViewPoubelle1);
             mProduitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup2, mNomEmballage2, mImagePoubelle2, mCardViewPoubelle2);
             mProduitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup3, mNomEmballage3, mImagePoubelle3, mCardViewPoubelle3);
-
-        }
-        catch (InterruptedException interruptedException){
-            Thread.currentThread().interrupt();
-        }
-        catch (Exception e){
-            e.printStackTrace();
+            mProduitObtenu.loadImageInView(mImageProduit);
+        } catch (Exception e){
+            Log.e(e.toString(), e.getMessage());
         }
 
     }

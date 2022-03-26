@@ -70,10 +70,6 @@ public class DoneesProduit {
     /**
      * Fonction qui permet regarde dans les 3 listes si l'emballage qu'on a dans le tableau
      * _produitObtenu.emball
-     * @param i TODO
-     * @param text TODO
-     * @param image TODO
-     * @return TODO
      */
     private String affichageCorrectImage(Produit pdt, int i,String text, ImageView image)
     {

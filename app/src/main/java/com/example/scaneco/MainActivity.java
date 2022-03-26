@@ -153,8 +153,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 mMarqueProduitRecupere = mProduitObtenu.getMarque();
 
                 //Image emballage
-                mProduitObtenu.loadImage();
-                mImageEmballage.setImageDrawable(mProduitObtenu.getImage());
+                mProduitObtenu.loadImageInView(mImageEmballage);
 
                 mDonneesDuProduit.afficherPoubelleSansTexte(mProduitObtenu, mImageViewPoubelle1, mImageViewPoubelle2, mImageViewPoubelle3);
             }
@@ -253,13 +252,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public void ouvrirProduitDetail()
     {
         Intent intent = new Intent(this, ProduitDetails.class);
-        intent.putExtra("nomProduit", mNomProduitRecupere);
-        intent.putExtra("marqueProduit", mMarqueProduitRecupere);
+        intent.putExtra("leProduit", mProduitObtenu);
         intent.putExtra("nomEmballage1", mDonneesDuProduit.getText1());
         intent.putExtra("nomEmballage2", mDonneesDuProduit.getText2());
         intent.putExtra("nomEmballage3", mDonneesDuProduit.getText3());
-        intent.putExtra("marqueProduit", mMarqueProduitRecupere);
-        intent.putExtra("codeBarre", mCodeBarre);
         startActivity(intent);
     }
 
