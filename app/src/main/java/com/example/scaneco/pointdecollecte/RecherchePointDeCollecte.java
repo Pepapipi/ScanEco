@@ -43,6 +43,7 @@ import org.osmdroid.views.overlay.Marker;
 import java.util.ArrayList;
 import java.util.List;
 
+/// TODO à finir !!!
 
 public class RecherchePointDeCollecte extends AppCompatActivity implements LocationListener {
 
