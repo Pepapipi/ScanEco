@@ -3,15 +3,19 @@ package com.example.scaneco.pointdecollecte;
 import static java.lang.Float.parseFloat;
 
 import android.util.JsonReader;
+
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class JsonPointDeCollecte {
+class JsonPointDeCollecte {
 
-    public static List<PointDeCollecte> valeurRenvoyeeJson(String fichierJson) throws Exception{
+    private JsonPointDeCollecte(){}
+
+    public static List<PointDeCollecte> valeurRenvoyeeJson(String fichierJson) throws IOException {
 
         List<PointDeCollecte> listeRenvoyee= new ArrayList<>();
         try (JsonReader reader = new JsonReader(new StringReader(fichierJson)))
@@ -46,6 +50,9 @@ public class JsonPointDeCollecte {
                                 case "ville":
                                     m.setVille(reader.nextString());
                                     break;
+                                default:
+                                    reader.skipValue();
+                                    break;
                             }
 
                         }
@@ -58,10 +65,6 @@ public class JsonPointDeCollecte {
                 reader.endArray();
             }
             reader.endObject();
-        }
-        catch (Exception e)
-        {
-            throw e;
         }
         return listeRenvoyee;
     }
