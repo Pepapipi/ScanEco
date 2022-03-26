@@ -1,5 +1,6 @@
 package com.example.scaneco;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
@@ -10,10 +11,15 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class BaseDonneesHorRamVilles extends AsyncTask<String, Void, String> {
+    //TODO Change asyncTask
 
+    @SuppressLint("StaticFieldLeak")
+    private final AccueilHorRamPoubelles activity;
 
-    public AccueilHorRamPoubelles activity;
-    public String json;
+    public BaseDonneesHorRamVilles(AccueilHorRamPoubelles activity) {
+        this.activity = activity;
+    }
+
     @Override
     protected String doInBackground(String... urls) {
         String ret;

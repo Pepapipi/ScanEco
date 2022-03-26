@@ -57,8 +57,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
         boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
-        baseDonneesHorRamVilles = new BaseDonneesHorRamVilles();
-        baseDonneesHorRamVilles.activity = this;
+        baseDonneesHorRamVilles = new BaseDonneesHorRamVilles(this);
 
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         try {
