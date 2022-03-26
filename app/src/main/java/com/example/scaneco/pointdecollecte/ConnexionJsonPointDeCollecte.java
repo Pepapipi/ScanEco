@@ -1,5 +1,6 @@
-package com.example.scaneco.pointDeCollecte;
+package com.example.scaneco.pointdecollecte;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import java.io.InputStream;
 import java.net.URL;
@@ -9,7 +10,13 @@ import java.util.Scanner;
 public class ConnexionJsonPointDeCollecte extends AsyncTask<String, Void, String> {
 
 
-    public RecherchePointDeCollecte activity;
+    @SuppressLint("StaticFieldLeak")
+    private final RecherchePointDeCollecte activity;
+
+    public ConnexionJsonPointDeCollecte(RecherchePointDeCollecte activity) {
+        this.activity = activity;
+    }
+
     @Override
     protected String doInBackground(String... urls) {
         String ret;

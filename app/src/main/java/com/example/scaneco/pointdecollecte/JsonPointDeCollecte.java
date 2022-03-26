@@ -1,4 +1,4 @@
-package com.example.scaneco.pointDeCollecte;
+package com.example.scaneco.pointdecollecte;
 
 import static java.lang.Float.parseFloat;
 

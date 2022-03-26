@@ -1,4 +1,4 @@
-package com.example.scaneco.pointDeCollecte;
+package com.example.scaneco.pointdecollecte;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -100,8 +100,7 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         osm.addMapListener(mapListener);
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
-        ConnexionJsonPointDeCollecte baseDeDonneesPdtCollectes = new ConnexionJsonPointDeCollecte();
-        baseDeDonneesPdtCollectes.activity = this;
+        ConnexionJsonPointDeCollecte baseDeDonneesPdtCollectes = new ConnexionJsonPointDeCollecte(this);
         try {
             baseDeDonneesPdtCollectes.execute("https://api.npoint.io/6696673b4c1fdcfcff8e");
         } catch (Exception e) {

@@ -25,7 +25,7 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
-import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;

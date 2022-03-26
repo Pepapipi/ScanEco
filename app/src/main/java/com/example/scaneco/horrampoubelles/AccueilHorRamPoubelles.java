@@ -17,7 +17,7 @@ import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
 import com.example.scaneco.animations.AccueilAnimations;
 
-import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

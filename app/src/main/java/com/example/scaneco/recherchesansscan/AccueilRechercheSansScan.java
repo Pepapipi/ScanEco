@@ -32,7 +32,7 @@ import com.example.scaneco.ProduitDetails;
 import com.example.scaneco.R;
 import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
-import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccueilRechercheSansScan extends AppCompatActivity {
@@ -204,7 +204,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                 try {
                     if (s.length() == 8 || s.length() == 13) {
                         doneesProduit = new DoneesProduit();
-                        //Il faut maintenant envoyé les données à la page produit.
+                        //Il faut maintenant envoyer les données à la page produit.
                         Produit produitAEnvoyer = Produit.getProductFromBarCode(s);
                         Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
                         doneesProduit.initialisationDesListes();
@@ -225,6 +225,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     page =1;
                     Toast.makeText(AccueilRechercheSansScan.this, "On lance la recherche", Toast.LENGTH_SHORT).show();
                     rechercheDuProduit(s,page.toString());
+                    Thread.currentThread().interrupt();
                 }
 
                 //Cache le clavier après que l'utilisateur ait validé sa saisie
