@@ -30,28 +30,28 @@ public class HorRamPoubellesDetailsVille extends AppCompatActivity {
         textView = findViewById(R.id.NomDeLaVille);
 
 
-        String nomVilleRecuperee = villeRecuperee.nom;
+        String nomVilleRecuperee = villeRecuperee.getNom();
         textView.setText(nomVilleRecuperee);
 
 
-        if (villeRecuperee.codePostal.equals("64600")||
-                villeRecuperee.codePostal.equals("64200")||
-                villeRecuperee.codePostal.equals("64100")||
-                villeRecuperee.codePostal.equals("64340")||villeRecuperee.codePostal.equals("64210"))
+        if (villeRecuperee.getCodePostal().equals("64600")||
+                villeRecuperee.getCodePostal().equals("64200")||
+                villeRecuperee.getCodePostal().equals("64100")||
+                villeRecuperee.getCodePostal().equals("64340")|| villeRecuperee.getCodePostal().equals("64210"))
         {
             findViewById(R.id.cartographie);
         }
 
-        if (villeRecuperee.codePostal.equals("64990"))
+        if (villeRecuperee.getCodePostal().equals("64990"))
         {
             findViewById(R.id.cartographie);
         }
 
 
-        textViewJoursSelectifs.setText(villeRecuperee.joursSelectifs);
-        textViewJoursMenagers.setText(villeRecuperee.joursMenagers);
-        textViewHeuresSelectifs.setText(villeRecuperee.heuresSelectifs);
-        textViewHeuresMenagers.setText(villeRecuperee.heuresMenagers);
+        textViewJoursSelectifs.setText(villeRecuperee.getJoursSelectifs());
+        textViewJoursMenagers.setText(villeRecuperee.getJoursMenagers());
+        textViewHeuresSelectifs.setText(villeRecuperee.getHeuresSelectifs());
+        textViewHeuresMenagers.setText(villeRecuperee.getHeuresMenagers());
 
 
     }

@@ -48,7 +48,7 @@ public class VillesDansLaListe extends AppCompatActivity {
 
         for(int i=1;i<maListeDePlusiersVilles.size();i++)
         {
-            arrayVille.add(maListeDePlusiersVilles.get(i).nom);
+            arrayVille.add(maListeDePlusiersVilles.get(i).getNom());
         }
 
         recherche_ville = (ListView) findViewById(R.id.list_villes);

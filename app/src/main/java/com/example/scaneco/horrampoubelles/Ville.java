@@ -4,12 +4,12 @@ package com.example.scaneco.horrampoubelles;
 
 public class Ville  {
 
-    public String nom;
-    public String codePostal;
-    public String joursSelectifs;
-    public String heuresSelectifs;
-    public String joursMenagers;
-    public String heuresMenagers;
+    private String nom;
+    private String codePostal;
+    private String joursSelectifs;
+    private String heuresSelectifs;
+    private String joursMenagers;
+    private String heuresMenagers;
 
 
     public String getNom() {

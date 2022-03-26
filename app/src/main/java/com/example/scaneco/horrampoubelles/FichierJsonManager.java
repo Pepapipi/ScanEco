@@ -34,22 +34,22 @@ class FichierJsonManager {
                             String varibale = reader.nextName();
                             switch (varibale) {
                                 case "nom":
-                                    v.nom = reader.nextString();
+                                    v.setNom(reader.nextString());
                                     break;
                                 case "codePostal":
-                                    v.codePostal = reader.nextString();
+                                    v.setCodePostal(reader.nextString());
                                     break;
                                 case "joursSelectifs":
-                                    v.joursSelectifs = reader.nextString();
+                                    v.setJoursSelectifs(reader.nextString());
                                     break;
                                 case "heuresSelectifs":
-                                    v.heuresSelectifs = reader.nextString();
+                                    v.setHeuresSelectifs(reader.nextString());
                                     break;
                                 case "joursMenagers":
-                                    v.joursMenagers = reader.nextString();
+                                    v.setJoursMenagers(reader.nextString());
                                     break;
                                 case "heuresMenagers":
-                                    v.heuresMenagers = reader.nextString();
+                                    v.setHeuresMenagers(reader.nextString());
                                     break;
                                 default:
                                     reader.skipValue();

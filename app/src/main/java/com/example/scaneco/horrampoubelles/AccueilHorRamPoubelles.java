@@ -82,7 +82,7 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
 
         ///////////////Ajout à mon tableau de tout les noms de mes villes et du code postal \\\\\\\\\\\\\\\
         for (int i = 0; i < listeDeListeDeVilles.size(); i++) {
-            arrayVille.add(listeDeListeDeVilles.get(i).get(0).nom +" / "+listeDeListeDeVilles.get(i).get(0).codePostal);
+            arrayVille.add(listeDeListeDeVilles.get(i).get(0).getNom() +" / "+ listeDeListeDeVilles.get(i).get(0).getCodePostal());
             tableauCompteurVille[i]=listeDeListeDeVilles.get(i).size();
         }
 
