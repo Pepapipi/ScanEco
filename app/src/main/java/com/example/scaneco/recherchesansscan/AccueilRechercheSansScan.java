@@ -164,8 +164,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     }
 
     public void rechercheDuProduit(String s, String page) {
-        jsonFromKeyword = new JsonFromKeyword();
-        jsonFromKeyword.activity = this;
+        jsonFromKeyword = new JsonFromKeyword(this);
         jsonFromKeyword.execute(s, page);
     }
 
