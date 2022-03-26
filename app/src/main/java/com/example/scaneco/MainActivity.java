@@ -1,5 +1,7 @@
 package com.example.scaneco;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,6 +59,17 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private ImageView mImageViewPoubelle2;
     private ImageView mImageViewPoubelle3;
 
+    private final ActivityResultLauncher<String> mPermissionResult = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (Boolean.TRUE.equals(result)){
+                    Log.e("TAG", "onActivityResult: PERMISSION GRANTED");
+                    startScanning();
+                } else {
+                    Log.e("TAG", "onActivityResult: PERMISSION DENIED");
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         //On vérifie s'il a autorisé ou non l'accès à la caméra
         //S'il a refusé on redemande si on peut l'utilser, mais on ne peut pas se servir du scan
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 123);
+            mPermissionResult.launch(Manifest.permission.CAMERA);
         }
         //S'il accepte, on lance le scan
         else{
@@ -173,28 +187,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             }
         }));
 
-    }
-
-    /**
-     * Fonction qui vérifie si on a la permission d'acceder à la caméra
-     * La fonction s'active au premier lancement de l'application
-     * Elle s'active ensuite à chaque fois qu'on arrive sur le scan et qu'on n'a toujours pas la permission
-     */
-    @Override
-    //TODO à changer car Deprecated
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 123){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                //Un petit message lui indique que c'est bon, et on lance le scan
-                Toast.makeText(this,"Permission accordée", Toast.LENGTH_SHORT).show();
-                startScanning();
-            }
-            else{
-                //Un message lui indique qu'il ne peut toujours pas se servir du scan
-                Toast.makeText(this,"Permission refusée", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     /**
