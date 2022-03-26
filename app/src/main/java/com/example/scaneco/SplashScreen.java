@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
@@ -14,8 +15,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        // TODO à changer car deprecated
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             startActivity(new Intent(SplashScreen.this,MainActivity.class));
             finish();
         },1500);
