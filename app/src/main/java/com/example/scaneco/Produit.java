@@ -3,6 +3,7 @@ package com.example.scaneco;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
+import android.widget.ImageView;
 
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,6 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Récupère à partir de données json où un code barres avec l'API d'OpenFoodFacts un objet Produit
@@ -48,8 +47,8 @@ public class Produit implements Serializable {
     private String marques;
     private String texteEmbalage;
     private String urlImage;
-    private Drawable image;
-    public String[] emball;
+    private transient Drawable image;
+    private String[] emball;
 
     /**
      * Construit un produit à partir de données json.
@@ -84,7 +83,7 @@ public class Produit implements Serializable {
                                     this.urlImage = reader.nextString();
                                     break;
                                 case "packaging":
-                                    emball = reader.nextString().split(",");
+                                    setEmball(reader.nextString().split(","));
                                     break;
 
                                 default:
@@ -96,13 +95,15 @@ public class Produit implements Serializable {
                         break;
                     case "status":
                         int status = reader.nextInt();
+                        reader.nextName();
                         if (status == 0) {
-                            name = reader.nextName();
                             throw new Resources.NotFoundException(reader.nextString());
                         } else {
-                            reader.nextName();
                             reader.nextString();
                         }
+                        break;
+                    default:
+                        reader.skipValue();
                         break;
                 }
 
@@ -155,8 +156,14 @@ public class Produit implements Serializable {
 
     public Drawable getImage(){return  image;}
 
-    public void loadImage() throws  Exception{
-        image = new ImageProduit().execute(urlImage).get();
+    public void loadImage() {
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.executeAsync(new ImageProduit(urlImage, MainActivity.USER_AGENT), data -> image = data);
+    }
+
+    public void loadImageInView(ImageView imageView){
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.executeAsync(new ImageProduit(urlImage, MainActivity.USER_AGENT), imageView::setImageDrawable);
     }
 
     public void setCode(String code) {
@@ -179,21 +186,17 @@ public class Produit implements Serializable {
         this.urlImage = urlImage;
     }
 
-    /**
-     * Créé et renvoit un Produit à partir d'un code barres. Seulement si les permissions internet
-     * ont été accordées.
-     *
-     * @param barCode Code barres du produit sous forme de chaîne de caractères.
-     * @return Le produit correspondant au code barres.
-     * @throws IOException Si les données json fournies ne sont pas valides.
-     * @throws Resources.NotFoundException Si le produit n'a pas été trouvé.
-     * @throws CancellationException If the computation was cancelled.
-     * @throws ExecutionException If the computation threw an exception.
-     * @throws InterruptedException If the current thread was interrupted while waiting.
-     */
-    public static Produit getProductFromBarCode(String barCode) throws IOException, Resources.NotFoundException, CancellationException, ExecutionException, InterruptedException {
-        return new Produit(new OpenFoodFactsAPI().execute("https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json").get());
+
+    public static void getProductFromBarCode(String barCode, Cmd cmd) {
+        TaskRunner taskRunner = new TaskRunner();
+        String url = "https://fr.openfoodfacts.org/api/v0/product/" + barCode + ".json";
+        taskRunner.executeAsync(new OpenFoodFactsAPI(url, MainActivity.USER_AGENT), data->cmd.execute(new Produit(data)));
     }
+
+    public interface Cmd{
+        void execute(Produit produit);
+    }
+
 
 
     /**
@@ -235,7 +238,7 @@ public class Produit implements Serializable {
                                     produit.setUrlImage(reader.nextString());
                                     break;
                                 case "packaging":
-                                    produit.emball = reader.nextString().split(",");
+                                    produit.setEmball(reader.nextString().split(","));
                                     break;
                                 default:
                                     reader.skipValue();
@@ -257,4 +260,11 @@ public class Produit implements Serializable {
         return produits;
     }
 
+    public String[] getEmball() {
+        return emball;
+    }
+
+    public void setEmball(String[] emball) {
+        this.emball = emball;
+    }
 }

@@ -1,48 +1,39 @@
-package com.example.scaneco.horRamPoubelles;
+package com.example.scaneco.horrampoubelles;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import com.example.scaneco.BaseDonneesHorRamVilles;
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
-import com.example.scaneco.SplashScreen;
+import com.example.scaneco.TaskRunner;
 import com.example.scaneco.animations.AccueilAnimations;
 
-import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
-import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AccueilHorRamPoubelles extends AppCompatActivity {
 
     ///////////////Variables\\\\\\\\\\\\\\\
-    ListView recherche_ville;
+    ListView rechercheVille;
     ArrayAdapter<String> adapter;
-    private ImageButton _boutonRetourScan;
-    String fichierJson;
-    static List<List<Ville>> listeDeListeDeVilles;
+    List<List<Ville>> listeDeListeDeVilles;
     Intent intent;
 
-    BaseDonneesHorRamVilles baseDonneesHorRamVilles;
-    ArrayList<String> arrayVille= new ArrayList<>();;
+    TaskRunner taskRunner = new TaskRunner();
+    ArrayList<String> arrayVille= new ArrayList<>();
 
 
 
@@ -55,89 +46,86 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
         //BARRE DE NAVIGATION
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.accueilAnimations:
-                    ouvrirAnimations();
-                    break;
-                case R.id.accueilPointDeCollecte:
-                    ouvrirRecherchePointDeCollecte();
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.accueilAnimations) {
+                ouvrirAnimations();
+            } else if (itemId == R.id.accueilPointDeCollecte) {
+                ouvrirRecherchePointDeCollecte();
             }
             return true;
         });
         //Bouton de retour
-        _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
-
-        baseDonneesHorRamVilles = new BaseDonneesHorRamVilles();
-        baseDonneesHorRamVilles.activity = this;
-
+        ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
+        boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         try {
-            baseDonneesHorRamVilles.execute("https://api.npoint.io/d3f9c37f03c56013060c");
+            taskRunner.executeAsync(new BaseDonneesHorRamVilles("https://api.npoint.io/d3f9c37f03c56013060c", MainActivity.USER_AGENT), this::json);
         }
-        catch (Exception e) {}
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     public void json(String fichierJson) {
+        int[] tableauCompteurVille;
         try {
             listeDeListeDeVilles = FichierJsonManager.valeurRenvoyeeJson(fichierJson);
 
         } catch (Exception e) {
-            listeDeListeDeVilles = null;
+            listeDeListeDeVilles = new ArrayList<>();
         }
-        int tableauCompteurVille[]=new int[listeDeListeDeVilles.size()];
-
-
+        tableauCompteurVille = new int[listeDeListeDeVilles.size()];
 
 
         ///////////////Ajout à mon tableau de tout les noms de mes villes et du code postal \\\\\\\\\\\\\\\
         for (int i = 0; i < listeDeListeDeVilles.size(); i++) {
-            arrayVille.add(listeDeListeDeVilles.get(i).get(0).nom +" / "+listeDeListeDeVilles.get(i).get(0).codePostal);
+            arrayVille.add(listeDeListeDeVilles.get(i).get(0).getNom() +" / "+ listeDeListeDeVilles.get(i).get(0).getCodePostal());
             tableauCompteurVille[i]=listeDeListeDeVilles.get(i).size();
         }
 
 
 
         ///////////////Affichage des villes dans la liste \\\\\\\\\\\\\\\
-        recherche_ville = (ListView) findViewById(R.id.list_villes);
+        rechercheVille = findViewById(R.id.list_villes);
 
-        adapter = new ArrayAdapter<String>(
+        adapter = new ArrayAdapter<>(
                 AccueilHorRamPoubelles.this,
                 android.R.layout.simple_list_item_1,
                 arrayVille
         );
-        recherche_ville.setAdapter(adapter);
+        rechercheVille.setAdapter(adapter);
 
-        recherche_ville.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent , View view, int position, long id){
+        rechercheVille.setOnItemClickListener((parent, view, position, id) -> {
 
 
-                int nombreDeVilleDansLaListe=tableauCompteurVille[position];
+            int nombreDeVilleDansLaListe=tableauCompteurVille[position];
 
-                //Si on a plus d'une ville dans la liste on va ouvrir un page intermédiaire avec un autre choix
-                if(nombreDeVilleDansLaListe>1)
-                {
-                    intent = new Intent(AccueilHorRamPoubelles.this, VillesDansLaListe.class);
-                    VillesDansLaListe.maListeDePlusiersVilles=listeDeListeDeVilles.get(position);
-                }
-                //Sinon on ouvre le détail des horaires directement
-                else
-                {
-                    intent = new Intent(AccueilHorRamPoubelles.this, HorRamPoubellesDetailsVille.class);
-                    HorRamPoubellesDetailsVille.villeRecuperee=listeDeListeDeVilles.get(position).get(0);
-                }
-
-                startActivity(intent);
+            //Si on a plus d'une ville dans la liste on va ouvrir un page intermédiaire avec un autre choix
+            if(nombreDeVilleDansLaListe>1)
+            {
+                intent = new Intent(AccueilHorRamPoubelles.this, VillesDansLaListe.class);
+                setMalisteDansVille(listeDeListeDeVilles, position);
             }
+            //Sinon on ouvre le détail des horaires directement
+            else
+            {
+                intent = new Intent(AccueilHorRamPoubelles.this, HorRamPoubellesDetailsVille.class);
+                setVilleDansHorRam(listeDeListeDeVilles, position);
+            }
+
+            startActivity(intent);
         });
 
     }
 
+    private static void setMalisteDansVille(@NonNull List<List<Ville>> listeDeListeDeVilles, int position){
+        VillesDansLaListe.maListeDePlusiersVilles=listeDeListeDeVilles.get(position);
+    }
 
-
+    private static void setVilleDansHorRam(@NonNull List<List<Ville>> listeDeListeDeVilles, int position){
+        HorRamPoubellesDetailsVille.villeRecuperee = listeDeListeDeVilles.get(position).get(0);
+    }
 
     ///////////////Loupe de recherche\\\\\\\\\\\\\\\
     @Override
@@ -166,17 +154,17 @@ public class AccueilHorRamPoubelles extends AppCompatActivity {
 
     protected void ouvrirLeScan()
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
     protected void ouvrirAnimations()
     {
-        Intent intent = new Intent(this, AccueilAnimations.class);
+        intent = new Intent(this, AccueilAnimations.class);
         startActivity(intent);
     }
     protected void ouvrirRecherchePointDeCollecte()
     {
-        Intent intent = new Intent(this, RecherchePointDeCollecte.class);
+        intent = new Intent(this, RecherchePointDeCollecte.class);
         startActivity(intent);
     }
 

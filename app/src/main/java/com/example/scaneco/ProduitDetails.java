@@ -4,73 +4,47 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class ProduitDetails extends AppCompatActivity{
-    private TextView m_nomEmballage1;
-    private TextView m_nomEmballage2;
-    private TextView m_nomEmballage3;
-
-    private TextView m_nomProduit;
-    private TextView m_marqueProduit;
-
-    private ImageView m_imagePoubelle1;
-    private ImageView m_imagePoubelle2;
-    private ImageView m_imagePoubelle3;
-    private ImageView m_imageProduit;
-
-    private Produit m_produitObtenu;
-
-    private CardView m_cardViewPoubelle1;
-    private CardView m_cardViewPoubelle2;
-    private CardView m_cardViewPoubelle3;
-
-    private  DoneesProduit m_produitDonnee;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produit_details);
 
-        m_nomEmballage1 = findViewById(R.id.textView);
-        m_nomEmballage2 = findViewById(R.id.textView2);
-        m_nomEmballage3 = findViewById(R.id.textView3);
-        m_nomProduit = findViewById(R.id.textView_nomProduit);
-        m_marqueProduit = findViewById(R.id.textView_marqueProduit);
-        m_cardViewPoubelle1 = findViewById(R.id.firstDescription);
-        m_cardViewPoubelle2 = findViewById(R.id.secondDescription);
-        m_cardViewPoubelle3 = findViewById(R.id.thirdDescription);
-        m_imagePoubelle1 = findViewById(R.id.imageView_poubelle1);
-        m_imagePoubelle2 = findViewById(R.id.imageView_poubelle2);
-        m_imagePoubelle3 = findViewById(R.id.imageView_poubelle3);
-        m_imageProduit = findViewById(R.id.imageView_EmballageScan);
+        TextView mNomEmballage1 = findViewById(R.id.textView);
+        TextView mNomEmballage2 = findViewById(R.id.textView2);
+        TextView mNomEmballage3 = findViewById(R.id.textView3);
+        TextView mNomProduit = findViewById(R.id.textView_nomProduit);
+        TextView mMarqueProduit = findViewById(R.id.textView_marqueProduit);
+        CardView mCardViewPoubelle1 = findViewById(R.id.firstDescription);
+        CardView mCardViewPoubelle2 = findViewById(R.id.secondDescription);
+        CardView mCardViewPoubelle3 = findViewById(R.id.thirdDescription);
+        ImageView mImagePoubelle1 = findViewById(R.id.imageView_poubelle1);
+        ImageView mImagePoubelle2 = findViewById(R.id.imageView_poubelle2);
+        ImageView mImagePoubelle3 = findViewById(R.id.imageView_poubelle3);
+        ImageView mImageProduit = findViewById(R.id.imageView_EmballageScan);
 
-        m_produitDonnee = new DoneesProduit();
-        m_produitDonnee.initialisationDesListes();
+        DoneesProduit mProduitDonnee = new DoneesProduit();
+        mProduitDonnee.initialisationDesListes();
 
 
         try {
-            String _codeBarre = getIntent().getStringExtra("codeBarre");
-            m_produitObtenu = Produit.getProductFromBarCode(_codeBarre);
-            m_nomProduit.setText(getIntent().getStringExtra("nomProduit"));
-            m_marqueProduit.setText(getIntent().getStringExtra("marqueProduit"));
+            Produit mProduitObtenu =(Produit)  getIntent().getSerializableExtra("leProduit");
+            mNomProduit.setText(mProduitObtenu.getNom());
+            mMarqueProduit.setText(mProduitObtenu.getMarque());
             String nomEmballageRecup1 = getIntent().getStringExtra("nomEmballage1");
             String nomEmballageRecup2 = getIntent().getStringExtra("nomEmballage2");
             String nomEmballageRecup3 = getIntent().getStringExtra("nomEmballage3");
-            m_produitObtenu.loadImage();
-            m_imageProduit.setImageDrawable(m_produitObtenu.getImage());
-            m_produitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup1,m_nomEmballage1,m_imagePoubelle1,m_cardViewPoubelle1);
-            m_produitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup2,m_nomEmballage2,m_imagePoubelle2,m_cardViewPoubelle2);
-            m_produitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup3,m_nomEmballage3,m_imagePoubelle3,m_cardViewPoubelle3);
-
+            mProduitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup1, mNomEmballage1, mImagePoubelle1, mCardViewPoubelle1);
+            mProduitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup2, mNomEmballage2, mImagePoubelle2, mCardViewPoubelle2);
+            mProduitDonnee.affichageCardViewAvecTexteEtImage(nomEmballageRecup3, mNomEmballage3, mImagePoubelle3, mCardViewPoubelle3);
+            mProduitObtenu.loadImageInView(mImageProduit);
+        } catch (Exception e){
+            Log.e(e.toString(), e.getMessage());
         }
-        catch (Exception ignored) {}
 
     }
 }

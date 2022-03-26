@@ -1,5 +1,7 @@
 package com.example.scaneco;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,13 +9,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,49 +25,51 @@ import android.widget.Toast;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.scaneco.animations.AccueilAnimations;
-import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
-import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
+import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.example.scaneco.recherchesansscan.AccueilRechercheSansScan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.zxing.Result;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
-    private DoneesProduit m_donneesDuProduit;
-    private TextView _nomProduit;
-    private View _ecranBlanc;
-    private TextView _marqueProduit;
+    public static final String USER_AGENT = "ScanEco - Android - Version 0.1";
 
-    private View _traitView;
+    private DoneesProduit mDonneesDuProduit;
+    private TextView mNomProduit;
+    private View mEcranBlanc;
+    private TextView mMarqueProduit;
 
-    private CodeScanner _mCodeScanner;
-    private CodeScannerView _mCodeScannerView;
-    private ImageButton _boutonRechercheSansScan;
-    private ImageButton _boutonReglages;
+    private View mTraitView;
 
-    private ImageView _imageEmballage;
+    private CodeScanner mCodeScanner;
 
-    private GestureDetector _gestureUtilisateur;
-    private float y1,y2;
-    private static int MIN_DISTANCE = 150;
+    private ImageView mImageEmballage;
 
-    private Produit _produitObtenu;
-    private String _codeBarre;
-    private String _nomProduitRecupere;
-    private String _marqueProduitRecupere;
+    private GestureDetector mGestureUtilisateur;
+    private float y1;
 
-    private ImageView _imageViewPoubelle1;
-    private ImageView _imageViewPoubelle2;
-    private ImageView _imageViewPoubelle3;
+    private Produit mProduitObtenu;
+    private String mCodeBarre;
+    private String mNomProduitRecupere;
+    private String mMarqueProduitRecupere;
 
+    private ImageView mImageViewPoubelle1;
+    private ImageView mImageViewPoubelle2;
+    private ImageView mImageViewPoubelle3;
+
+    private final ActivityResultLauncher<String> mPermissionResult = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (Boolean.TRUE.equals(result)){
+                    Log.e("TAG", "onActivityResult: PERMISSION GRANTED");
+                    startScanning();
+                } else {
+                    Log.e("TAG", "onActivityResult: PERMISSION DENIED");
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,70 +77,59 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         setContentView(R.layout.activity_main);
 
         //Création et initialisation du scanner
-        _mCodeScannerView = findViewById(R.id.scanner_view);
-        _mCodeScanner = new CodeScanner(this, _mCodeScannerView);
+        CodeScannerView mCodeScannerView = findViewById(R.id.scanner_view);
+        mCodeScanner = new CodeScanner(this, mCodeScannerView);
 
         //Initialisation des variables qui nous permettront d'affocher les
         //caracteristiques du produit
-        _ecranBlanc = findViewById(R.id.view_ecranBlanc);
-        _nomProduit = findViewById(R.id.textView_nomProduit);
-        _imageEmballage = findViewById(R.id.imageView_EmballageScan);
-        _marqueProduit = findViewById(R.id.textView_marqueProduit);
+        mEcranBlanc = findViewById(R.id.view_ecranBlanc);
+        mNomProduit = findViewById(R.id.textView_nomProduit);
+        mImageEmballage = findViewById(R.id.imageView_EmballageScan);
+        mMarqueProduit = findViewById(R.id.textView_marqueProduit);
 
-        _imageViewPoubelle1 = findViewById(R.id.imageView_poubelle1);
-        _imageViewPoubelle2 = findViewById(R.id.imageView_poubelle2);
-        _imageViewPoubelle3 = findViewById(R.id.imageView_poubelle3);
+        mImageViewPoubelle1 = findViewById(R.id.imageView_poubelle1);
+        mImageViewPoubelle2 = findViewById(R.id.imageView_poubelle2);
+        mImageViewPoubelle3 = findViewById(R.id.imageView_poubelle3);
 
-        _traitView = findViewById(R.id.traitView);
+        mTraitView = findViewById(R.id.traitView);
         //Initialisation des listes
-        m_donneesDuProduit = new DoneesProduit();
-        m_donneesDuProduit.initialisationDesListes();
+        mDonneesDuProduit = new DoneesProduit();
+        mDonneesDuProduit.initialisationDesListes();
 
         //Initialisation du swipe de l'utilisateur
-        this._gestureUtilisateur = new GestureDetector(MainActivity.this,this);
+        this.mGestureUtilisateur = new GestureDetector(MainActivity.this,this);
 
         //Initialisation de la barre de menu
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item ->{
-            switch (item.getItemId()){
-                case R.id.accueilHorRamPoubelles:
-                    ouvrirHorRamPoubelles();
-                    break;
-
-                case R.id.accueilAnimations:
-                    ouvrirAnimations();
-                    break;
-                case R.id.accueilPointDeCollecte:
-                    ouvrirRecherchePointDeCollecte();
+            int itemId = item.getItemId();
+            if (itemId == R.id.accueilHorRamPoubelles) {
+                ouvrirHorRamPoubelles();
+            } else if (itemId == R.id.accueilAnimations) {
+                ouvrirAnimations();
+            } else if (itemId == R.id.accueilPointDeCollecte) {
+                ouvrirRecherchePointDeCollecte();
             }
             return true;
         });
 
 
         //Initialisation du bouton qui ouvre la page recherche sans scan
-        _boutonRechercheSansScan = findViewById(R.id.bouton1);
+        ImageButton mBoutonRechercheSansScan = findViewById(R.id.bouton1);
         //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
-        _boutonRechercheSansScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ouvrirRechercheSansScan();
-            }
-        });
+        mBoutonRechercheSansScan.setOnClickListener(v -> ouvrirRechercheSansScan());
 
         //Initialisation du bouton qui ouvre la page des réglages
-        _boutonReglages = findViewById(R.id.boutonReglages);
+        ImageButton mBoutonReglages = findViewById(R.id.boutonReglages);
         //Quand le bouton est cliqué alors il sera redirigé vers la page des réglages
-        _boutonReglages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { ouvrirReglages(); }
-        });
+        mBoutonReglages.setOnClickListener(v -> ouvrirReglages());
 
 
         //Pour se servir du scan, l'utilisateur doit autoriser l'accès à la caméra
         //On vérifie s'il a autorisé ou non l'accès à la caméra
         //S'il a refusé on redemande si on peut l'utilser, mais on ne peut pas se servir du scan
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 123);
+            mPermissionResult.launch(Manifest.permission.CAMERA);
         }
         //S'il accepte, on lance le scan
         else{
@@ -156,75 +147,46 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private void startScanning() {
         //Au départ quand aucun article n'est scanné le texte n'apparait pas
         //Donc on lui demande d'être invisible
-        _ecranBlanc.setVisibility(View.INVISIBLE);
-        _nomProduit.setVisibility(View.INVISIBLE);
-        _marqueProduit.setVisibility(View.INVISIBLE);
-        _traitView.setVisibility(View.INVISIBLE);
-        _mCodeScanner.startPreview();
+        mEcranBlanc.setVisibility(View.INVISIBLE);
+        mNomProduit.setVisibility(View.INVISIBLE);
+        mMarqueProduit.setVisibility(View.INVISIBLE);
+        mTraitView.setVisibility(View.INVISIBLE);
+        mCodeScanner.startPreview();
 
         //Le scan décode un code-barres
-        _mCodeScanner.setDecodeCallback(new DecodeCallback() {
-            @Override
-            public void onDecoded(@NonNull Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+        mCodeScanner.setDecodeCallback(result -> runOnUiThread(() -> {
 
-                        try {
-                            //Code-barres scanné
-                            _codeBarre = result.getText();
-                            //Le produit rendu par OFF
-                            _produitObtenu= Produit.getProductFromBarCode(_codeBarre);
+            try {
+                //Code-barres scanné
+                mCodeBarre = result.getText();
+                //Le produit rendu par OFF
+                Produit.getProductFromBarCode(mCodeBarre , produit -> {
+                    mProduitObtenu = produit;
 
-                            //Nom produit
-                            _nomProduitRecupere = _produitObtenu.getNom();
-                            _marqueProduitRecupere = _produitObtenu.getMarque();
+                    //Nom produit
+                    mNomProduitRecupere = mProduitObtenu.getNom();
+                    mMarqueProduitRecupere = mProduitObtenu.getMarque();
 
-                            //Image emballage
-                            _produitObtenu.loadImage();
-                            _imageEmballage.setImageDrawable(_produitObtenu.getImage());
+                    //Image emballage
+                    mProduitObtenu.loadImageInView(mImageEmballage);
 
-                            m_donneesDuProduit.afficherPoubelleSansTexte(_produitObtenu,_imageViewPoubelle1,_imageViewPoubelle2,_imageViewPoubelle3);
-                        }
-                        catch (Exception e){
+                    mDonneesDuProduit.afficherPoubelleSansTexte(mProduitObtenu, mImageViewPoubelle1, mImageViewPoubelle2, mImageViewPoubelle3);
 
-                            _nomProduitRecupere =e.toString();
-                            //_nomProduitRecupere = "Erreur, le produit n'est pas répertoriée dans la base de données OpenFoodFacts";
-                        }
-                        _nomProduit.setText(_nomProduitRecupere);
-                        _marqueProduit.setText(_marqueProduitRecupere);
-                        //On les affiche en rendant le texte visible
-                        _ecranBlanc.setVisibility(View.VISIBLE);
-                        _nomProduit.setVisibility(View.VISIBLE);
-                        _marqueProduit.setVisibility(View.VISIBLE);
-                        _traitView.setVisibility(View.VISIBLE);
-                        _mCodeScanner.startPreview();
-                    }
+                    mNomProduit.setText(mNomProduitRecupere);
+                    mMarqueProduit.setText(mMarqueProduitRecupere);
+                    //On les affiche en rendant le texte visible
+                    mEcranBlanc.setVisibility(View.VISIBLE);
+                    mNomProduit.setVisibility(View.VISIBLE);
+                    mMarqueProduit.setVisibility(View.VISIBLE);
+                    mTraitView.setVisibility(View.VISIBLE);
+                    mCodeScanner.startPreview();
                 });
             }
-        });
-
-    }
-
-    /**
-     * Fonction qui vérifie si on a la permission d'acceder à la caméra
-     * La fonction s'active au premier lancement de l'application
-     * Elle s'active ensuite à chaque fois qu'on arrive sur le scan et qu'on n'a toujours pas la permission
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 123){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                //Un petit message lui indique que c'est bon, et on lance le scan
-                Toast.makeText(this,"Permission accordée", Toast.LENGTH_SHORT).show();
-                startScanning();
+            catch (Exception e){
+                mNomProduitRecupere =e.toString();
             }
-            else{
-                //Un message lui indique qu'il ne peut toujours pas se servir du scan
-                Toast.makeText(this,"Permission refusée", Toast.LENGTH_SHORT).show();
-            }
-        }
+        }));
+
     }
 
     /**
@@ -282,14 +244,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     public void ouvrirProduitDetail()
     {
         Intent intent = new Intent(this, ProduitDetails.class);
-        intent.putExtra("nomProduit", _nomProduitRecupere);
-        intent.putExtra("marqueProduit", _marqueProduitRecupere);
-        intent.putExtra("nomEmballage1", m_donneesDuProduit.text1);
-        intent.putExtra("nomEmballage2", m_donneesDuProduit.text2);
-        intent.putExtra("nomEmballage3", m_donneesDuProduit.text3);
-        intent.putExtra("marqueProduit", _marqueProduitRecupere);
-        //intent.putExtra("imageEmballage", (Parcelable) _imageEmballage.getDrawable());
-        intent.putExtra("codeBarre", _codeBarre);
+        intent.putExtra("leProduit", mProduitObtenu);
+        intent.putExtra("nomEmballage1", mDonneesDuProduit.getText1());
+        intent.putExtra("nomEmballage2", mDonneesDuProduit.getText2());
+        intent.putExtra("nomEmballage3", mDonneesDuProduit.getText3());
         startActivity(intent);
     }
 
@@ -302,19 +260,17 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
      */
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        _gestureUtilisateur.onTouchEvent(event);
-        switch (event.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                y1 = event.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                y2 = event.getY();
-                float valueY = y2-y1;
-                if(Math.abs(valueY) > MIN_DISTANCE){
-                    if(y2<y1) {
-                        ouvrirProduitDetail();
-                    }
-                }
+        mGestureUtilisateur.onTouchEvent(event);
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            y1 = event.getY();
+        } else if (action == MotionEvent.ACTION_UP) {
+            float y2 = event.getY();
+            float valueY = y2 - y1;
+            final int MIN_DISTANCE = 150;
+            if (Math.abs(valueY) > MIN_DISTANCE && y2 < y1) {
+                ouvrirProduitDetail();
+            }
         }
         return super.onTouchEvent(event);
     }
@@ -326,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public void onShowPress(MotionEvent e) {
-
+        //Nothing because not needed
     }
 
     @Override
@@ -341,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public void onLongPress(MotionEvent e) {
-
+        //Nothing because not needed
     }
 
     @Override

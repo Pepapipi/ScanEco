@@ -1,25 +1,18 @@
-package com.example.scaneco.horRamPoubelles;
+package com.example.scaneco.horrampoubelles;
 
-import android.content.Context;
-import android.os.Parcel;
 import android.util.JsonReader;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
+class FichierJsonManager {
 
-public class FichierJsonManager {
+    private FichierJsonManager(){}
 
-    public static List<List<Ville>> valeurRenvoyeeJson(String fichierJson) throws Exception{
+    public static List<List<Ville>> valeurRenvoyeeJson(String fichierJson) throws IOException {
 
         List<List<Ville>> listeListeVilles = new ArrayList<>();
 
@@ -41,22 +34,25 @@ public class FichierJsonManager {
                             String varibale = reader.nextName();
                             switch (varibale) {
                                 case "nom":
-                                    v.nom = reader.nextString();
+                                    v.setNom(reader.nextString());
                                     break;
                                 case "codePostal":
-                                    v.codePostal = reader.nextString();
+                                    v.setCodePostal(reader.nextString());
                                     break;
                                 case "joursSelectifs":
-                                    v.joursSelectifs = reader.nextString();
+                                    v.setJoursSelectifs(reader.nextString());
                                     break;
                                 case "heuresSelectifs":
-                                    v.heuresSelectifs = reader.nextString();
+                                    v.setHeuresSelectifs(reader.nextString());
                                     break;
                                 case "joursMenagers":
-                                    v.joursMenagers = reader.nextString();
+                                    v.setJoursMenagers(reader.nextString());
                                     break;
                                 case "heuresMenagers":
-                                    v.heuresMenagers = reader.nextString();
+                                    v.setHeuresMenagers(reader.nextString());
+                                    break;
+                                default:
+                                    reader.skipValue();
                                     break;
                             }
 
@@ -71,10 +67,6 @@ public class FichierJsonManager {
                 reader.endArray();
             }
             reader.endObject();
-        }
-        catch (Exception e)
-        {
-            throw e;
         }
         return listeListeVilles;
     }

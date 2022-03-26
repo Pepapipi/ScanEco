@@ -1,46 +1,26 @@
 package com.example.scaneco.recherchesansscan;
 
-import android.os.AsyncTask;
-
-import com.example.scaneco.MainActivity;
-
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
 
-public class JsonFromKeyword extends AsyncTask<String, Void, String> {
-    public Exception e;
-    public String json;
-    public AccueilRechercheSansScan activity;
+class JsonFromKeyword implements Callable<String> {
+    private final String input;
+    private final String page;
+    private final String userAgent;
 
-    @Override
-    protected String doInBackground(String... strings) {
-        String ret = null;
-        try {
-            String keywords = strings[0];
-            String page = strings[1];
-
-            keywords = keywords.replaceAll(" ", "+");
-
-            URL url = new URL("https://fr.openfoodfacts.org/cgi/search.pl?action=process&search_terms=" + keywords + "&sort_by=unique_scans_n&page_size=24&page="+page+"&json=1");
-
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent", "ScanEco - Android - Version 0.1");
-            InputStream inputStream = connection.getInputStream();
-            Scanner scanner = new Scanner(inputStream);
-            ret = scanner.useDelimiter("\\A").next();
-        } catch (Exception e) {
-            this.e = e;
-        }
-        return ret;
+    public JsonFromKeyword(String input, String page, String userAgent) {
+        this.input = input.replace(" ", "+");
+        this.page = page;
+        this.userAgent = userAgent;
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        json = s;
-        if (activity != null) {
-            activity.jsonGot(s);
-        }
+    public String call() throws IOException {
+        URLConnection urlConnection = new URL("https://fr.openfoodfacts.org/cgi/search.pl?action=process&search_terms=" + input + "&sort_by=unique_scans_n&page_size=24&page="+page+"&json=1").openConnection();
+        urlConnection.setRequestProperty("User-Agent", userAgent);
+        return new Scanner(urlConnection.getInputStream()).useDelimiter("\\A").next();
     }
 }

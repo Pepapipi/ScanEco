@@ -3,30 +3,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
-import android.widget.VideoView;
 
 import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
-import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
-import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
+import com.example.scaneco.TaskRunner;
+import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.io.InputStream;
-import java.net.URL;
 
 
 public class AccueilAnimations extends AppCompatActivity {
-    private ImageButton _boutonRetourScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +26,33 @@ public class AccueilAnimations extends AppCompatActivity {
         //BARRE DE NAVIGATION
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.accueilHorRamPoubelles:
-                    ouvrirHorRamPoubelles();
-                    break;
-                case R.id.accueilPointDeCollecte:
-                    ouvrirRecherchePointDeCollecte();
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.accueilHorRamPoubelles) {
+                ouvrirHorRamPoubelles();
+            } else if (itemId == R.id.accueilPointDeCollecte) {
+                ouvrirRecherchePointDeCollecte();
             }
             return true;
         });
         //Bouton de retour
-        _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
+        ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
+        boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
-
+        TaskRunner taskRunner = new TaskRunner();
 
         //VIDEOS
-
+        String messageRedirection = "redirection";
+        String baseUrlYoutubeVideo = "https://www.youtube.com/watch?v=";
+        String packageYoutube = "com.google.android.youtube";
+        String baseUrlYoutubeThumbnail = "https://img.youtube.com/vi/";
+        String imgExtention = "/0.jpg";
         String videoKey = "REh-GAV1cfA";
         ImageView imageView = findViewById(R.id.imageView1);
         imageView.setOnClickListener(v -> {
-            Log.println(Log.INFO, "info", "redirection");
-            Intent youtube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoKey));
+            Log.println(Log.INFO, "info", messageRedirection);
+            Intent youtube = new Intent(Intent.ACTION_VIEW, Uri.parse(baseUrlYoutubeVideo + videoKey));
             youtube.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            youtube.setPackage("com.google.android.youtube");
+            youtube.setPackage(packageYoutube);
             try {
                 getApplication().startActivity(youtube);
             }
@@ -68,7 +61,7 @@ public class AccueilAnimations extends AppCompatActivity {
             }
         });
         try {
-            new SetImageFromUrl(imageView, "https://img.youtube.com/vi/" + videoKey + "/0.jpg");
+            taskRunner.executeAsync(new SetImageFromUrl(baseUrlYoutubeThumbnail + videoKey + imgExtention), imageView::setImageBitmap);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -76,10 +69,10 @@ public class AccueilAnimations extends AppCompatActivity {
         String videoKey2 = "MECmgIz36nU";
         ImageView imageView2 = findViewById(R.id.imageView2);
         imageView2.setOnClickListener(v -> {
-            Log.println(Log.INFO, "info", "redirection");
-            Intent youtube2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoKey2));
+            Log.println(Log.INFO, "info", messageRedirection);
+            Intent youtube2 = new Intent(Intent.ACTION_VIEW, Uri.parse(baseUrlYoutubeVideo + videoKey2));
             youtube2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            youtube2.setPackage("com.google.android.youtube");
+            youtube2.setPackage(packageYoutube);
             try {
                 getApplication().startActivity(youtube2);
             }
@@ -88,7 +81,7 @@ public class AccueilAnimations extends AppCompatActivity {
             }
         });
         try {
-            new SetImageFromUrl(imageView2, "https://img.youtube.com/vi/" + videoKey2 + "/0.jpg");
+            taskRunner.executeAsync(new SetImageFromUrl(baseUrlYoutubeThumbnail + videoKey2 + imgExtention), imageView2::setImageBitmap);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -96,10 +89,10 @@ public class AccueilAnimations extends AppCompatActivity {
         String videoKey3 = "w6WTuAl18CA";
         ImageView imageView3 = findViewById(R.id.imageView3);
         imageView3.setOnClickListener(v -> {
-            Log.println(Log.INFO, "info", "redirection");
-            Intent youtube3 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoKey3));
+            Log.println(Log.INFO, "info", messageRedirection);
+            Intent youtube3 = new Intent(Intent.ACTION_VIEW, Uri.parse(baseUrlYoutubeVideo + videoKey3));
             youtube3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            youtube3.setPackage("com.google.android.youtube");
+            youtube3.setPackage(packageYoutube);
             try {
                 getApplication().startActivity(youtube3);
             }
@@ -108,7 +101,7 @@ public class AccueilAnimations extends AppCompatActivity {
             }
         });
         try {
-            new SetImageFromUrl(imageView3, "https://img.youtube.com/vi/" + videoKey3 + "/0.jpg");
+            taskRunner.executeAsync(new SetImageFromUrl(baseUrlYoutubeThumbnail + videoKey3 + imgExtention), imageView3::setImageBitmap);
         }catch (Exception e){
             e.printStackTrace();
         }
