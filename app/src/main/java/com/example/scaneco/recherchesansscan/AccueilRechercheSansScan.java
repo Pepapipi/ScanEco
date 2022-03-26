@@ -8,22 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.*;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
@@ -37,7 +31,7 @@ import com.example.scaneco.Produit;
 import com.example.scaneco.ProduitDetails;
 import com.example.scaneco.R;
 import com.example.scaneco.animations.AccueilAnimations;
-import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
 import com.example.scaneco.pointDeCollecte.RecherchePointDeCollecte;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

@@ -2,7 +2,7 @@ package com.example.scaneco;
 
 import android.os.AsyncTask;
 
-import com.example.scaneco.horRamPoubelles.AccueilHorRamPoubelles;
+import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
 
 import java.io.InputStream;
 import java.net.URL;

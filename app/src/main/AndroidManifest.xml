@@ -20,7 +20,7 @@
             android:name=".pointDeCollecte.RecherchePointDeCollecte"
             android:exported="false" />
         <activity
-            android:name=".horRamPoubelles.VillesDansLaListe"
+            android:name=".horrampoubelles.VillesDansLaListe"
             android:exported="false" />
         <activity
             android:name=".ProduitDetails"
@@ -32,10 +32,10 @@
             android:name=".recherchesansscan.RechercheSansScanCategDetails"
             android:exported="false" />
         <activity
-            android:name=".horRamPoubelles.AccueilHorRamPoubelles"
+            android:name=".horrampoubelles.AccueilHorRamPoubelles"
             android:exported="false" />
         <activity
-            android:name=".horRamPoubelles.HorRamPoubellesDetailsVille"
+            android:name=".horrampoubelles.HorRamPoubellesDetailsVille"
             android:exported="false" />
         <activity
             android:name=".recherchesansscan.AccueilRechercheSansScan"

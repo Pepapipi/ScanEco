@@ -1,20 +1,10 @@
-package com.example.scaneco.horRamPoubelles;
+package com.example.scaneco.horrampoubelles;
 
-import android.content.Context;
-import android.os.Parcel;
 import android.util.JsonReader;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 
 
 public class FichierJsonManager {
