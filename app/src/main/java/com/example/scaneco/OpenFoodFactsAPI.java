@@ -7,8 +7,6 @@ import java.net.URLConnection;
 import java.util.Scanner;
 
 public class OpenFoodFactsAPI extends AsyncTask<String, Void, String> {
-
-    public String json;
     @Override
     protected String doInBackground(String... urls) {
         String ret;
