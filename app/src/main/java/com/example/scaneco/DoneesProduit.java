@@ -46,18 +46,18 @@ public class DoneesProduit {
         //Affiche les poubelles correspondantes, tant que il n'y a pas de text
         //Ce qui veut dire qu'aucun emballage a était trouvé..
         int i=0;
-        while(i<pdt.emball.length && getText1().isEmpty())
+        while(i< pdt.getEmball().length && getText1().isEmpty())
         {
             setText1(affichageCorrectImage(pdt,i, getText1(),img1));
 
             i++;
         }
-        while(i<pdt.emball.length && getText2().isEmpty())
+        while(i< pdt.getEmball().length && getText2().isEmpty())
         {
             setText2(affichageCorrectImage(pdt, i, getText2(),img2));
             i++;
         }
-        while(i<pdt.emball.length && getText3().isEmpty())
+        while(i< pdt.getEmball().length && getText3().isEmpty())
         {
             setText3(affichageCorrectImage(pdt,i, getText3(),img3));
             i++;
@@ -77,7 +77,7 @@ public class DoneesProduit {
      */
     private String affichageCorrectImage(Produit pdt, int i,String text, ImageView image)
     {
-        String emballage = upperCaseFirst(pdt.emball[i].replace(" fr:","").replace(" 100% recyclable",""));
+        String emballage = upperCaseFirst(pdt.getEmball()[i].replace(" fr:","").replace(" 100% recyclable",""));
         if (listeRecyclable.contains(emballage))
         {
             text=emballage;
@@ -106,17 +106,17 @@ public class DoneesProduit {
             //Affiche les poubelles correspondantes, tant que il n'y a pas de text
             //Ce qui veut dire qu'aucun emballage a était trouvé..
             int i=0;
-            while(i<pdt.emball.length && getText1().isEmpty())
+            while(i< pdt.getEmball().length && getText1().isEmpty())
             {
                 setText1(retourneTexte(pdt,i, getText1()));
                 i++;
             }
-            while(i<pdt.emball.length && getText2().isEmpty())
+            while(i< pdt.getEmball().length && getText2().isEmpty())
             {
                 setText2(retourneTexte(pdt, i, getText2()));
                 i++;
             }
-            while(i<pdt.emball.length && getText3().isEmpty())
+            while(i< pdt.getEmball().length && getText3().isEmpty())
             {
                 setText3(retourneTexte(pdt,i, getText3()));
                 i++;
@@ -131,7 +131,7 @@ public class DoneesProduit {
 
     private String retourneTexte(Produit pdt, int i, String text)
     {
-        String emballage = upperCaseFirst(pdt.emball[i].replace(" fr:","").replace(" 100% recyclable",""));
+        String emballage = upperCaseFirst(pdt.getEmball()[i].replace(" fr:","").replace(" 100% recyclable",""));
         if (listeRecyclable.contains(emballage) || listeNonRecyclable.contains(emballage) || listeVerre.contains(emballage))
             text=emballage;
         return text;

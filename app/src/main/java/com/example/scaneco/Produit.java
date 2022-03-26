@@ -48,8 +48,8 @@ public class Produit implements Serializable {
     private String marques;
     private String texteEmbalage;
     private String urlImage;
-    private Drawable image;
-    public String[] emball;
+    private transient Drawable image;
+    private String[] emball;
 
     /**
      * Construit un produit à partir de données json.
@@ -84,7 +84,7 @@ public class Produit implements Serializable {
                                     this.urlImage = reader.nextString();
                                     break;
                                 case "packaging":
-                                    emball = reader.nextString().split(",");
+                                    setEmball(reader.nextString().split(","));
                                     break;
 
                                 default:
@@ -96,13 +96,15 @@ public class Produit implements Serializable {
                         break;
                     case "status":
                         int status = reader.nextInt();
+                        reader.nextName();
                         if (status == 0) {
-                            name = reader.nextName();
                             throw new Resources.NotFoundException(reader.nextString());
                         } else {
-                            reader.nextName();
                             reader.nextString();
                         }
+                        break;
+                    default:
+                        reader.skipValue();
                         break;
                 }
 
@@ -155,7 +157,7 @@ public class Produit implements Serializable {
 
     public Drawable getImage(){return  image;}
 
-    public void loadImage() throws  Exception{
+    public void loadImage() throws ExecutionException, InterruptedException{
         image = new ImageProduit().execute(urlImage).get();
     }
 
@@ -235,7 +237,7 @@ public class Produit implements Serializable {
                                     produit.setUrlImage(reader.nextString());
                                     break;
                                 case "packaging":
-                                    produit.emball = reader.nextString().split(",");
+                                    produit.setEmball(reader.nextString().split(","));
                                     break;
                                 default:
                                     reader.skipValue();
@@ -257,4 +259,11 @@ public class Produit implements Serializable {
         return produits;
     }
 
+    public String[] getEmball() {
+        return emball;
+    }
+
+    public void setEmball(String[] emball) {
+        this.emball = emball;
+    }
 }
