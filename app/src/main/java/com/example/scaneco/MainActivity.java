@@ -276,9 +276,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         Intent intent = new Intent(this, ProduitDetails.class);
         intent.putExtra("nomProduit", _nomProduitRecupere);
         intent.putExtra("marqueProduit", _marqueProduitRecupere);
-        intent.putExtra("nomEmballage1", m_donneesDuProduit.text1);
-        intent.putExtra("nomEmballage2", m_donneesDuProduit.text2);
-        intent.putExtra("nomEmballage3", m_donneesDuProduit.text3);
+        intent.putExtra("nomEmballage1", m_donneesDuProduit.getText1());
+        intent.putExtra("nomEmballage2", m_donneesDuProduit.getText2());
+        intent.putExtra("nomEmballage3", m_donneesDuProduit.getText3());
         intent.putExtra("marqueProduit", _marqueProduitRecupere);
         //intent.putExtra("imageEmballage", (Parcelable) _imageEmballage.getDrawable());
         intent.putExtra("codeBarre", _codeBarre);

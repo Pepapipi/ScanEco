@@ -211,9 +211,9 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                         doneesProduit.recupererLeTextePourEnvoyerAuxDetails(produitAEnvoyer);
                         intent.putExtra("nomProduit", produitAEnvoyer.getNom());
                         intent.putExtra("marqueProduit", produitAEnvoyer.getMarque());
-                        intent.putExtra("nomEmballage1", doneesProduit.text1);
-                        intent.putExtra("nomEmballage2", doneesProduit.text2);
-                        intent.putExtra("nomEmballage3", doneesProduit.text3);
+                        intent.putExtra("nomEmballage1", doneesProduit.getText1());
+                        intent.putExtra("nomEmballage2", doneesProduit.getText2());
+                        intent.putExtra("nomEmballage3", doneesProduit.getText3());
                         intent.putExtra("codeBarre", produitAEnvoyer.getCode());
                         startActivity(intent);
                         Toast.makeText(AccueilRechercheSansScan.this, "Yes codeBrre Ok", Toast.LENGTH_SHORT).show();

@@ -1,17 +1,13 @@
 package com.example.scaneco.recherchesansscan;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scaneco.DoneesProduit;
@@ -19,7 +15,6 @@ import com.example.scaneco.Produit;
 import com.example.scaneco.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -106,9 +101,9 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
                 String marquePdt = lpdt.get(position).getMarque();
                 lpdt.get(position).loadImage();
                 Drawable imagePdt = lpdt.get(position).getImage();
-                listeEmballageA.add(m_donnees.text1);
-                listeEmballageA.add(m_donnees.text2);
-                listeEmballageA.add(m_donnees.text3);
+                listeEmballageA.add(m_donnees.getText1());
+                listeEmballageA.add(m_donnees.getText2());
+                listeEmballageA.add(m_donnees.getText3());
                 listeEmballageChaqueProduit.add(listeEmballageA);
 
                 holder.setData(nomPdt, marquePdt, imagePdt, holder._imageViewPoubelle1, holder._imageViewPoubelle2, holder._imageViewPoubelle3);
