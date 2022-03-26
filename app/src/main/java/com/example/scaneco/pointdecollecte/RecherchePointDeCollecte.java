@@ -2,8 +2,10 @@ package com.example.scaneco.pointdecollecte;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
@@ -44,14 +46,11 @@ import java.util.List;
 
 public class RecherchePointDeCollecte extends AppCompatActivity implements LocationListener {
 
-    private MapListener mapListener;
-    public static MapView osm;
+    private MapView osm;
     private MapController mc;
-    private LocationManager locationManager;
-    static List<PointDeCollecte> listePointsDeCollecte;
+    List<PointDeCollecte> listePointsDeCollecte;
     private static final int PERMISSAO_REQUERIDA = 1;
     Marker markerPosition;
-    private ImageButton _boutonRetourScan;
     ArrayList<Marker> listeMarkerPoubelleNoire = new ArrayList<>();
     ArrayList<Marker> listeMarkerPoubelleJaune = new ArrayList<>();
     ArrayList<Marker> listeMarkerPoubelleVerte = new ArrayList<>();
@@ -66,11 +65,11 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         //onde mostra a imagem do mapa
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-        osm = (MapView) findViewById(R.id.mapView);
-        osm.setTileSource(TileSourceFactory.MAPNIK);
-        osm.setMultiTouchControls(true);
+        setOsm(findViewById(R.id.mapView));
+        getOsm().setTileSource(TileSourceFactory.MAPNIK);
+        getOsm().setMultiTouchControls(true);
 
-        mapListener = new MapListener() {
+        MapListener mapListener = new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
                 Log.i("Script", "onScroll()");
@@ -83,11 +82,20 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
                 return false;
             }
         };
-        mc = (MapController) osm.getController();
-        markerPosition = new Marker(osm);
+        mc = (MapController) getOsm().getController();
+        markerPosition = new Marker(getOsm());
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                     this,
                     new String[]{
@@ -98,60 +106,57 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
             );
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-        osm.addMapListener(mapListener);
+        getOsm().addMapListener(mapListener);
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         ConnexionJsonPointDeCollecte baseDeDonneesPdtCollectes = new ConnexionJsonPointDeCollecte(this);
         try {
             baseDeDonneesPdtCollectes.execute("https://api.npoint.io/6696673b4c1fdcfcff8e");
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         //Initialisation de la barre de menu
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item ->{
-            switch (item.getItemId()){
-                case R.id.accueilHorRamPoubelles:
-                    ouvrirHorRamPoubelles();
-                    break;
-
-                case R.id.accueilAnimations:
-                    ouvrirAnimations();
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.accueilHorRamPoubelles) {
+                ouvrirHorRamPoubelles();
+            } else if (itemId == R.id.accueilAnimations) {
+                ouvrirAnimations();
             }
             return true;
         });
         //Bouton de retour
-        _boutonRetourScan = findViewById(R.id.boutonRetourScan);
-        _boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
+        ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
+        boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
     }
 
     @Override
+    //TODO à changer car deprecated
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSAO_REQUERIDA: {
-                // Se a solicitação de permissão foi cancelada o array vem vazio.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permissão cedida, recria a activity para carregar o mapa, só será executado uma vez
-                    this.recreate();
-
-                }
-
-            }
+        if (
+            requestCode == PERMISSAO_REQUERIDA &&
+            grantResults.length > 0 &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {// Se a solicitação de permissão foi cancelada o array vem vazio.
+            // Permissão cedida, recria a activity para carregar o mapa, só será executado uma vez
+            this.recreate();
         }
     }
 
+    @Override
     public void onResume() {
-        osm.onResume();
+        getOsm().onResume();
         super.onResume();
 
     }
 
 
+    @Override
     public void onPause() {
-        osm.onPause();
+        getOsm().onPause();
         super.onPause();
     }
 
@@ -159,29 +164,23 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
 
     @Override
     public void onLocationChanged(Location location) {
-        osm.getOverlays().remove(markerPosition);
+        getOsm().getOverlays().remove(markerPosition);
         GeoPoint point = new GeoPoint(location.getLatitude(),location.getLongitude());
         markerPosition.setPosition(point);
 
         mc.setZoom(16);
         mc.animateTo(point);
-        osm.getOverlays().add(markerPosition);
+        getOsm().getOverlays().add(markerPosition);
 
     }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
     @Override
     public void onProviderEnabled(String provider) {
-
+        //Nothing because not needed
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        //Nothing because not needed
     }
 
     @Override
@@ -189,83 +188,62 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         super.onDestroy();
 
     }
-    int nbr=0;
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.check1:
-                if(checked)
-                {
-                    for (Marker pdt:listeMarkerPoubelleNoire) {
-                        osm.getOverlays().add(pdt);
-                    }
+        int id = view.getId();
+        if (id == R.id.check1) {
+            if (checked) {
+                for (Marker pdt : listeMarkerPoubelleNoire) {
+                    getOsm().getOverlays().add(pdt);
                 }
-                else
-                {
-                    for (Marker pdt:listeMarkerPoubelleNoire) {
-                        osm.getOverlays().remove(pdt);
-                    }
+            } else {
+                for (Marker pdt : listeMarkerPoubelleNoire) {
+                    getOsm().getOverlays().remove(pdt);
                 }
-                break;
-            case R.id.check2:
-                if(checked)
-                {
-                    for (Marker pdt:listeMarkerPoubelleJaune) {
-                        osm.getOverlays().add(pdt);
-                    }
+            }
+        } else if (id == R.id.check2) {
+            if (checked) {
+                for (Marker pdt : listeMarkerPoubelleJaune) {
+                    getOsm().getOverlays().add(pdt);
                 }
-                else
-                {
-                    for (Marker pdt:listeMarkerPoubelleJaune) {
-                        osm.getOverlays().remove(pdt);
-                    }
+            } else {
+                for (Marker pdt : listeMarkerPoubelleJaune) {
+                    getOsm().getOverlays().remove(pdt);
                 }
-                break;
-            case R.id.check3:
-                if(checked)
-                {
-                    for (Marker pdt:listeMarkerPoubelleVerte) {
-                        osm.getOverlays().add(pdt);
-                    }
+            }
+        } else if (id == R.id.check3) {
+            if (checked) {
+                for (Marker pdt : listeMarkerPoubelleVerte) {
+                    getOsm().getOverlays().add(pdt);
                 }
-                else
-                {
-                    for (Marker pdt:listeMarkerPoubelleVerte) {
-                        osm.getOverlays().remove(pdt);
-                    }
+            } else {
+                for (Marker pdt : listeMarkerPoubelleVerte) {
+                    getOsm().getOverlays().remove(pdt);
                 }
-                break;
-            case R.id.check4:
-                if(checked)
-                {
-                    for (Marker pdt:listeMarkerPoubelleBleue) {
-                        osm.getOverlays().add(pdt);
-                    }
+            }
+        } else if (id == R.id.check4) {
+            if (checked) {
+                for (Marker pdt : listeMarkerPoubelleBleue) {
+                    getOsm().getOverlays().add(pdt);
                 }
-                else
-                {
-                    for (Marker pdt:listeMarkerPoubelleBleue) {
-                        osm.getOverlays().remove(pdt);
-                    }
+            } else {
+                for (Marker pdt : listeMarkerPoubelleBleue) {
+                    getOsm().getOverlays().remove(pdt);
                 }
-                break;
-            case R.id.check5:
-                if(checked)
-                {
-                    for (Marker pdt:listeMarkerDechetterie) {
-                        osm.getOverlays().add(pdt);
-                    }
+            }
+        } else if (id == R.id.check5) {
+            if (checked) {
+                for (Marker pdt : listeMarkerDechetterie) {
+                    getOsm().getOverlays().add(pdt);
                 }
-                else
-                {
-                    for (Marker pdt:listeMarkerDechetterie) {
-                        osm.getOverlays().remove(pdt);
-                    }
+            } else {
+                for (Marker pdt : listeMarkerDechetterie) {
+                    getOsm().getOverlays().remove(pdt);
                 }
-                break;
+            }
         }
     }
 
@@ -274,35 +252,28 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
             listePointsDeCollecte = JsonPointDeCollecte.valeurRenvoyeeJson(fichierJson);
 
         } catch (Exception e) {
-            listePointsDeCollecte = null;
+            listePointsDeCollecte = new ArrayList<>();
         }
         for (int i = 0; i < listePointsDeCollecte.size(); i++) {
-            Marker m = new Marker(osm);
+            Marker m = new Marker(getOsm());
             GeoPoint coordonnes = new GeoPoint(listePointsDeCollecte.get(i).getLongitude(), listePointsDeCollecte.get(i).getLatitude());
             m.setPosition(coordonnes);
             m.setTitle(listePointsDeCollecte.get(i).getAdresse() +"-"+ listePointsDeCollecte.get(0).getVille());
-            switch (listePointsDeCollecte.get(i).getType())
-            {
-                case "Noire":
-                    m.setIcon(getDrawable(R.drawable.ic_ping_noire));
-                    listeMarkerPoubelleNoire.add(m);
-                    break;
-                case "Jaune":
-                    m.setIcon(getDrawable(R.drawable.ic_ping_jaune));
-                    listeMarkerPoubelleJaune.add(m);
-                    break;
-                case "Verte":
-                    m.setIcon(getDrawable(R.drawable.ic_ping_verre));
-                    listeMarkerPoubelleVerte.add(m);
-                    break;
-                case "Bleue":
-                    m.setIcon(getDrawable(R.drawable.ic_ping_bleue));
-                    listeMarkerPoubelleBleue.add(m);
-                    break;
-                case "Dechetterie":
-                    m.setIcon(getDrawable(R.drawable.ic_ping_dechetterie));
-                    listeMarkerDechetterie.add(m);
-                    break;
+            if ("Noire".equals(listePointsDeCollecte.get(i).getType())) {
+                m.setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_ping_noire));
+                listeMarkerPoubelleNoire.add(m);
+            } else if ("Jaune".equals(listePointsDeCollecte.get(i).getType())) {
+                m.setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_ping_jaune));
+                listeMarkerPoubelleJaune.add(m);
+            } else if ("Verte".equals(listePointsDeCollecte.get(i).getType())) {
+                m.setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_ping_verre));
+                listeMarkerPoubelleVerte.add(m);
+            } else if ("Bleue".equals(listePointsDeCollecte.get(i).getType())) {
+                m.setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_ping_bleue));
+                listeMarkerPoubelleBleue.add(m);
+            } else if ("Dechetterie".equals(listePointsDeCollecte.get(i).getType())) {
+                m.setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_ping_dechetterie));
+                listeMarkerDechetterie.add(m);
             }
         }}
 
@@ -330,5 +301,13 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public MapView getOsm() {
+        return osm;
+    }
+
+    public void setOsm(MapView osm) {
+        this.osm = osm;
     }
 }
