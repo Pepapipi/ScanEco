@@ -30,6 +30,7 @@ import com.example.scaneco.MainActivity;
 import com.example.scaneco.Produit;
 import com.example.scaneco.ProduitDetails;
 import com.example.scaneco.R;
+import com.example.scaneco.TaskRunner;
 import com.example.scaneco.animations.AccueilAnimations;
 import com.example.scaneco.horrampoubelles.AccueilHorRamPoubelles;
 import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
@@ -42,7 +43,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     ProgramAdapter adapter;
-    JsonFromKeyword jsonFromKeyword;
+    TaskRunner taskRunner = new TaskRunner();
     List<Produit> produits;
     RecyclerViewClickListner recyclerViewClickListner;
     ScrollView scrlView;
@@ -164,9 +165,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
     }
 
     public void rechercheDuProduit(String s, String page) {
-        jsonFromKeyword = new JsonFromKeyword(this);
-        //TODO deprecated async task
-        jsonFromKeyword.execute(s, page);
+        taskRunner.executeAsync(new JsonFromKeyword(s, page, MainActivity.USER_AGENT), this::jsonGot);
     }
 
     public void jsonGot(String json) {
@@ -202,6 +201,7 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     Il faut savoir que un code barre est composé de 8 ou 13 chiffres
                  */
                 try {
+                    Long.parseLong(s);
                     if (s.length() == 8 || s.length() == 13) {
                         doneesProduit = new DoneesProduit();
                         //Il faut maintenant envoyer les données à la page produit.
@@ -220,12 +220,15 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     } else {
                         Toast.makeText(AccueilRechercheSansScan.this, "Malheuresement le code barre est faux", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
+                }
+                catch (InterruptedException interruptedException){
+                    Thread.currentThread().interrupt();
+                }
+                catch (Exception e) {
                     saisieRecup = s;
                     page =1;
                     Toast.makeText(AccueilRechercheSansScan.this, "On lance la recherche", Toast.LENGTH_SHORT).show();
                     rechercheDuProduit(s,page.toString());
-                    Thread.currentThread().interrupt();
                 }
 
                 //Cache le clavier après que l'utilisateur ait validé sa saisie
