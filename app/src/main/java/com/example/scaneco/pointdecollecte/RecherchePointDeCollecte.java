@@ -1,5 +1,7 @@
 package com.example.scaneco.pointdecollecte;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -51,7 +53,6 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
     private MapView osm;
     private MapController mc;
     List<PointDeCollecte> listePointsDeCollecte;
-    private static final int PERMISSAO_REQUERIDA = 1;
     Marker markerPosition;
     ArrayList<Marker> listeMarkerPoubelleNoire = new ArrayList<>();
     ArrayList<Marker> listeMarkerPoubelleJaune = new ArrayList<>();
@@ -60,9 +61,22 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
     ArrayList<Marker> listeMarkerDechetterie = new ArrayList<>();
     TaskRunner taskRunner = new TaskRunner();
 
+    private final ActivityResultLauncher<String> mPermissionResult = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (Boolean.TRUE.equals(result)){
+                    Log.e("TAG", "onActivityResult: PERMISSION GRANTED");
+                } else {
+                    Log.e("TAG", "onActivityResult: PERMISSION DENIED");
+                }
+            }
+    );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_recherche_point_de_collecte);
 
         //onde mostra a imagem do mapa
@@ -89,25 +103,10 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         markerPosition = new Marker(getOsm());
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-            && ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                    },
-                    1
-            );
-        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            mPermissionResult.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            mPermissionResult.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         getOsm().addMapListener(mapListener);
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
@@ -132,20 +131,6 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         ImageButton boutonRetourScan = findViewById(R.id.boutonRetourScan);
         boutonRetourScan.setOnClickListener(v -> ouvrirLeScan());
 
-    }
-
-    @Override
-    //TODO à changer car deprecated
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (
-            requestCode == PERMISSAO_REQUERIDA &&
-            grantResults.length > 0 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED
-        ) {// Se a solicitação de permissão foi cancelada o array vem vazio.
-            // Permissão cedida, recria a activity para carregar o mapa, só será executado uma vez
-            this.recreate();
-        }
     }
 
     @Override

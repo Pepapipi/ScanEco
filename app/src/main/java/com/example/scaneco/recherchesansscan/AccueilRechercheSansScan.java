@@ -204,24 +204,22 @@ public class AccueilRechercheSansScan extends AppCompatActivity {
                     if (s.length() == 8 || s.length() == 13) {
                         doneesProduit = new DoneesProduit();
                         //Il faut maintenant envoyer les données à la page produit.
-                        Produit produitAEnvoyer = Produit.getProductFromBarCode(s);
-                        Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
-                        doneesProduit.initialisationDesListes();
-                        doneesProduit.recupererLeTextePourEnvoyerAuxDetails(produitAEnvoyer);
-                        intent.putExtra("leProduit", produitAEnvoyer);
-                        intent.putExtra("nomEmballage1", doneesProduit.getText1());
-                        intent.putExtra("nomEmballage2", doneesProduit.getText2());
-                        intent.putExtra("nomEmballage3", doneesProduit.getText3());
-                        startActivity(intent);
+                        Produit.getProductFromBarCode(s, produit -> {
+                            Produit produitAEnvoyer = produit;
+                            Intent intent = new Intent(getApplicationContext(), ProduitDetails.class);
+                            doneesProduit.initialisationDesListes();
+                            doneesProduit.recupererLeTextePourEnvoyerAuxDetails(produitAEnvoyer);
+                            intent.putExtra("leProduit", produitAEnvoyer);
+                            intent.putExtra("nomEmballage1", doneesProduit.getText1());
+                            intent.putExtra("nomEmballage2", doneesProduit.getText2());
+                            intent.putExtra("nomEmballage3", doneesProduit.getText3());
+                            startActivity(intent);
+                        });
                         Toast.makeText(AccueilRechercheSansScan.this, "Yes codeBrre Ok", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(AccueilRechercheSansScan.this, "Malheuresement le code barre est faux", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch (InterruptedException interruptedException){
-                    Thread.currentThread().interrupt();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     saisieRecup = s;
                     page =1;
                     Toast.makeText(AccueilRechercheSansScan.this, "On lance la recherche", Toast.LENGTH_SHORT).show();
