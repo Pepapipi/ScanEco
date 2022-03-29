@@ -40,4 +40,6 @@
     <string name="row3Type">Verre</string>
     <string name="row3Jours">Jeudi</string>
     <string name="row3Heures">6h-11h</string>
+
+    <string name="produitNonTrouve">Désolé le produit recherché n\'a pas été trouvé dans la base de données d\'OpenFoodFacts.</string>
 </resources>
