@@ -25,23 +25,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp"
+            >
 
             <CheckBox
                 android:id="@+id/check1"
-                android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@drawable/btn_moreinfo"
-                />
+                android:background="@drawable/btn_sac_poub_500"
+                android:button="@color/black"
+                android:onClick="onCheckboxClicked" />
 
             <CheckBox
                 android:id="@+id/check2"
                 android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@drawable/btn_moreinfo"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_plastique_500"
+                android:button="@color/black"
                  />
 
             <CheckBox
@@ -49,15 +54,19 @@
                 android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@drawable/btn_moreinfo"
-                 />
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_verre_500"
+                android:button="@color/black"
+                />
 
             <CheckBox
                 android:id="@+id/check4"
                 android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@drawable/btn_moreinfo"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_papier_515"
+                android:button="@color/black"
                  />
 
             <CheckBox
@@ -65,7 +74,9 @@
                 android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:button="@drawable/btn_moreinfo"/>
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_dechetterie_500"
+                android:button="@color/black"/>
         </LinearLayout>
 
         <org.osmdroid.views.MapView

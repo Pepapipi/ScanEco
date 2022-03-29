@@ -203,44 +203,7 @@
 
         </TableRow>
 
-        <TableRow>
 
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3.5"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="10sp"
-                android:text="@string/row3Type"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/joursVerre"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="10sp"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/heuresVerre"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="10sp"
-                android:textSize="12sp" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="2.1"
-                android:src="@drawable/poubelle_verte" />
-
-        </TableRow>
 
     </TableLayout>
 
