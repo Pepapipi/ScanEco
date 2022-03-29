@@ -65,7 +65,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/btn_papier_515"
+                android:background="@drawable/btn_dechetterie_500"
                 android:button="@color/black"
                  />
 

@@ -1,6 +1,5 @@
 package com.example.scaneco;
 
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
 import android.widget.ImageView;
@@ -53,10 +52,8 @@ public class Produit implements Serializable {
     /**
      * Construit un produit à partir de données json.
      * @param json Données json sous forme de chaîne de caractères.
-     * @throws IOException Si les données json fournies ne sont pas valides.
-     * @throws Resources.NotFoundException Si le produit n'a pas été trouvé.
      */
-    public Produit(String json) throws IOException, Resources.NotFoundException {
+    public Produit(String json) {
         try (JsonReader reader = new JsonReader(new StringReader(json))) {
             reader.beginObject();
             while (reader.hasNext()){
@@ -97,7 +94,7 @@ public class Produit implements Serializable {
                         int status = reader.nextInt();
                         reader.nextName();
                         if (status == 0) {
-                            throw new Resources.NotFoundException(reader.nextString());
+                            setNom("Désolé le produit recherché n'a pas été trouvé dans la base de données d'OpenFoodFacts.");
                         } else {
                             reader.nextString();
                         }
@@ -108,6 +105,9 @@ public class Produit implements Serializable {
                 }
 
             }
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 

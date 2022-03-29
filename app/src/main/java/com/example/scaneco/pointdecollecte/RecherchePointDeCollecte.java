@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -174,60 +175,41 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-
         // Check which checkbox was clicked
         int id = view.getId();
-        if (id == R.id.check1) {
-            if (checked) {
-                for (Marker pdt : listeMarkerPoubelleNoire) {
-                    getOsm().getOverlays().add(pdt);
-                }
-            } else {
-                for (Marker pdt : listeMarkerPoubelleNoire) {
-                    getOsm().getOverlays().remove(pdt);
-                }
+        switch (id) {
+            case R.id.check1:
+                ajouterBoutons(view, listeMarkerPoubelleNoire);
+                break;
+            case R.id.check2:
+                ajouterBoutons(view, listeMarkerPoubelleJaune);
+                break;
+            case R.id.check3:
+                ajouterBoutons(view, listeMarkerPoubelleVerte);
+                break;
+            case R.id.check4:
+                ajouterBoutons(view, listeMarkerPoubelleBleue);
+                break;
+            case R.id.check5:
+                ajouterBoutons(view, listeMarkerDechetterie);
+                break;
+            default:
+                break;
+        }
+    }
+    public void ajouterBoutons(View view, List<Marker> liste)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+        for (Marker pdt : liste) {
+            if(checked)
+            {
+                getOsm().getOverlays().add(pdt);
             }
-        } else if (id == R.id.check2) {
-            if (checked) {
-                for (Marker pdt : listeMarkerPoubelleJaune) {
-                    getOsm().getOverlays().add(pdt);
-                }
-            } else {
-                for (Marker pdt : listeMarkerPoubelleJaune) {
-                    getOsm().getOverlays().remove(pdt);
-                }
-            }
-        } else if (id == R.id.check3) {
-            if (checked) {
-                for (Marker pdt : listeMarkerPoubelleVerte) {
-                    getOsm().getOverlays().add(pdt);
-                }
-            } else {
-                for (Marker pdt : listeMarkerPoubelleVerte) {
-                    getOsm().getOverlays().remove(pdt);
-                }
-            }
-        } else if (id == R.id.check4) {
-            if (checked) {
-                for (Marker pdt : listeMarkerPoubelleBleue) {
-                    getOsm().getOverlays().add(pdt);
-                }
-            } else {
-                for (Marker pdt : listeMarkerPoubelleBleue) {
-                    getOsm().getOverlays().remove(pdt);
-                }
-            }
-        } else if (id == R.id.check5) {
-            if (checked) {
-                for (Marker pdt : listeMarkerDechetterie) {
-                    getOsm().getOverlays().add(pdt);
-                }
-            } else {
-                for (Marker pdt : listeMarkerDechetterie) {
-                    getOsm().getOverlays().remove(pdt);
-                }
+            else
+            {
+                getOsm().getOverlays().remove(pdt);
             }
         }
     }
@@ -295,4 +277,5 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
     public void setOsm(MapView osm) {
         this.osm = osm;
     }
+
 }
