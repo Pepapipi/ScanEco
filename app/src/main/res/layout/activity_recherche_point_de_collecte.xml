@@ -23,13 +23,12 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
             android:layout_marginRight="10dp"
-            >
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/check1"
@@ -41,42 +40,39 @@
 
             <CheckBox
                 android:id="@+id/check2"
-                android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_plastique_500"
                 android:button="@color/black"
-                 />
+                android:onClick="onCheckboxClicked" />
 
             <CheckBox
                 android:id="@+id/check3"
-                android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_verre_500"
                 android:button="@color/black"
-                />
+                android:onClick="onCheckboxClicked" />
 
             <CheckBox
                 android:id="@+id/check4"
-                android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_papier_515"
                 android:button="@color/black"
-                 />
+                android:onClick="onCheckboxClicked" />
 
             <CheckBox
                 android:id="@+id/check5"
-                android:onClick="onCheckboxClicked"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_dechetterie_500"
-                android:button="@color/black"/>
+                android:button="@color/black"
+                android:onClick="onCheckboxClicked" />
         </LinearLayout>
 
         <org.osmdroid.views.MapView

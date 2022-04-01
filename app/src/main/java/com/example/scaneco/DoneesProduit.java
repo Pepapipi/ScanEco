@@ -14,7 +14,7 @@ public class DoneesProduit {
     private final List<String> listeRecyclable= new ArrayList<>();
     private final String[] tabRecyclable = {"Bouteille plastique", "Etui en carton", "Brique en carton", "Canette","Bouteille en PET",
             "Bouteille en plastique", "plastic bottle","Bouteille et bouchon 100% recyclable", "Boite en métal"
-            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule en papier", "Opercule en métal", "Sachet en papier"};
+            ,"Bouchon en plastique","Couvercle en métal", "Carton", "Opercule en papier", "Opercule en métal", "Sachet en papier", "Pot en carton", "Couvercle en carton"};
 
     private final List<String> listeVerre = new ArrayList<>();
     private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};

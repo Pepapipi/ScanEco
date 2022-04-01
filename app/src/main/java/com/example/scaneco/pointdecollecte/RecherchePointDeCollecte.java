@@ -64,6 +64,7 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
             new ActivityResultContracts.RequestPermission(),
             result -> {
                 if (Boolean.TRUE.equals(result)){
+                    this.recreate();
                     Log.e("TAG", "onActivityResult: PERMISSION GRANTED");
                 } else {
                     Log.e("TAG", "onActivityResult: PERMISSION DENIED");
@@ -103,12 +104,19 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         GeoPoint pointFrance = new GeoPoint(43.48333, -1.48333);
         mc.setCenter(pointFrance);
         mc.setZoom(10);
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             mPermissionResult.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        }
+        else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             mPermissionResult.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+
+        }
+        else {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        }
+
         getOsm().addMapListener(mapListener);
 
 
@@ -226,7 +234,7 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
             Marker m = new Marker(getOsm());
             GeoPoint coordonnes = new GeoPoint(listePointsDeCollecte.get(i).getLongitude(), listePointsDeCollecte.get(i).getLatitude());
             m.setPosition(coordonnes);
-            m.setTitle(listePointsDeCollecte.get(i).getAdresse() +"-"+ listePointsDeCollecte.get(0).getVille());
+            m.setTitle(listePointsDeCollecte.get(i).getAdresse() +"-"+ listePointsDeCollecte.get(i).getVille());
             if ("Noire".equals(listePointsDeCollecte.get(i).getType())) {
                 m.setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_ping_noire));
                 listeMarkerPoubelleNoire.add(m);

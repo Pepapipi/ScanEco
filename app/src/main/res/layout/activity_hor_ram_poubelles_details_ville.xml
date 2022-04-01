@@ -143,7 +143,8 @@
         </TableRow>
 
         <!-- Données -->
-        <TableRow>
+        <TableRow
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="0dp"
@@ -185,7 +186,8 @@
         </TableRow>
 
 
-        <TableRow android:background="@color/gris_clair">
+        <TableRow android:background="@color/gris_clair"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="0dp"
