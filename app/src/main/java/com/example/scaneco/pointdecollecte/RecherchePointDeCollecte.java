@@ -103,17 +103,12 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         GeoPoint pointFrance = new GeoPoint(43.48333, -1.48333);
         mc.setCenter(pointFrance);
         mc.setZoom(10);
-
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             mPermissionResult.launch(Manifest.permission.ACCESS_FINE_LOCATION);
         else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             mPermissionResult.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
-        else
-        {
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-        }
-
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         getOsm().addMapListener(mapListener);
 
 
