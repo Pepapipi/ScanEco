@@ -45,12 +45,12 @@ public class HorRamPoubellesDetailsVille extends AppCompatActivity {
                 villeRecuperee.getCodePostal().equals("64100")||
                 villeRecuperee.getCodePostal().equals("64340")|| villeRecuperee.getCodePostal().equals("64210"))
         {
-            findViewById(R.id.cartographie);
+            //findViewById(R.id.cartographie);
         }
 
         if (villeRecuperee.getCodePostal().equals("64990"))
         {
-            findViewById(R.id.cartographie);
+            //findViewById(R.id.cartographie);
         }
 
 
