@@ -63,6 +63,7 @@
         app:menu="@menu/barre_de_menu" />
 
    <!--ScrollView pour les items -->
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="wrap_content"
@@ -75,19 +76,17 @@
         <GridLayout
             android:id="@+id/gridViewRechercheSansScan"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:columnOrderPreserved="true"
             android:alignmentMode="alignMargins"
             android:columnCount="2"
-            android:columnOrderPreserved="true"
             android:paddingBottom="50dp"
-            android:rowCount="3">
+            >
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
@@ -96,9 +95,8 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutPapier"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
-
                     android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -116,24 +114,22 @@
                         android:layout_marginTop="3dp"
                         android:text="Papiers"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -151,7 +147,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Verres"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -161,15 +157,13 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="162dp"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -187,24 +181,22 @@
                         android:layout_marginTop="3dp"
                         android:text="Plastiques"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -222,7 +214,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Piles"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -230,17 +222,15 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
-                android:layout_height="25dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:gravity="center"
@@ -258,7 +248,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Fruits/Légumes"
                         android:textColor="#6f6f6f"
-                        android:textSize="17dp" />
+                        android:textSize="16dp" />
 
 
                 </LinearLayout>
@@ -266,17 +256,15 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -294,7 +282,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Verdures"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -303,17 +291,15 @@
             //Catégorie Vaisselles
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -331,7 +317,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Vaisselles"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -339,17 +325,15 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -367,7 +351,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Médicaments"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -375,17 +359,15 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -403,7 +385,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Cartons"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -411,17 +393,15 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -439,24 +419,22 @@
                         android:layout_marginTop="3dp"
                         android:text="Vêtements"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -474,7 +452,7 @@
                         android:layout_marginTop="3dp"
                         android:text="Meubles"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -482,17 +460,15 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center"
@@ -508,15 +484,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Electroménagers"
+                        android:text="Electroménager"
                         android:textColor="#6f6f6f"
-                        android:textSize="18sp" />
+                        android:textSize="15sp" />
 
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </GridLayout>
     </ScrollView>
+
     <ImageButton
         android:id="@+id/boutonRetourScan"
         android:layout_width="60dp"
