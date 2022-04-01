@@ -20,7 +20,7 @@ public class DoneesProduit {
     private final String[] tabVerre = {"Verres", "Verre", "Bouteille en verre", "Bouteille verre","Pot en verre"};
 
     private final List<String> listeNonRecyclable = new ArrayList<>();
-    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Plastique", "Barquette en plastique",
+    private final String[] tabNonRecyclabe = {"Sachet en plastique", "Film en plastique", "Sachet plastique", "Barquette en plastique",
             "Pot en plastique", "Couvercle en plastique", "Capsules métalliques", "Bouchons en liège", "Opercule"};
 
     private String text1="";
