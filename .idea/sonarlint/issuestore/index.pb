@@ -21,3 +21,13 @@ k
 ;app/src/main/java/com/example/scaneco/OpenFoodFactsAPI.java,9\a\9a53d673d6e12871b353643ac1b2473d27b30d18
 …
 Uapp/src/main/java/com/example/scaneco/recherchesansscan/AccueilRechercheSansScan.java,8\2\82f74b44481a8facc03aae4bdb12f8f9643ed1a9
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+g
+7app/src/main/java/com/example/scaneco/MainActivity.java,3\b\3b4e84a3140c7e626bbeae6149be5afa7d6206cd
+z
+Japp/src/main/java/com/example/scaneco/pointdecollecte/PointDeCollecte.java,c\d\cd95b7b03df332627428fdc3e96b8d88d0f7711d
+†
+Vapp/src/main/java/com/example/scaneco/horrampoubelles/HorRamPoubellesDetailsVille.java,1\b\1bfbc1352abd2da125ef76dd16845d0890e5d87b
+ƒ
+Sapp/src/main/java/com/example/scaneco/pointdecollecte/RecherchePointDeCollecte.java,c\e\ce841f2c9443de3220fbff80cd05817239b88a73
