@@ -13,7 +13,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.example.scaneco.MainActivity;
 import com.example.scaneco.R;
+import com.example.scaneco.animations.AccueilAnimations;
+import com.example.scaneco.pointdecollecte.RecherchePointDeCollecte;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,21 @@ public class VillesDansLaListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_villes_dans_la_liste);
 
-        ///////////////Navigation\\\\\\\\\\\\\\\
+        //BARRE DE NAVIGATION
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.accueilAnimations) {
+                ouvrirAnimations();
+            } else if (itemId == R.id.accueilPointDeCollecte) {
+                ouvrirRecherchePointDeCollecte();
+            }else if (itemId == R.id.accueilHorRamPoubelles)
+            {
+                ouvrirHorRamPoubelles();
+            }
+            return true;
+        });
+
         boutonRetourAccueilHorRamPoubelles = findViewById(R.id.boutonRetourAccueilHorRamPoubelles);
         boutonRetourAccueilHorRamPoubelles.setOnClickListener(v -> ouvrirHorRamPoubelles());
 
@@ -97,9 +115,33 @@ public class VillesDansLaListe extends AppCompatActivity {
 
 
     /////////////////Navigation\\\\\\\\\\\\\\\\\\\\
+
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder aux Animations
+     **/
+    public void ouvrirAnimations()
+    {
+        Intent intent = new Intent(this, AccueilAnimations.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page des horaires de ramassage des poubelles
+     **/
     public void ouvrirHorRamPoubelles()
     {
         Intent intent = new Intent(this, AccueilHorRamPoubelles.class);
+        startActivity(intent);
+    }
+    /**
+     * Fonction permettant d'aller sur une autre page(vue)
+     * Ici cette fonction permettra d'accéder à la page des points de collecte
+     **/
+    protected void ouvrirRecherchePointDeCollecte()
+    {
+        Intent intent = new Intent(this, RecherchePointDeCollecte.class);
         startActivity(intent);
     }
 

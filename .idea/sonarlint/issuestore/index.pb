@@ -7,5 +7,3 @@ z
 Japp/src/main/java/com/example/scaneco/pointdecollecte/PointDeCollecte.java,c\d\cd95b7b03df332627428fdc3e96b8d88d0f7711d
 g
 7app/src/main/java/com/example/scaneco/MainActivity.java,3\b\3b4e84a3140c7e626bbeae6149be5afa7d6206cd
-e
-5app/src/main/java/com/example/scaneco/TaskRunner.java,2\0\200150808cdd43deb74d57e0d8a6a91ba3755196
