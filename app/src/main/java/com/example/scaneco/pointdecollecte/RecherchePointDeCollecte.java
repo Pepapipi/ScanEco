@@ -100,7 +100,9 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         };
         mc = (MapController) getOsm().getController();
         markerPosition = new Marker(getOsm());
-
+        GeoPoint pointFrance = new GeoPoint(43.48333, -1.48333);
+        mc.setCenter(pointFrance);
+        mc.setZoom(10);
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             mPermissionResult.launch(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -108,6 +110,8 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
             mPermissionResult.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         getOsm().addMapListener(mapListener);
+
+
         ///////////////Recuperation de la BD en JSON\\\\\\\\\\\\\\\
         try {
             taskRunner.executeAsync(new ConnexionJsonPointDeCollecte("https://api.npoint.io/6696673b4c1fdcfcff8e", MainActivity.USER_AGENT), this::json);
@@ -153,9 +157,6 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
         getOsm().getOverlays().remove(markerPosition);
         GeoPoint point = new GeoPoint(location.getLatitude(),location.getLongitude());
         markerPosition.setPosition(point);
-
-        mc.setZoom(16);
-        mc.animateTo(point);
         getOsm().getOverlays().add(markerPosition);
 
     }

@@ -120,11 +120,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         //Quand le bouton est cliqué alors il sera redirigé vers la page recherche sans scan
         mBoutonRechercheSansScan.setOnClickListener(v -> ouvrirRechercheSansScan());
 
-        //Initialisation du bouton qui ouvre la page des réglages
-        ImageButton mBoutonReglages = findViewById(R.id.boutonReglages);
-        //Quand le bouton est cliqué alors il sera redirigé vers la page des réglages
-        mBoutonReglages.setOnClickListener(v -> ouvrirReglages());
-
 
         //Pour se servir du scan, l'utilisateur doit autoriser l'accès à la caméra
         //On vérifie s'il a autorisé ou non l'accès à la caméra
