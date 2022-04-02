@@ -3,8 +3,6 @@ j
 :app/src/test/java/com/example/scaneco/ExampleUnitTest.java,9\a\9aa4cde87e8cd28a90563d13bff7cde80f66ef7b
 y
 Iapp/src/androidTest/java/com/example/scaneco/ExampleInstrumentedTest.java,b\c\bc64916d2b887438d5f3dfa518fc9f5dec09bf84
-z
-Japp/src/main/java/com/example/scaneco/pointdecollecte/PointDeCollecte.java,c\d\cd95b7b03df332627428fdc3e96b8d88d0f7711d
 g
 7app/src/main/java/com/example/scaneco/ImageProduit.java,4\c\4c3d2c4525f668ed548f268616d60a2054a5b58c
 e
@@ -15,15 +13,11 @@ i
 9app/src/main/java/com/example/scaneco/ProduitDetails.java,f\6\f65c0e4cafacb290a32676139202023c9d3d8a0a
 b
 2app/src/main/java/com/example/scaneco/Produit.java,9\6\96b6ab0e12210d90adf6dc78bec5f2321621c2a1
+h
+8app/src/main/java/com/example/scaneco/DoneesProduit.java,d\6\d6c9c65677fed54718770d03a42dd8ef028ba554
 |
 Lapp/src/main/java/com/example/scaneco/recherchesansscan/JsonFromKeyword.java,2\d\2d6832a60828f7c1128cdf84c49fbe5f44b6ebb0
-…
-Uapp/src/main/java/com/example/scaneco/recherchesansscan/AccueilRechercheSansScan.java,8\2\82f74b44481a8facc03aae4bdb12f8f9643ed1a9
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-†
-Vapp/src/main/java/com/example/scaneco/horrampoubelles/HorRamPoubellesDetailsVille.java,1\b\1bfbc1352abd2da125ef76dd16845d0890e5d87b
-~
-Napp/src/main/java/com/example/scaneco/pointdecollecte/JsonPointDeCollecte.java,a\9\a9fd38c1fb2b60291d7aa21cc304f0ee159c6456
 k
 ;app/src/main/java/com/example/scaneco/OpenFoodFactsAPI.java,9\a\9a53d673d6e12871b353643ac1b2473d27b30d18
+…
+Uapp/src/main/java/com/example/scaneco/recherchesansscan/AccueilRechercheSansScan.java,8\2\82f74b44481a8facc03aae4bdb12f8f9643ed1a9

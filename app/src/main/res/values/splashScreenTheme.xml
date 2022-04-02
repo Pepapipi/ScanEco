@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimaryVariant">@color/vert_Clair</item>
         <item name="colorPrimary">@color/vert_Original</item>
 
