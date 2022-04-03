@@ -11,10 +11,22 @@
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/TitreHorRamPoub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="Horaires de ramassage des poubelles"
+        android:textSize="18sp" />
+
     <ListView
         android:id="@+id/list_villes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:padding="20dp">
     </ListView>
 

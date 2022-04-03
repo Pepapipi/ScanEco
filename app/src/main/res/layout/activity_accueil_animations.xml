@@ -44,8 +44,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Recycler le plastique avec Jamy"
+                    android:textColor="#07680F"
                     android:textStyle="bold"
-                    android:textSize="22dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:id="@+id/imageView1"
@@ -73,8 +74,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Une seconde vie pour nos poubelles"
+                    android:textColor="#07680F"
                     android:textStyle="bold"
-                    android:textSize="22dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -100,8 +102,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="La face bien cachée du recyclage"
+                android:textColor="#07680F"
                 android:textStyle="bold"
-                android:textSize="22dp" />
+                android:textSize="18dp" />
 
             <ImageView
                 android:id="@+id/imageView3"
