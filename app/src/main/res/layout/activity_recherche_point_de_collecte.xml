@@ -25,23 +25,22 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/check1"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:background="@drawable/btn_sac_poub_500_false"
                 android:button="@color/black"
                 android:onClick="onCheckboxClicked" />
 
             <CheckBox
                 android:id="@+id/check2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_plastique_500_false"
                 android:button="@color/black"
@@ -49,8 +48,8 @@
 
             <CheckBox
                 android:id="@+id/check3"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_verre_500_false"
                 android:button="@color/black"
@@ -58,8 +57,8 @@
 
             <CheckBox
                 android:id="@+id/check4"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_papier_515_false"
                 android:button="@color/black"
@@ -67,8 +66,8 @@
 
             <CheckBox
                 android:id="@+id/check5"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_dechetterie_500_false"
                 android:button="@color/black"
