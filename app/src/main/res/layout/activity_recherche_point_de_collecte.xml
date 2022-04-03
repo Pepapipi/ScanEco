@@ -34,7 +34,7 @@
                 android:id="@+id/check1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@drawable/btn_sac_poub_500"
+                android:background="@drawable/btn_sac_poub_500_false"
                 android:button="@color/black"
                 android:onClick="onCheckboxClicked" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/btn_plastique_500"
+                android:background="@drawable/btn_plastique_500_false"
                 android:button="@color/black"
                 android:onClick="onCheckboxClicked" />
 
@@ -52,7 +52,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/btn_verre_500"
+                android:background="@drawable/btn_verre_500_false"
                 android:button="@color/black"
                 android:onClick="onCheckboxClicked" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/btn_papier_515"
+                android:background="@drawable/btn_papier_515_false"
                 android:button="@color/black"
                 android:onClick="onCheckboxClicked" />
 
@@ -70,7 +70,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/btn_dechetterie_500"
+                android:background="@drawable/btn_dechetterie_500_false"
                 android:button="@color/black"
                 android:onClick="onCheckboxClicked" />
         </LinearLayout>

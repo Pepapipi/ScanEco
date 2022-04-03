@@ -51,6 +51,12 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
 
     private MapView osm;
     private MapController mc;
+    private CheckBox mcheck1;
+    private CheckBox mcheck2;
+    private CheckBox mcheck3;
+    private CheckBox mcheck4;
+    private CheckBox mcheck5
+            ;
     List<PointDeCollecte> listePointsDeCollecte;
     Marker markerPosition;
     ArrayList<Marker> listeMarkerPoubelleNoire = new ArrayList<>();
@@ -79,6 +85,11 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
 
         setContentView(R.layout.activity_recherche_point_de_collecte);
 
+        mcheck1 = findViewById(R.id.check1);
+        mcheck2 = findViewById(R.id.check2);
+        mcheck3 = findViewById(R.id.check3);
+        mcheck4 = findViewById(R.id.check4);
+        mcheck5 = findViewById(R.id.check5);
         //onde mostra a imagem do mapa
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
@@ -211,14 +222,51 @@ public class RecherchePointDeCollecte extends AppCompatActivity implements Locat
     public void ajouterBoutons(View view, List<Marker> liste)
     {
         boolean checked = ((CheckBox) view).isChecked();
+        int id = view.getId();
         for (Marker pdt : liste) {
             if(checked)
             {
                 getOsm().getOverlays().add(pdt);
-            }
+                switch (id) {
+                    case R.id.check1:
+                        mcheck1.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_sac_poub_500));
+                        break;
+                    case R.id.check2:
+                        mcheck2.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_plastique_500));
+                        break;
+                    case R.id.check3:
+                        mcheck3.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_verre_500));
+                        break;
+                    case R.id.check4:
+                        mcheck4.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_papier_515));
+                        break;
+                    case R.id.check5:
+                        mcheck5.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_dechetterie_500));
+                        break;
+                    }
+                }
+
+
             else
             {
                 getOsm().getOverlays().remove(pdt);
+                switch (id) {
+                    case R.id.check1:
+                        mcheck1.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_sac_poub_500_false));
+                        break;
+                    case R.id.check2:
+                        mcheck2.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_plastique_500_false));
+                        break;
+                    case R.id.check3:
+                        mcheck3.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_verre_500_false));
+                        break;
+                    case R.id.check4:
+                        mcheck4.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_papier_515_false));
+                        break;
+                    case R.id.check5:
+                        mcheck5.setBackground(AppCompatResources.getDrawable(this, R.drawable.btn_dechetterie_500_false));
+                        break;
+                }
             }
         }
     }
