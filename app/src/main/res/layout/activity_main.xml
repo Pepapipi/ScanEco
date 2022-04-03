@@ -64,7 +64,7 @@
         android:layout_height="220dp"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorOnPrimary"
-        android:visibility="visible"/>
+        android:visibility="invisible"/>
 
     <View
         android:id="@+id/traitView"
@@ -74,6 +74,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@color/gris_clair"
+        android:visibility="invisible"
         />
 
     <ImageView
@@ -81,9 +82,9 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_above="@+id/bottom_navigation"
-        android:layout_marginBottom="5dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
         android:maxWidth="140dp"
         android:maxHeight="140dp"
         android:minWidth="140dp"
@@ -102,7 +103,8 @@
         android:text="Nom du produit"
         android:textAlignment="center"
         android:textSize="17dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/textView_marqueProduit"
@@ -115,7 +117,8 @@
         android:fontFamily="sans-serif-medium"
         android:text="Marque"
         android:textAlignment="center"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/imageView_poubelle1"
